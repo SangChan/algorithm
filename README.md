@@ -1,2 +1,4 @@
 # Algorithm
-1. linked list : linkedlist.c
+- [x] linear queue
+- [x] circular queue
+- [ ] linked list
