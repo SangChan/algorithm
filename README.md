@@ -3,3 +3,5 @@
 - [x] circular queue
 - [x] linked list
 - [x] factorial
+- [ ] binomial coefficient
+- [ ] fibonacci
