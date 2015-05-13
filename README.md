@@ -5,3 +5,4 @@
 - [x] factorial
 - [x] binomial coefficient
 - [x] fibonacci
+- [ ] how many case to pay
