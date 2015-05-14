@@ -1,5 +1,25 @@
 #include <stdio.h>
 
+#define MAXN 200
+
+int partition_memo(int n, int m)
+{
+	static int memo[MAXN][MAXN];
+	int count = 0;
+	if (n < m)
+		m = n;
+	if (memo[n][m] > 0)
+		return memo[n][m];
+	if (n == 0)
+		return memo[n][m] = 1;
+
+	for (int i = 1; i <= m; i++)
+	{
+		count += partition_memo(n-i,i);
+	}
+	return memo[n][m] = count;
+}
+
 void print_arr(int arr[], int arr_len)
 {
 	for (int i = 0; i < arr_len; ++i)
@@ -43,14 +63,12 @@ int partition(int n, int m)
 	return count;
 }
 
-#define MAXN 50
-
 int main()
 {
 	int num[MAXN],n,m;
 
 	printf("input n, m: ");
 	scanf("%d %d",&n, &m);
-	printf("total : %d\n", partition_print(n,m,num,0));
+	printf("total : %d\n", partition_memo(n,m));
 	return 0;
 }
