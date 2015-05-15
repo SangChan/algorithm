@@ -5,5 +5,6 @@
 - [x] factorial
 - [x] binomial coefficient
 - [x] fibonacci
-- [ ] how many case to pay
-- [ ] integer partition
+- [x] how many case to pay
+- [x] integer partition
+- [ ] n-bit gray code
