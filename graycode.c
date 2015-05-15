@@ -36,7 +36,18 @@ void print_gray(int code[], int n, int index)
 	print_gray_reverse(code,n,index+1);
 }
 
+void print_gray2(int code[], int n, int index, int reverse)
+{
+	if(index == n) {
+		print_code(code, n);
+		return ;
+	}
 
+	code[index] = reverse;
+	print_gray2(code, n, index+1,0);
+	code[index] = 1 - reverse;
+	print_gray2(code,n,index+1,1);
+}
 
 #define MAXN 20
 
@@ -45,6 +56,6 @@ int main()
 	int code[MAXN], n;
 	printf("input n :");
 	scanf("%d",&n);
-	print_gray(code,n,0);
+	print_gray2(code,n,0,0);
 	return 0;
 }
