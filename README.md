@@ -7,4 +7,5 @@
 - [x] fibonacci
 - [x] how many case to pay
 - [x] integer partition
-- [ ] n-bit gray code
+- [x] n-bit gray code
+- [ ] path finder
