@@ -9,3 +9,4 @@
 - [x] integer partition
 - [x] n-bit gray code
 - [ ] path finder
+- [ ] find prime number
