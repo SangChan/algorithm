@@ -14,25 +14,10 @@ int isPrime(int num)
 
 int main()
 {
-	printf("1: %d\n",isPrime(1));
-	printf("2: %d\n",isPrime(2));
-	printf("3: %d\n",isPrime(3));
-	printf("4: %d\n",isPrime(4));
-	printf("5: %d\n",isPrime(5));
-	printf("6: %d\n",isPrime(6));
-	printf("7: %d\n",isPrime(7));
-	printf("8: %d\n",isPrime(8));
-	printf("9: %d\n",isPrime(9));
-	printf("10: %d\n",isPrime(10));
-	printf("11: %d\n",isPrime(11));
-	printf("12: %d\n",isPrime(12));
-	printf("13: %d\n",isPrime(13));
-	printf("14: %d\n",isPrime(14));
-	printf("15: %d\n",isPrime(15));
-	printf("16: %d\n",isPrime(16));
-	printf("17: %d\n",isPrime(17));
-	printf("18: %d\n",isPrime(18));
-	printf("19: %d\n",isPrime(19));
-	printf("20: %d\n",isPrime(20));
+	for (int i = 0; i < 65535; i++)
+	{
+		if(isPrime(i) == 1)
+			printf("%d is prime number\n",i);
+	}
 	return 0;
 }
