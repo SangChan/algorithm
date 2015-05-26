@@ -8,5 +8,6 @@
 - [x] how many case to pay
 - [x] integer partition
 - [x] n-bit gray code
-- [ ] path finder
-- [ ] find prime number
+- [x] path finder
+- [x] find prime number
+- [ ] find subset
