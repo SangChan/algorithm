@@ -16,4 +16,4 @@
 
 # Issues
 
-see also[#1](/../../issues/1)
+see also.. [#1](/../../issues/1)
