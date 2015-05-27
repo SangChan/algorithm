@@ -13,3 +13,7 @@
 - [x] find subset
 - [x] thief's knapsack
 - [x] find comboset
+
+# Issues
+
+see also[#1](/../../issues/1)
