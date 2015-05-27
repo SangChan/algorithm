@@ -12,4 +12,4 @@
 - [x] find prime number
 - [x] find subset
 - [x] thief's knapsack
-- [ ] find comboset
+- [x] find comboset
