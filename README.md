@@ -10,4 +10,6 @@
 - [x] n-bit gray code
 - [x] path finder
 - [x] find prime number
-- [ ] find subset
+- [x] find subset
+- [x] thief's knapsack
+- [ ] find comboset
