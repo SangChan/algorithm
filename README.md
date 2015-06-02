@@ -13,8 +13,8 @@
 - [x] find subset
 - [x] thief's knapsack
 - [x] find comboset
-- [ ] check alphametic
-- [ ] self descriptive
+- [x] check alphametic
+- [x] self descriptive
 
 # Issues
 
