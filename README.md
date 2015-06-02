@@ -14,6 +14,7 @@
 - [x] thief's knapsack
 - [x] find comboset
 - [ ] check alphametic
+- [ ] self descriptive
 
 # Issues
 
