@@ -13,6 +13,7 @@
 - [x] find subset
 - [x] thief's knapsack
 - [x] find comboset
+- [ ] check alphametic
 
 # Issues
 
