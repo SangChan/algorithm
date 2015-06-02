@@ -26,6 +26,24 @@ int check_self_descriptive(int arr[],int len)
 	return 1;
 }
 
+void rperm_self_descriptive4(int arr[], int len)
+{
+	arr[0] = len - 4;
+	arr[1] = 2;
+	arr[2] = 1;
+	arr[3] = 0;
+	for (int i = 4; i < len-5; i++)
+	{
+		arr[i] = 0;
+	}
+	arr[len-5] = 0;
+	arr[len-4] = 1;
+	arr[len-3] = 0;
+	arr[len-2] = 0;
+	arr[len-1] = 0;
+	print_arr(arr, len);
+}
+
 void rperm_self_descriptive3(int arr[], int len, int n, int k)
 {
 	int t = 0, s = 0;
@@ -102,7 +120,10 @@ int main()
 	int arr[MAXN], n;
 
 	scanf("%d", &n);
-	rperm_self_descriptive3(arr,0,n,n);
+	if (n < 8)
+		rperm_self_descriptive3(arr,0,n,n);	
+	else 
+		rperm_self_descriptive4(arr, n);
 	return 0;
 
 }
