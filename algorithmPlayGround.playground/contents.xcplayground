@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='5.0' target-platform='ios'>
-    <timeline fileName='timeline.xctimeline'/>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='Big O Notation'/>
+        <page name='Sorting'/>
+        <page name='Linked List'/>
+        <page name='Binary Search Trees'/>
+        <page name='Tries'/>
+        <page name='Stacks and Queues'/>
+        <page name='Graphs'/>
+        <page name='Shortest Paths'/>
+        <page name='Heaps'/>
+        <page name='Hash Tables'/>
+    </pages>
 </playground>
