@@ -11,5 +11,8 @@
         <page name='Shortest Paths'/>
         <page name='Heaps'/>
         <page name='Hash Tables'/>
+        <page name='My Page - Patterns'/>
+        <page name='My Page - Data Structure'/>
+        <page name='My Page - Algorithm'/>
     </pages>
 </playground>
