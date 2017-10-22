@@ -19,7 +19,7 @@ func sum(a: [Int], sum: Int) -> Bool {
 
 sum(a: list, sum: 10)
 
-func sum2(a : [Int], sum: Int) -> Bool {
+func sum2(a: [Int], sum: Int) -> Bool {
     var dic : [Int : Int] = [:]
     for i in a {
         dic[i] = sum - i
@@ -34,3 +34,17 @@ func sum2(a : [Int], sum: Int) -> Bool {
 }
 
 sum2(a: list, sum: 10)
+
+func sum3(a: [Int], sum: Int) -> Bool {
+    var index = 0
+    for i in a {
+        let withA = sum - i
+        if let withAIndex = a.index(of: withA), withAIndex != index {
+            return true
+        }
+        index += 1
+    }
+    return false
+}
+
+sum3(a: list, sum: 10)
