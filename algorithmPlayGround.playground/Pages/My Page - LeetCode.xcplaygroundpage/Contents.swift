@@ -1,6 +1,6 @@
-//: [Previous](@previous)
-
 import Foundation
+
+// 1. Two Sum
 
 var list = [1,2,3,5,8,2,3,4,5]
 
@@ -48,3 +48,79 @@ func sum3(a: [Int], sum: Int) -> Bool {
 }
 
 sum3(a: list, sum: 10)
+
+// 657. Judge Route Circle
+
+var isCircle = "UD" //return true
+var isNotCircle = "LL" // return false
+
+struct Position {
+    var x = 0
+    var y = 0
+}
+
+struct Robot {
+    var postion = Position(x: 0, y: 0)
+    
+    mutating func add(newPosition : Position) {
+        self.postion.x += newPosition.x
+        self.postion.y += newPosition.y
+    }
+}
+
+func judgeCircle(moves : String) -> Bool{
+    var robot = Robot()
+    let initialPosition = robot.postion
+    for m in moves {
+        let move = getMoves(fromChar: m)
+        let newPosition = getValue(fromMoves: move)
+        robot.add(newPosition: newPosition)
+    }
+    if initialPosition.x == robot.postion.x && initialPosition.y == robot.postion.y {
+        return true
+    }
+    return false
+}
+
+judgeCircle(moves: isCircle)
+judgeCircle(moves: isNotCircle)
+
+enum Moves {
+    case up
+    case down
+    case left
+    case right
+    case none
+}
+
+func getMoves(fromChar : Character) -> Moves {
+    let string = String(fromChar).lowercased()
+    switch string {
+    case "u":
+        return .up
+    case "d" :
+        return .down
+    case "l" :
+        return .left
+    case "r" :
+        return .right
+    default :
+        return .none
+    }
+}
+
+func getValue(fromMoves : Moves) -> Position {
+    switch fromMoves {
+    case .up:
+        return Position(x: 0, y: 1)
+    case .down:
+        return Position(x: 0, y: -1)
+    case .left:
+        return Position(x: -1, y: 0)
+    case .right:
+        return Position(x: 1, y: 0)
+    default :
+        return Position(x: 0, y: 0)
+    }
+}
+
