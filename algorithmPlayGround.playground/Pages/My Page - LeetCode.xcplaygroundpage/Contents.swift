@@ -54,6 +54,14 @@ sum3(a: list, sum: 10)
 var isCircle = "UD" //return true
 var isNotCircle = "LL" // return false
 
+enum Moves {
+    case up
+    case down
+    case left
+    case right
+    case none
+}
+
 struct Position {
     var x = 0
     var y = 0
@@ -68,32 +76,7 @@ struct Robot {
     }
 }
 
-func judgeCircle(moves : String) -> Bool{
-    var robot = Robot()
-    let initialPosition = robot.postion
-    for m in moves {
-        let move = getMoves(fromChar: m)
-        let newPosition = getValue(fromMoves: move)
-        robot.add(newPosition: newPosition)
-    }
-    if initialPosition.x == robot.postion.x && initialPosition.y == robot.postion.y {
-        return true
-    }
-    return false
-}
-
-judgeCircle(moves: isCircle)
-judgeCircle(moves: isNotCircle)
-
-enum Moves {
-    case up
-    case down
-    case left
-    case right
-    case none
-}
-
-func getMoves(fromChar : Character) -> Moves {
+func moves(fromChar : Character) -> Moves {
     let string = String(fromChar).lowercased()
     switch string {
     case "u":
@@ -109,7 +92,7 @@ func getMoves(fromChar : Character) -> Moves {
     }
 }
 
-func getValue(fromMoves : Moves) -> Position {
+func position(fromMoves : Moves) -> Position {
     switch fromMoves {
     case .up:
         return Position(x: 0, y: 1)
@@ -124,3 +107,17 @@ func getValue(fromMoves : Moves) -> Position {
     }
 }
 
+func judgeCircle(_ routes : String) -> Bool{
+    var robot = Robot()
+    let initialPosition = robot.postion
+    for m in routes {
+        robot.add(newPosition: position(fromMoves: moves(fromChar: m)))
+    }
+    if initialPosition.x == robot.postion.x && initialPosition.y == robot.postion.y {
+        return true
+    }
+    return false
+}
+
+judgeCircle(isCircle)
+judgeCircle(isNotCircle)
