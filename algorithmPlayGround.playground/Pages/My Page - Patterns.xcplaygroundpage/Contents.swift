@@ -112,3 +112,56 @@ class PizzaFactory {
 let newPizza = PizzaFactory.createPizza(type: .newyork)
 newPizza.bake()
 
+protocol Baozi {
+    var topping : [String] { get set }
+    func bake()
+}
+
+protocol BakeFactory {
+    func bakePizza() -> Pizza
+    func bakeBaozi() -> Baozi
+}
+
+class NewyorkBaozi : Baozi {
+    var topping: [String] = []
+    func bake() {
+        print("We don't knwo what is Baozi")
+    }
+}
+
+class ShanghaiDimsum : Baozi {
+    var topping: [String] = ["flour", "pork", "onion"]
+    func bake() {
+        print("It's shanghai dimsum")
+    }
+}
+
+class NewyorkPizzaFactory : BakeFactory {
+    func bakePizza() -> Pizza {
+        return NewyorkPizza()
+    }
+    
+    func bakeBaozi() -> Baozi {
+        return NewyorkBaozi()
+    }
+}
+
+
+class ShanghaiPizzaFactory : BakeFactory {
+    func bakeBaozi() -> Baozi {
+        return ShanghaiDimsum()
+    }
+    
+    func bakePizza() -> Pizza {
+        return ItailianPizza()
+    }
+}
+
+let nyPizza = NewyorkPizzaFactory()
+nyPizza.bakeBaozi().bake()
+nyPizza.bakePizza().bake()
+
+let shPizza = ShanghaiPizzaFactory()
+shPizza.bakeBaozi().bake()
+shPizza.bakePizza().bake()
+
