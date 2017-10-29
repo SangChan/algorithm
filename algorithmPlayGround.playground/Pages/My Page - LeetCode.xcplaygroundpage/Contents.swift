@@ -121,3 +121,22 @@ func judgeCircle(_ routes : String) -> Bool{
 
 judgeCircle(isCircle)
 judgeCircle(isNotCircle)
+
+// 7. Reverse Integer
+
+var reverseEx1 = 123 //should be 321
+var reverseEx2 = -123 // shold be -321
+
+func reverse(x : Int) -> Int {
+    let isMinus : Bool = (x < 0) ? true : false
+    let strX = String(abs(x))
+    var reverseStrX : String = ""
+    for i in strX.reversed() {
+        reverseStrX.append(i)
+    }
+    let reverseX : Int = Int(reverseStrX) ?? 0
+    return (isMinus) ? reverseX * -1 : reverseX
+}
+
+reverse(x: reverseEx1)
+reverse(x: reverseEx2)
