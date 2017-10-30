@@ -138,5 +138,25 @@ func reverse(x : Int) -> Int {
     return (isMinus) ? reverseX * -1 : reverseX
 }
 
+func reverse2(x : Int) -> Int {
+    var inputX : Int = x
+    var reverseX : Int = 0
+    
+    while inputX != 0 {
+        reverseX *= 10
+        reverseX += inputX % 10
+        inputX /= 10
+    }
+    
+    if reverseX > Int.max || reverseX < Int.min {
+        return 0
+    }
+    
+    return reverseX
+}
+
 reverse(x: reverseEx1)
 reverse(x: reverseEx2)
+
+reverse2(x: reverseEx1)
+reverse2(x: reverseEx2)
