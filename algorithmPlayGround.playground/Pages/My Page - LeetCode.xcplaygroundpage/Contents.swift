@@ -160,3 +160,19 @@ reverse(x: reverseEx2)
 
 reverse2(x: reverseEx1)
 reverse2(x: reverseEx2)
+
+// 9. Palindrome Number
+
+func isPalindrome(x : Int) -> Bool {
+    let reverseX = reverse2(x: x)
+    if reverseX == x {
+        return true
+    }
+    return false
+}
+
+var palindromeEx1 = 121
+var palindromeEx2 = 432
+
+isPalindrome(x: palindromeEx1)
+isPalindrome(x: palindromeEx2)
