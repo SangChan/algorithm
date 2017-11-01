@@ -176,3 +176,41 @@ var palindromeEx2 = 432
 
 isPalindrome(x: palindromeEx1)
 isPalindrome(x: palindromeEx2)
+
+// 14. Longest Common Prefix
+
+let lcpEx1 = ["leet", "leetcode", "leets", "leeds"] //returns "lee"
+
+func longestCommonPrefixByHorizontalScanning(a : [String]) -> String {
+    guard a.count != 0 else { return "" }
+    var prefix : String = a[0]
+    for str in a[1..<a.count] {
+        while str.range(of: prefix) == nil {
+            prefix.removeLast()
+            if prefix.isEmpty { return "" }
+        }
+    }
+    
+    return prefix
+}
+
+longestCommonPrefixByHorizontalScanning(a: lcpEx1)
+
+func longestCommonPrefixByVerticalScanning(a : [String]) -> String {
+    guard a.count != 0 else { return "" }
+    let str = a[0]
+    for i in 0 ..< str.lengthOfBytes(using: .utf8) {
+        let c :Character = str[str.index(str.startIndex, offsetBy: i)]
+        for j in 1 ..< a.count {
+            let anotherStr = a[j]
+            if i == a[j].lengthOfBytes(using: .utf8) || anotherStr[anotherStr.index(anotherStr.startIndex, offsetBy: i)] != c {
+                
+                return String(str[..<str.index(str.startIndex, offsetBy: i)])
+            }
+        }
+    }
+    return a[0]
+}
+
+longestCommonPrefixByVerticalScanning(a: lcpEx1)
+
