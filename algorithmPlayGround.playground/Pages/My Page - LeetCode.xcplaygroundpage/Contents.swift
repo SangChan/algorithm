@@ -214,3 +214,11 @@ func longestCommonPrefixByVerticalScanning(a : [String]) -> String {
 
 longestCommonPrefixByVerticalScanning(a: lcpEx1)
 
+// 26. Remove Duplicates from Sorted Array
+
+let rmdEx1 = [1, 1, 3, 6, 8, 12]
+let rmdEX2 = [2, 5, 5, 5, 14, 25]
+
+func removeDulicates(a : inout [Int]) {
+    
+}
