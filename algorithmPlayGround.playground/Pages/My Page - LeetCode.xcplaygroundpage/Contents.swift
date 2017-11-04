@@ -216,9 +216,22 @@ longestCommonPrefixByVerticalScanning(a: lcpEx1)
 
 // 26. Remove Duplicates from Sorted Array
 
-let rmdEx1 = [1, 1, 3, 6, 8, 12]
-let rmdEX2 = [2, 5, 5, 5, 14, 25]
+var rmdEx1 = [1, 1, 3, 6, 8, 12]
+var rmdEX2 = [2, 5, 5, 5, 14, 25]
 
-func removeDulicates(a : inout [Int]) {
+func removeDulicates(a : inout [Int]) -> Int{
+    var i : Int = 0
+    for j in 1..<a.count {
+        if a[j] != a[i] {
+            i += 1
+            a[i] = a[j]
+        }
+    }
     
+    return i+1
 }
+
+removeDulicates(a: &rmdEx1)
+print(rmdEx1)
+removeDulicates(a: &rmdEX2)
+print(rmdEX2)
