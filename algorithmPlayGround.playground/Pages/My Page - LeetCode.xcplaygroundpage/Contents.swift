@@ -232,6 +232,27 @@ func removeDulicates(a : inout [Int]) -> Int{
 }
 
 removeDulicates(a: &rmdEx1)
-print(rmdEx1)
 removeDulicates(a: &rmdEX2)
-print(rmdEX2)
+
+
+// 27. Remove Element
+
+var reEx1 = [3,2,2,3]
+
+func removeElement(a : inout [Int], v : Int) -> Int {
+    var i : Int = 0
+    for j in 0 ..< a.count {
+        if a.count < j {
+            return a.count
+        }
+        if a[j] == v {
+            a.remove(at: j)
+            i += 1
+        }
+    }
+    return a.count - i
+}
+
+removeElement(a: &reEx1, v: 3)
+print(reEx1)
+
