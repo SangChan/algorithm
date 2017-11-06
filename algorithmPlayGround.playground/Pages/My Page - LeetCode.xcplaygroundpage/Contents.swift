@@ -234,7 +234,6 @@ func removeDulicates(a : inout [Int]) -> Int{
 removeDulicates(a: &rmdEx1)
 removeDulicates(a: &rmdEX2)
 
-
 // 27. Remove Element
 
 var reEx1 = [3,2,2,3]
@@ -254,5 +253,3 @@ func removeElement(a : inout [Int], v : Int) -> Int {
 }
 
 removeElement(a: &reEx1, v: 3)
-print(reEx1)
-
