@@ -253,3 +253,43 @@ func removeElement(a : inout [Int], v : Int) -> Int {
 }
 
 removeElement(a: &reEx1, v: 3)
+
+// 70. Climbing Stairs
+
+func climbStairs(i: Int) -> Int {
+    return climb_stairs(step: 0, i: i)
+}
+
+func climb_stairs(step: Int, i: Int) -> Int {
+    if step > i {
+        return 0
+    }
+    if step == i {
+        return 1
+    }
+    
+    return climb_stairs(step: step+1, i: i) + climb_stairs(step: step+2, i: i)
+}
+
+let climbEX1 = 5
+climbStairs(i: climbEX1)
+
+func climsStairsFibo(i: Int) -> Int {
+    if i == 1 {
+        return 1
+    }
+    
+    var first = 1
+    var second = 2
+    for n in 3 ..< i+1 {
+        let third = first+second
+        first = second
+        second = third
+    }
+    
+    return second
+}
+
+climsStairsFibo(i: climbEX1)
+
+
