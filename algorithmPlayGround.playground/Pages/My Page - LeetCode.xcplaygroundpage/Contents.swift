@@ -292,4 +292,8 @@ func climsStairsFibo(i: Int) -> Int {
 
 climsStairsFibo(i: climbEX1)
 
+// 83. Remove Duplicates from Sorted Linked List
+
+let rmDpEx1 = [1,1,2] // return [1,2]
+let rmDpEx2 = [1,1,2,3,3] // return [1,2,3]
 
