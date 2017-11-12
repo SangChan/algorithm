@@ -281,7 +281,7 @@ func climsStairsFibo(i: Int) -> Int {
     
     var first = 1
     var second = 2
-    for n in 3 ..< i+1 {
+    for _ in 3 ..< i+1 {
         let third = first+second
         first = second
         second = third
@@ -297,3 +297,10 @@ climsStairsFibo(i: climbEX1)
 let rmDpEx1 = [1,1,2] // return [1,2]
 let rmDpEx2 = [1,1,2,3,3] // return [1,2,3]
 
+class ListNode {
+    var value : Int?
+    var next : ListNode?
+}
+
+func deleteDuplicates(head : ListNode) -> ListNode {
+}
