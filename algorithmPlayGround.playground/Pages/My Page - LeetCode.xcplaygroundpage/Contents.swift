@@ -304,8 +304,19 @@ class ListNode {
 
 class LinkedList {
     private var head : ListNode = ListNode()
-    func addLink(key: Int) {
-        
+    func addLink(value: Int) {
+        if head.value == nil {
+            head.value = value
+            return
+        }
+        var current : ListNode? = head
+        while current != nil {
+            var childToUse : ListNode = ListNode()
+            childToUse.value = value
+            current!.next = childToUse
+            break
+        }
+        current = current?.next
     }
     func removeLinkAtIndex(index : Int) {
         
