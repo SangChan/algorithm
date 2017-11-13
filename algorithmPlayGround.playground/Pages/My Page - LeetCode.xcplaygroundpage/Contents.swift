@@ -302,5 +302,15 @@ class ListNode {
     var next : ListNode?
 }
 
+class LinkedList {
+    private var head : ListNode = ListNode()
+    func addLink(key: Int) {
+        
+    }
+    func removeLinkAtIndex(index : Int) {
+        
+    }
+}
+
 func deleteDuplicates(head : ListNode) -> ListNode {
 }
