@@ -318,8 +318,29 @@ class LinkedList {
         }
         current = current?.next
     }
+    
     func removeLinkAtIndex(index : Int) {
+        var current : ListNode? = head
+        var trailer : ListNode?
+        var listIndex : Int = 0
         
+        if index == 0 {
+            current = current?.next
+            head = current!
+            return
+        }
+        
+        while current != nil {
+            if listIndex == index {
+                trailer!.next = current?.next
+                current = nil
+                break
+            }
+            
+            trailer = current
+            current = current?.next
+            listIndex += 1
+        }
     }
 }
 
