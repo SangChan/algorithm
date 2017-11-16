@@ -342,6 +342,14 @@ class LinkedList {
             listIndex += 1
         }
     }
+    
+    func printAllkeys() {
+        var current: ListNode! = head
+        while current != nil {
+            // TODO : print here 
+            current = current!.next
+        }
+    }
 }
 
 func deleteDuplicates(head : ListNode) -> ListNode {
