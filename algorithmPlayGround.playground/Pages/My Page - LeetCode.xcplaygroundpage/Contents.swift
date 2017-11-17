@@ -294,9 +294,6 @@ climsStairsFibo(i: climbEX1)
 
 // 83. Remove Duplicates from Sorted Linked List
 
-let rmDpEx1 = [1,1,2] // return [1,2]
-let rmDpEx2 = [1,1,2,3,3] // return [1,2,3]
-
 class ListNode {
     var value : Int?
     var next : ListNode?
@@ -346,11 +343,24 @@ class LinkedList {
     func printAllkeys() {
         var current: ListNode! = head
         while current != nil {
-            // TODO : print here 
+            // TODO : print here
             current = current!.next
         }
     }
 }
+
+//let rmDpEx1 = [1,1,2] // return [1,2]
+var rmDpEx1 = LinkedList()
+rmDpEx1.addLink(value: 1)
+rmDpEx1.addLink(value: 1)
+rmDpEx1.addLink(value: 2)
+//let rmDpEx2 = [1,1,2,3,3] // return [1,2,3]
+var rmDpEx2 = LinkedList()
+rmDpEx2.addLink(value: 1)
+rmDpEx2.addLink(value: 1)
+rmDpEx2.addLink(value: 2)
+rmDpEx2.addLink(value: 3)
+rmDpEx2.addLink(value: 3)
 
 func deleteDuplicates(head : ListNode) -> ListNode {
 }
