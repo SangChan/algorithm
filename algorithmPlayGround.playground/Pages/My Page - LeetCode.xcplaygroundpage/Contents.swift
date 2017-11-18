@@ -349,13 +349,12 @@ class LinkedList {
     }
 }
 
-//let rmDpEx1 = [1,1,2] // return [1,2]
-var rmDpEx1 = LinkedList()
+var rmDpEx1 = LinkedList() //return [1,2]
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 2)
-//let rmDpEx2 = [1,1,2,3,3] // return [1,2,3]
-var rmDpEx2 = LinkedList()
+
+var rmDpEx2 = LinkedList() // return [1,2,3]
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 2)
