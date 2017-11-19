@@ -316,7 +316,7 @@ class LinkedList {
         current = current?.next
     }
     
-    func removeLinkAtIndex(index : Int) {
+    /*func removeLinkAtIndex(index : Int) {
         var current : ListNode? = head
         var trailer : ListNode?
         var listIndex : Int = 0
@@ -338,12 +338,13 @@ class LinkedList {
             current = current?.next
             listIndex += 1
         }
-    }
+    }*/
     
     func printAllkeys() {
         var current: ListNode! = head
         while current != nil {
             // TODO : print here
+            print(current.value ?? -65535)
             current = current!.next
         }
     }
@@ -353,6 +354,7 @@ var rmDpEx1 = LinkedList() //return [1,2]
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 2)
+rmDpEx1.printAllkeys()
 
 var rmDpEx2 = LinkedList() // return [1,2,3]
 rmDpEx2.addLink(value: 1)
@@ -360,6 +362,7 @@ rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 2)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.addLink(value: 3)
+rmDpEx2.printAllkeys()
 
-func deleteDuplicates(head : ListNode) -> ListNode {
-}
+//func deleteDuplicates(head : ListNode) -> ListNode {
+//}
