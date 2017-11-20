@@ -302,7 +302,7 @@ class ListNode {
 class LinkedList {
     private var head : ListNode = ListNode()
     func addLink(value: Int) {
-        if head.value == nil {
+        if head.value == nil && head.next == nil {
             head.value = value
             return
         }
@@ -341,11 +341,17 @@ class LinkedList {
     }*/
     
     func printAllkeys() {
-        var current: ListNode! = head
-        while current != nil {
-            // TODO : print here
-            print(current.value ?? -65535)
-            current = current!.next
+        printNode(head)
+    }
+    
+    fileprivate func printNode(_ node : ListNode) {
+        if let value = node.value {
+            print("value = \(value)")
+        }
+        
+        if let next = node.next {
+            print("next = \(next)")
+            printNode(next)
         }
     }
 }
@@ -356,13 +362,13 @@ rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 2)
 rmDpEx1.printAllkeys()
 
-var rmDpEx2 = LinkedList() // return [1,2,3]
-rmDpEx2.addLink(value: 1)
-rmDpEx2.addLink(value: 1)
-rmDpEx2.addLink(value: 2)
-rmDpEx2.addLink(value: 3)
-rmDpEx2.addLink(value: 3)
-rmDpEx2.printAllkeys()
+//var rmDpEx2 = LinkedList() // return [1,2,3]
+//rmDpEx2.addLink(value: 1)
+//rmDpEx2.addLink(value: 1)
+//rmDpEx2.addLink(value: 2)
+//rmDpEx2.addLink(value: 3)
+//rmDpEx2.addLink(value: 3)
+//rmDpEx2.printAllkeys()
 
 //func deleteDuplicates(head : ListNode) -> ListNode {
 //}
