@@ -350,7 +350,7 @@ class LinkedList {
         }
         
         if let next = node.next {
-            print("next = \(next)")
+            print("next = \(next), value = \(next.value)")
             printNode(next)
         }
     }
@@ -358,8 +358,8 @@ class LinkedList {
 
 var rmDpEx1 = LinkedList() //return [1,2]
 rmDpEx1.addLink(value: 1)
-rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 2)
+rmDpEx1.addLink(value: 3)
 rmDpEx1.printAllkeys()
 
 //var rmDpEx2 = LinkedList() // return [1,2,3]
