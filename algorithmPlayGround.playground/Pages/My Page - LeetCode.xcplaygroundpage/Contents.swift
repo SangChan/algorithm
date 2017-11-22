@@ -300,48 +300,31 @@ class ListNode {
 }
 
 class LinkedList {
-    private var head : ListNode = ListNode()
-    func addLink(value: Int) {
-        if head.value == nil && head.next == nil {
-            head.value = value
-            return
+    private var head : ListNode?
+    private var tail: ListNode? {
+        if var node = head {
+            while let next = node.next {
+                node = next
+            }
+            return node
+        } else {
+            return nil
         }
-        var current : ListNode? = head
-        while current != nil {
-            var childToUse : ListNode = ListNode()
-            childToUse.value = value
-            current!.next = childToUse
-            break
-        }
-        current = current?.next
     }
     
-    /*func removeLinkAtIndex(index : Int) {
-        var current : ListNode? = head
-        var trailer : ListNode?
-        var listIndex : Int = 0
-        
-        if index == 0 {
-            current = current?.next
-            head = current!
-            return
+    func addLink(value: Int) {
+        let newNode : ListNode = ListNode()
+        newNode.value = value
+        if let lastNode = tail {
+            lastNode.next = newNode
+        } else {
+            head = newNode
         }
-        
-        while current != nil {
-            if listIndex == index {
-                trailer!.next = current?.next
-                current = nil
-                break
-            }
-            
-            trailer = current
-            current = current?.next
-            listIndex += 1
-        }
-    }*/
+    }
     
     func printAllkeys() {
-        printNode(head)
+        guard let firstNode = head else { return }
+        printNode(firstNode)
     }
     
     fileprivate func printNode(_ node : ListNode) {
@@ -350,7 +333,6 @@ class LinkedList {
         }
         
         if let next = node.next {
-            print("next = \(next), value = \(next.value)")
             printNode(next)
         }
     }
@@ -362,13 +344,13 @@ rmDpEx1.addLink(value: 2)
 rmDpEx1.addLink(value: 3)
 rmDpEx1.printAllkeys()
 
-//var rmDpEx2 = LinkedList() // return [1,2,3]
-//rmDpEx2.addLink(value: 1)
-//rmDpEx2.addLink(value: 1)
-//rmDpEx2.addLink(value: 2)
-//rmDpEx2.addLink(value: 3)
-//rmDpEx2.addLink(value: 3)
-//rmDpEx2.printAllkeys()
+var rmDpEx2 = LinkedList() // return [1,2,3]
+rmDpEx2.addLink(value: 1)
+rmDpEx2.addLink(value: 1)
+rmDpEx2.addLink(value: 2)
+rmDpEx2.addLink(value: 3)
+rmDpEx2.addLink(value: 3)
+rmDpEx2.printAllkeys()
 
 //func deleteDuplicates(head : ListNode) -> ListNode {
 //}
