@@ -336,21 +336,46 @@ class LinkedList {
             printNode(next)
         }
     }
+    
+    func deleteDuplicates() {
+        guard let firstNode = head else { return }
+        deleteDuplicates(firstNode)
+    }
+    
+    fileprivate func deleteDuplicates(_ node : ListNode) {
+        if let next = node.next {
+            if next.value == node.value {
+                if let afterNext = next.next {
+                    node.next = afterNext
+                    self.deleteDuplicates(afterNext)
+                } else {
+                    node.next = nil
+                }
+            } else {
+                self.deleteDuplicates(next)
+            }
+        }
+    }
 }
 
 var rmDpEx1 = LinkedList() //return [1,2]
+print("first")
 rmDpEx1.addLink(value: 1)
-rmDpEx1.addLink(value: 2)
+rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 3)
+rmDpEx1.printAllkeys()
+print("after process")
+rmDpEx1.deleteDuplicates()
 rmDpEx1.printAllkeys()
 
 var rmDpEx2 = LinkedList() // return [1,2,3]
+print("first")
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 2)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.printAllkeys()
-
-//func deleteDuplicates(head : ListNode) -> ListNode {
-//}
+print("after process")
+rmDpEx2.deleteDuplicates()
+rmDpEx2.printAllkeys()
