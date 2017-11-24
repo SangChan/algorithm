@@ -359,23 +359,17 @@ class LinkedList {
 }
 
 var rmDpEx1 = LinkedList() //return [1,2]
-print("first")
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 3)
-rmDpEx1.printAllkeys()
-print("after process")
 rmDpEx1.deleteDuplicates()
-rmDpEx1.printAllkeys()
+//rmDpEx1.printAllkeys()
 
 var rmDpEx2 = LinkedList() // return [1,2,3]
-print("first")
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 1)
 rmDpEx2.addLink(value: 2)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.addLink(value: 3)
-rmDpEx2.printAllkeys()
-print("after process")
 rmDpEx2.deleteDuplicates()
-rmDpEx2.printAllkeys()
+//rmDpEx2.printAllkeys()
