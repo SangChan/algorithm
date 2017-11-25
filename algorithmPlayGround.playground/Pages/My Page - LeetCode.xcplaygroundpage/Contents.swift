@@ -363,7 +363,6 @@ rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 1)
 rmDpEx1.addLink(value: 3)
 rmDpEx1.deleteDuplicates()
-//rmDpEx1.printAllkeys()
 
 var rmDpEx2 = LinkedList() // return [1,2,3]
 rmDpEx2.addLink(value: 1)
@@ -372,4 +371,3 @@ rmDpEx2.addLink(value: 2)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.addLink(value: 3)
 rmDpEx2.deleteDuplicates()
-//rmDpEx2.printAllkeys()
