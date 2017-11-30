@@ -431,11 +431,14 @@ class AVLTree<T: Comparable> {
 }
 
 let symmetricTreeEx1 : Array<Int> = [1,2,2,3,4,4,3]
-//let symmetricTreeEx2 : Array<Int> = [1,2,2,nil,3,nil,3]
+let symmetricTreeEx2 : Array<Int> = [1,2,2,Int.min,3,Int.min,3]
 var root = AVLTree<Int>()
 
 for number in symmetricTreeEx1 {
     root.addNode(key: number)
 }
 
-
+var root2 = AVLTree<Int>()
+for number in symmetricTreeEx2 {
+    root2.addNode(key: number)
+}
