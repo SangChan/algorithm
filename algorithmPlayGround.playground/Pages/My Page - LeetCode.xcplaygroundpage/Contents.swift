@@ -449,5 +449,5 @@ let stocksEx1 : [Int] = [7, 1, 5, 3, 6, 4] // return 5
 let stocksEx2 : [Int] = [7, 6, 4, 3, 1] // return 0
 
 func maxProfit(stocks : [Int]) -> Int {
-    return 0
+    return Int.min
 }
