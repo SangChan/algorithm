@@ -448,6 +448,34 @@ for number in symmetricTreeEx2 {
 let stocksEx1 : [Int] = [7, 1, 5, 3, 6, 4] // return 5
 let stocksEx2 : [Int] = [7, 6, 4, 3, 1] // return 0
 
-func maxProfit(stocks : [Int]) -> Int {
-    return Int.min
+func maxProfitBruteForce(_ prices : [Int]) -> Int {
+    var maxProfit : Int = 0
+    for i in 0 ..< prices.count {
+        for j in i+1 ..< prices.count {
+            let profit = prices[j] - prices[i]
+            if profit > maxProfit {
+                maxProfit = profit
+            }
+        }
+    }
+    return maxProfit
 }
+
+func maxProfit(_ prices : [Int]) -> Int {
+    var minPrice = Int.max
+    var maxProfit = 0
+    for i in 0 ..< prices.count {
+        if prices[i] < minPrice {
+            minPrice = prices[i]
+        } else if prices[i] - minPrice > maxProfit {
+            maxProfit = prices[i] - minPrice
+        }
+    }
+    return maxProfit
+}
+
+maxProfitBruteForce(stocksEx1)
+maxProfitBruteForce(stocksEx2)
+
+maxProfit(stocksEx1)
+maxProfit(stocksEx2)
