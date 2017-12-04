@@ -461,6 +461,9 @@ func maxProfitBruteForce(_ prices : [Int]) -> Int {
     return maxProfit
 }
 
+maxProfitBruteForce(stocksEx1)
+maxProfitBruteForce(stocksEx2)
+
 func maxProfit(_ prices : [Int]) -> Int {
     var minPrice = Int.max
     var maxProfit = 0
@@ -474,8 +477,45 @@ func maxProfit(_ prices : [Int]) -> Int {
     return maxProfit
 }
 
-maxProfitBruteForce(stocksEx1)
-maxProfitBruteForce(stocksEx2)
-
 maxProfit(stocksEx1)
 maxProfit(stocksEx2)
+
+//122. Best Time to Buy and Sell Stock
+
+func maxProfitUsingPeak(_ prices : [Int]) -> Int {
+    var i = 0
+    var valley = prices[0]
+    var peak = prices[0]
+    var maxProfit = 0
+    
+    while i < prices.count - 1 {
+        while i < prices.count - 1 && prices[i] >= prices[i+1] {
+            i += 1
+        }
+        valley = prices[i]
+        while i < prices.count - 1 && prices[i] <= prices[i+1] {
+            i += 1
+        }
+        peak = prices[i]
+        maxProfit += peak - valley
+    }
+    
+    return maxProfit
+}
+
+maxProfitUsingPeak(stocksEx1)
+maxProfitUsingPeak(stocksEx2)
+
+func maxPrifitOnePass(_ prices : [Int]) -> Int {
+    var maxProfit = 0
+    for i in 1 ..< prices.count {
+        if prices[i] > prices[i-1] {
+            maxProfit += prices[i] - prices[i-1]
+        }
+    }
+    return maxProfit
+}
+
+maxPrifitOnePass(stocksEx1)
+maxPrifitOnePass(stocksEx2)
+
