@@ -525,5 +525,16 @@ let singleNumberEx1 : [Int] = [1,2,3,4,5,6,2,3,4,5,6] // return 1, must be linea
 let singleNumberEx2 : [Int] = [2,6,8,3,9,11,2,6,3,9,11] //return 8, must be linear
 
 func singleNumber(_ nums: [Int]) -> Int {
+    let reversedNums : [Int] = nums.reversed()
+    for i in 0 ..< nums.count {
+        let number = nums[i]
+        if let reversedIndex = reversedNums.index(of: number), let index = nums.index(of: number) {
+            if reversedIndex + index == nums.count - 1{
+                return number
+            }
+        }
+    }
     return 0
 }
+
+singleNumber(singleNumberEx1)
