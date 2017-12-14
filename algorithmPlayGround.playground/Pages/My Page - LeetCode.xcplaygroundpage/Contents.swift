@@ -538,3 +538,5 @@ func singleNumber(_ nums: [Int]) -> Int {
 }
 
 singleNumber(singleNumberEx1)
+singleNumber(singleNumberEx2)
+
