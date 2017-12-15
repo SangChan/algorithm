@@ -540,3 +540,27 @@ func singleNumber(_ nums: [Int]) -> Int {
 singleNumber(singleNumberEx1)
 singleNumber(singleNumberEx2)
 
+func singleNumberByMath(_ nums: [Int]) -> Int {
+    var singlers : [Int] = []
+    for i in 0 ..< nums.count {
+        let number = nums[i]
+        if singlers.index(of: number) == nil {
+            singlers.append(number)
+        }
+    }
+    
+    var sumOfSinglers : Int = 0
+    for i in 0 ..< singlers.count {
+        sumOfSinglers += singlers[i]
+    }
+    
+    var sumOfNums : Int = 0
+    for i in 0 ..< nums.count {
+        sumOfNums += nums[i]
+    }
+    
+    return (sumOfSinglers * 2) - sumOfNums
+}
+
+singleNumberByMath(singleNumberEx1)
+singleNumberByMath(singleNumberEx2)
