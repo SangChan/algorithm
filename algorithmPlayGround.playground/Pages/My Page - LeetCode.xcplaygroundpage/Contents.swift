@@ -122,6 +122,10 @@ func judgeCircle(_ routes : String) -> Bool{
 judgeCircle(isCircle)
 judgeCircle(isNotCircle)
 
+func judgeCircleByStack(_ routes: String) -> Bool {
+    return false
+}
+
 // 7. Reverse Integer
 
 var reverseEx1 = 123 //should be 321
