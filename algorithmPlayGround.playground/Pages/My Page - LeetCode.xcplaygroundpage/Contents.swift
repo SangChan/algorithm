@@ -122,6 +122,26 @@ func judgeCircle(_ routes : String) -> Bool{
 judgeCircle(isCircle)
 judgeCircle(isNotCircle)
 
+class Stack<T> {
+    fileprivate var array : [T] = [T]()
+    
+    public func size() -> Int {
+        return array.count
+    }
+    
+    public func push(x : T) {
+        array.append(x)
+    }
+    
+    public func pop() -> T? {
+        return array.popLast()
+    }
+    
+    public func isEmpty() -> Bool {
+        return (array.count == 0) ? true : false
+    }
+}
+
 func judgeCircleByStack(_ routes: String) -> Bool {
     return false
 }
