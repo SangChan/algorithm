@@ -143,8 +143,33 @@ class Stack<T> {
 }
 
 func judgeCircleByStack(_ routes: String) -> Bool {
+    var upDownStack = Stack<Int>()
+    var leftRightStack = Stack<Int>()
+    for m in routes {
+        switch moves(fromChar: m) {
+        case .up:
+            upDownStack.push(x: 1)
+        case .down:
+            upDownStack.pop()
+        case .left:
+            leftRightStack.push(x: 1)
+        case .right:
+            leftRightStack.pop()
+        default:
+            upDownStack.push(x: 1)
+            upDownStack.pop()
+            leftRightStack.push(x: 1)
+            leftRightStack.pop()
+        }
+    }
+    if upDownStack.isEmpty() == true && leftRightStack.isEmpty() == true {
+        return true
+    }
     return false
 }
+
+judgeCircleByStack(isCircle)
+judgeCircleByStack(isNotCircle)
 
 // 7. Reverse Integer
 
