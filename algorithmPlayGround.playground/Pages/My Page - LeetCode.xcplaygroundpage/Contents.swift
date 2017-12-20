@@ -143,8 +143,8 @@ class Stack<T> {
 }
 
 func judgeCircleByStack(_ routes: String) -> Bool {
-    var upDownStack = Stack<Int>()
-    var leftRightStack = Stack<Int>()
+    let upDownStack = Stack<Int>()
+    let leftRightStack = Stack<Int>()
     for m in routes {
         switch moves(fromChar: m) {
         case .up:
