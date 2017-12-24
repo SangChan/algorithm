@@ -568,7 +568,7 @@ func maxPrifitOnePass(_ prices : [Int]) -> Int {
 maxPrifitOnePass(stocksEx1)
 maxPrifitOnePass(stocksEx2)
 
-//135. Single Number
+//136. Single Number
 
 let singleNumberEx1 : [Int] = [1,2,3,4,5,6,2,3,4,5,6] // return 1, must be linear
 let singleNumberEx2 : [Int] = [2,6,8,3,9,11,2,6,3,9,11] //return 8, must be linear
@@ -613,3 +613,9 @@ func singleNumberByMath(_ nums: [Int]) -> Int {
 
 singleNumberByMath(singleNumberEx1)
 singleNumberByMath(singleNumberEx2)
+
+//141. Linked List Cycle
+
+func hasCycle() -> Bool {
+    return false
+}
