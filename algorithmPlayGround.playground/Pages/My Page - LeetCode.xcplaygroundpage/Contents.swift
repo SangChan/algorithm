@@ -616,6 +616,8 @@ singleNumberByMath(singleNumberEx2)
 
 //141. Linked List Cycle
 
-func hasCycle() -> Bool {
-    return false
+extension LinkedList {
+    func hasCycle() -> Bool {
+        return false
+    }
 }
