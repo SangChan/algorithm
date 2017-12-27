@@ -617,7 +617,7 @@ singleNumberByMath(singleNumberEx2)
 //141. Linked List Cycle
 
 extension LinkedList {
-    func hasCycle(_ head : ListNode) -> Bool {
+    func hasCycle(_ head : ListNode?) -> Bool {
         var nodes : [ListNode] = []
         var newHead : ListNode? = head
         while newHead != nil {
@@ -630,8 +630,22 @@ extension LinkedList {
                     }
                 }
             }
-            newHead = head.next
+            newHead = newHead?.next
         }
         return false
     }
+    
+    func hasCycleByTwoPointers(_ head : ListNode?) -> Bool {
+        guard let newHead = head else { return false }
+        guard let newNext = newHead.next else { return false }
+        
+        var slow = newHead
+        var fast = newNext
+        
+        while slow.value != fast.value {
+            
+        }
+        
+    }
 }
+
