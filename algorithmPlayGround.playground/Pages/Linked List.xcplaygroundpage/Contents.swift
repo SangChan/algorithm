@@ -30,7 +30,7 @@ class TeacherNode {
     var next : TeacherNode?
 }
 
-class LinkedList<T:Equatable> {
+class LinkedList<T:Equatable, Comparable> {
     private var head : LLNode<T> = LLNode<T>()
     var count: Int {
         if head.key == nil {
