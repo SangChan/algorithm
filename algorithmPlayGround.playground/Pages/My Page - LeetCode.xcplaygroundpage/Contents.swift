@@ -639,13 +639,17 @@ extension LinkedList {
         guard let newHead = head else { return false }
         guard let newNext = newHead.next else { return false }
         
-        var slow = newHead
-        var fast = newNext
+        var slow : ListNode? = newHead
+        var fast : ListNode? = newNext
         
         while slow.value != fast.value {
-            
+            if fast == nil || fast.next == nil {
+                return false
+            }
+            slow = slow.next?
+            fast = fast.next?.next?
         }
-        
+        return true
     }
 }
 
