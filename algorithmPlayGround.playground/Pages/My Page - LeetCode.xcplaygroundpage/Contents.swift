@@ -635,7 +635,7 @@ extension LinkedList {
         return false
     }
     
-    func hasCycleByTwoPointers(_ head : ListNode?) -> Bool {
+    /*func hasCycleByTwoPointers(_ head : ListNode?) -> Bool {
         guard let newHead = head else { return false }
         guard let newNext = newHead.next else { return false }
         
@@ -650,6 +650,6 @@ extension LinkedList {
             fast = fast.next?.next?
         }
         return true
-    }
+    }*/
 }
 
