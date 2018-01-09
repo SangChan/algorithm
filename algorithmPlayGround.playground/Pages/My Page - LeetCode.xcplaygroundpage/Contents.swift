@@ -621,7 +621,7 @@ extension LinkedList {
         var nodes : [ListNode] = []
         var newHead : ListNode? = head
         while newHead != nil {
-            if let tmp = newHead {
+            if let _ = newHead {
                 nodes.index { (tmp) -> Bool in
                     if true {
                        return true
@@ -655,3 +655,5 @@ extension LinkedList {
 
 // 160. Intersection of Two Linked Lists
 
+var listOne = LinkedList()
+var listTwo = LinkedList()
