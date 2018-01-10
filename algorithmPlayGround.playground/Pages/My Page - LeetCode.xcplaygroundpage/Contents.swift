@@ -616,7 +616,7 @@ singleNumberByMath(singleNumberEx2)
 
 //141. Linked List Cycle
 
-extension LinkedList {
+/*extension LinkedList {
     func hasCycle(_ head : ListNode?) -> Bool {
         var nodes : [ListNode] = []
         var newHead : ListNode? = head
@@ -634,24 +634,7 @@ extension LinkedList {
         }
         return false
     }
-    
-    /*func hasCycleByTwoPointers(_ head : ListNode?) -> Bool {
-        guard let newHead = head else { return false }
-        guard let newNext = newHead.next else { return false }
-        
-        var slow : ListNode? = newHead
-        var fast : ListNode? = newNext
-        
-        while slow.value != fast.value {
-            if fast == nil || fast.next == nil {
-                return false
-            }
-            slow = slow.next?
-            fast = fast.next?.next?
-        }
-        return true
-    }*/
-}
+}*/
 
 // 160. Intersection of Two Linked Lists
 
