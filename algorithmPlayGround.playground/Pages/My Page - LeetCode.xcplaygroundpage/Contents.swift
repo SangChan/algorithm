@@ -385,7 +385,9 @@ class LinkedList {
             printNode(next)
         }
     }
-    
+}
+
+extension LinkedList {
     func deleteDuplicates() {
         guard let firstNode = head else { return }
         deleteDuplicates(firstNode)
