@@ -618,25 +618,22 @@ singleNumberByMath(singleNumberEx2)
 
 //141. Linked List Cycle
 
-/*extension LinkedList {
+extension LinkedList {
     func hasCycle(_ head : ListNode?) -> Bool {
         var nodes : [ListNode] = []
         var newHead : ListNode? = head
         while newHead != nil {
-            if let _ = newHead {
-                nodes.index { (tmp) -> Bool in
-                    if true {
-                       return true
-                    } else {
-                        nodes.append(tmp)
-                    }
-                }
-            }
+//            nodes.index { (tmp == newHead) -> Bool in
+//                if true {
+//                    return true
+//                } else {
+//                    nodes.append(tmp)
+//            }
             newHead = newHead?.next
         }
         return false
     }
-}*/
+}
 
 // 160. Intersection of Two Linked Lists
 
