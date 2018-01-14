@@ -623,12 +623,7 @@ extension LinkedList {
         var nodes : [ListNode] = []
         var newHead : ListNode? = head
         while newHead != nil {
-//            nodes.index { (tmp == newHead) -> Bool in
-//                if true {
-//                    return true
-//                } else {
-//                    nodes.append(tmp)
-//            }
+            guard let node = newHead else { return false }
             newHead = newHead?.next
         }
         return false
