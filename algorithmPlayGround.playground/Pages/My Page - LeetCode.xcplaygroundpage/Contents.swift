@@ -634,3 +634,11 @@ extension LinkedList {
 
 var listOne = LinkedList()
 var listTwo = LinkedList()
+
+// 118. Pascal's Triangle
+
+func generatePascalTriangle(_ numRows: Int) -> [[Int]] {
+    return [[1]]
+}
+
+generatePascalTriangle(5)
