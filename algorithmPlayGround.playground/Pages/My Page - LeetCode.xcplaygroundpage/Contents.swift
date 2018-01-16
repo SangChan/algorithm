@@ -642,3 +642,13 @@ func generatePascalTriangle(_ numRows: Int) -> [[Int]] {
 }
 
 generatePascalTriangle(5)
+
+/* of gives 5, it returns
+[
+    [1],
+    [1,1],
+    [1,2,1],
+    [1,3,3,1],
+    [1,4,6,4,1]
+]
+*/
