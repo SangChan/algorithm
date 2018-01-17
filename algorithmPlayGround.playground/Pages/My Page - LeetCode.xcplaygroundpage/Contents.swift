@@ -638,7 +638,29 @@ var listTwo = LinkedList()
 // 118. Pascal's Triangle
 
 func generatePascalTriangle(_ numRows: Int) -> [[Int]] {
-    return [[1]]
+    guard numRows > 0 else { return [[0]] }
+    
+    var trianleArray = [[Int]]()
+    
+    trianleArray.append([1])
+    
+    for i in 1 ..< numRows {
+        var rowArray = [Int]()
+        rowArray.append(1)
+        
+        var preRowArray = [Int]()
+        preRowArray = trianleArray[i-1]
+        
+        for j in 1 ..< i {
+            let sum = preRowArray[j-1] + preRowArray[j]
+            rowArray.append(sum)
+        }
+        [rowArray .append(1)]
+        
+        trianleArray.append(rowArray)
+    }
+    
+    return trianleArray
 }
 
 generatePascalTriangle(5)
