@@ -674,3 +674,9 @@ generatePascalTriangle(5)
     [1,4,6,4,1]
 ]
 */
+
+// 167. Two Sum II - Input array is sorted
+
+func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+    return [0]
+}
