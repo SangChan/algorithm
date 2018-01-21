@@ -680,3 +680,9 @@ generatePascalTriangle(5)
 func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
     return [0]
 }
+
+// 169. Majority Element
+
+func majorityElement(_ nums: [Int]) -> Int {
+    
+}
