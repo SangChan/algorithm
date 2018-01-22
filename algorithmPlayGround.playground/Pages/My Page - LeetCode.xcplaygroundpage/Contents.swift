@@ -684,5 +684,5 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
 // 169. Majority Element
 
 func majorityElement(_ nums: [Int]) -> Int {
-    
+    return -1
 }
