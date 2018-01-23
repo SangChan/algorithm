@@ -678,11 +678,11 @@ generatePascalTriangle(5)
 // 167. Two Sum II - Input array is sorted
 
 func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
-    return [0]
+    return [Int.min]
 }
 
 // 169. Majority Element
 
 func majorityElement(_ nums: [Int]) -> Int {
-    return -1
+    return Int.min
 }
