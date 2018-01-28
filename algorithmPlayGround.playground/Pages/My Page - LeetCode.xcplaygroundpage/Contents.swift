@@ -684,3 +684,13 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
 func majorityElement(_ nums: [Int]) -> Int {
     return Int.min
 }
+
+// 189. Rotate Array
+
+func rotate(_ nums: inout [Int], _ k: Int) {
+        
+}
+
+var ex1Rotate = [1,2,3,4,5,6,7]
+
+rotate(&ex1Rotate, 3) //return [5,6,7,1,2,3,4]
