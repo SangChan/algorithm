@@ -688,7 +688,11 @@ func majorityElement(_ nums: [Int]) -> Int {
 // 189. Rotate Array
 
 func rotate(_ nums: inout [Int], _ k: Int) {
-        
+    for i in 0 ..< k {
+        if let temp = nums.popLast() {
+            nums.insert(temp, at: 0)
+        }
+    }
 }
 
 var ex1Rotate = [1,2,3,4,5,6,7]
