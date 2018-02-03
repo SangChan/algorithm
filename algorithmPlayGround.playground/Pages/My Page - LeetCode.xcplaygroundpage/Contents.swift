@@ -695,6 +695,9 @@ func rotate(_ nums: inout [Int], _ k: Int) {
     }
 }
 
+var ex1Rotate = [1,2,3,4,5,6,7]
+rotate(&ex1Rotate, 3) //return [5,6,7,1,2,3,4]
+
 func rotateWithBruteForce(_ nums: inout [Int], _ k: Int) {
     var temp : Int = 0
     var previous : Int = 0
@@ -708,6 +711,9 @@ func rotateWithBruteForce(_ nums: inout [Int], _ k: Int) {
     }
 }
 
+var ex2Rotate = [1,2,3,4,5,6,7]
+rotateWithBruteForce(&ex2Rotate, 3) //return [5,6,7,1,2,3,4]
+
 func rotateWithExtraArray(_ nums: inout [Int], _ k: Int) {
     var a : [Int] = [Int](repeating:0, count: nums.count)
     for i in 0 ..< nums.count {
@@ -717,12 +723,14 @@ func rotateWithExtraArray(_ nums: inout [Int], _ k: Int) {
         nums[i] = a[i]
     }
 }
+var ex3Rotate = [1,2,3,4,5,6,7]
+rotateWithExtraArray(&ex3Rotate, 3) //return [5,6,7,1,2,3,4]
 
 func rotateWithReverse(_ nums: inout [Int], _ k: Int) {
     let processedK = k % nums.count
     reverseArray(&nums, 0, nums.count - 1)
-    reverseArray(&nums, 0, k - 1)
-    reverseArray(&nums, k, nums.count - 1)
+    reverseArray(&nums, 0, processedK - 1)
+    reverseArray(&nums, processedK, nums.count - 1)
 }
 
 func reverseArray(_ nums: inout [Int], _ start: Int, _ end: Int) {
@@ -737,15 +745,5 @@ func reverseArray(_ nums: inout [Int], _ start: Int, _ end: Int) {
     }
 }
 
-var ex1Rotate = [1,2,3,4,5,6,7]
-rotate(&ex1Rotate, 3) //return [5,6,7,1,2,3,4]
-
-var ex2Rotate = [1,2,3,4,5,6,7]
-rotateWithBruteForce(&ex2Rotate, 3) //return [5,6,7,1,2,3,4]
-
-var ex3Rotate = [1,2,3,4,5,6,7]
-rotateWithExtraArray(&ex3Rotate, 3) //return [5,6,7,1,2,3,4]
-
 var ex4Rotate = [1,2,3,4,5,6,7]
 rotateWithReverse(&ex4Rotate, 3) //return [5,6,7,1,2,3,4]
-
