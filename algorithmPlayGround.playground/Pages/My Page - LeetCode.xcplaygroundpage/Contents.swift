@@ -747,3 +747,12 @@ func reverseArray(_ nums: inout [Int], _ start: Int, _ end: Int) {
 
 var ex4Rotate = [1,2,3,4,5,6,7]
 rotateWithReverse(&ex4Rotate, 3) //return [5,6,7,1,2,3,4]
+
+// 191. Number of 1 Bits
+
+func hammingWeight(_ num: UInt32) -> Int {
+    return 0
+}
+
+var exNumberOfOne = 11
+hammingWeight(11)
