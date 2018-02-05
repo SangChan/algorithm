@@ -751,7 +751,14 @@ rotateWithReverse(&ex4Rotate, 3) //return [5,6,7,1,2,3,4]
 // 191. Number of 1 Bits
 
 func hammingWeight(_ num: UInt32) -> Int {
-    return 0
+    let binary = String(num, radix:2)
+    var count = 0
+    for b in binary {
+        if b == "1" {
+            count += 1
+        }
+    }
+    return count
 }
 
 var exNumberOfOne = 11
