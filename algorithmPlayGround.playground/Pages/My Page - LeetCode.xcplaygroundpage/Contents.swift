@@ -752,6 +752,7 @@ rotateWithReverse(&ex4Rotate, 3) //return [5,6,7,1,2,3,4]
 
 func hammingWeight(_ num: UInt32) -> Int {
     let binary = String(num, radix:2)
+    print(binary)
     var count = 0
     for b in binary {
         if b == "1" {
@@ -761,5 +762,5 @@ func hammingWeight(_ num: UInt32) -> Int {
     return count
 }
 
-var exNumberOfOne = 11
-hammingWeight(11)
+var exNumberOfOne : UInt32 = 255
+hammingWeight(exNumberOfOne)
