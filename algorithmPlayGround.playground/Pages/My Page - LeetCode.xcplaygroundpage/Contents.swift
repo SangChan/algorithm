@@ -770,3 +770,19 @@ hammingWeight(exNumberOfOne)
 func rob(_ nums: [Int]) -> Int {
     return 0
 }
+
+// 146. LRU Cache
+
+class LRUCache {
+    init(capacity : Int) {
+
+    }
+    
+    func get(_ key : Int) -> Int{
+        return 0
+    }
+
+    func put(_ key: Int, value: Int) {
+
+    }
+}
