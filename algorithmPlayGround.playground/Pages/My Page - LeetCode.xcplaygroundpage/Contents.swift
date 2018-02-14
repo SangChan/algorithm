@@ -774,16 +774,23 @@ func rob(_ nums: [Int]) -> Int {
 // 146. LRU Cache
 
 class LRUCache {
+    var cache : Array<[Int:Int]> =  Array<[Int:Int]>()
+    var capacity : Int = 0
+    
     init(capacity : Int) {
-
+        self.capacity = capacity
     }
     
     func get(_ key : Int) -> Int{
-        return 0
+        
+        return -1
     }
 
     func put(_ key: Int, value: Int) {
-
+        if cache.count >= capacity {
+            
+        }
+        cache.append([key:value])
     }
 }
 
