@@ -781,15 +781,28 @@ class LRUCache {
         self.capacity = capacity
     }
     
-    func get(_ key : Int) -> Int{
-        
+    func get(_ key : Int) -> Int {
+        var index = 0
+        for i in cache {
+            print("\(index):\(i)")
+            if let value = i[key] {
+                cache.remove(at: index)
+                cache.append([key:value])
+                return value
+            }
+            index += 1
+        }
         return -1
     }
 
     func put(_ key: Int, value: Int) {
         if cache.count >= capacity {
-            
+            print("insert \(key,value)")
+            cache.remove(at: 0)
+            cache.insert([key:value], at: 0)
+            return
         }
+        print("append \(key,value)")
         cache.append([key:value])
     }
 }
