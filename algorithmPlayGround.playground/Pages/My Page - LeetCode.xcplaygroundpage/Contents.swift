@@ -799,12 +799,12 @@ class LRUCache {
     func put(_ key: Int, value: Int) {
         print("put : \(key),\(value)")
         if cache.count >= capacity {
-            print("insert \(key,value)")
+            print("insert [\(key),\(value)]")
             cache.remove(at: 0)
             cache.insert([key:value], at: 0)
             return
         }
-        print("append \(key,value)")
+        print("append [\(key),\(value)]")
         cache.append([key:value])
     }
 }
