@@ -810,7 +810,6 @@ class LRUCache {
 }
 
 let cache : LRUCache = LRUCache(capacity: 2)
-
 cache.put(1, value: 1)
 cache.put(2, value: 2)
 cache.get(1) // returns 1
