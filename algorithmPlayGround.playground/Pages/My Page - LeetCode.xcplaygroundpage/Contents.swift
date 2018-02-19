@@ -807,6 +807,10 @@ class LRUCache {
         print("append [\(key),\(value)]")
         cache.append([key:value])
     }
+    
+    func desctiption() -> String {
+        return ""
+    }
 }
 
 let cache : LRUCache = LRUCache(capacity: 2)
