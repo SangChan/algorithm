@@ -808,8 +808,10 @@ class LRUCache {
         cache.append([key:value])
     }
     
-    func desctiption() -> String {
-        return ""
+    func desctiption() {
+        for i in cache {
+            print("\(index):\(i)")
+        }
     }
 }
 
