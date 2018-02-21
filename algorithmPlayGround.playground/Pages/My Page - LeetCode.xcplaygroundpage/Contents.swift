@@ -785,7 +785,6 @@ class LRUCache {
         print("get : \(key)")
         var index = 0
         for i in cache {
-            print("\(index):\(i)")
             if let value = i[key] {
                 cache.remove(at: index)
                 cache.append([key:value])
@@ -808,20 +807,33 @@ class LRUCache {
         cache.append([key:value])
     }
     
-    func desctiption() {
+    func description() {
+        print("-------description---------")
+        var index = 0
         for i in cache {
             print("\(index):\(i)")
+            index += 1
         }
+        print("-----------------------")
     }
 }
 
 let cache : LRUCache = LRUCache(capacity: 2)
 cache.put(1, value: 1)
+cache.description()
 cache.put(2, value: 2)
+cache.description()
 cache.get(1) // returns 1
+cache.description()
 cache.put(3, value: 3) // evicts key 2
+cache.description()
 cache.get(2) // returns -1 (not found)
+cache.description()
 cache.put(4, value: 4) // evicts key 1
+cache.description()
 cache.get(1) // return -1 (not found)
+cache.description()
 cache.get(3) // returns 3
+cache.description()
 cache.get(4) // returns 4
+cache.description()
