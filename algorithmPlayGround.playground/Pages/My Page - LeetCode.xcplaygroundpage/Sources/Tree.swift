@@ -98,6 +98,7 @@ class Tree<T> {
         while allStack.isEmpty() == false {
             if let currentTree = allStack.pop() {
                 // process tree.value
+                print(currentTree.x)
             }
         }
     }
