@@ -768,7 +768,15 @@ hammingWeight(exNumberOfOne)
 // 198. House Robber
 
 func rob(_ nums: [Int]) -> Int {
-    return 0
+    var prevNo : Int = 0
+    var prevYes : Int = 0;
+    for num in nums {
+        var temp = prevNo
+        prevNo = max(prevNo, prevYes)
+        prevYes = num + temp
+    }
+    return max(prevNo, prevYes)
+    
 }
 
 // 146. LRU Cache
