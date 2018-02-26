@@ -821,3 +821,8 @@ cache.put(4, value: 4) // evicts key 1
 cache.get(1) // return -1 (not found)
 cache.get(3) // returns 3
 cache.get(4) // returns 4
+
+// 217. Contains Duplicate
+func containsDuplicate(_ nums: [Int]) -> Bool {
+    return false
+}
