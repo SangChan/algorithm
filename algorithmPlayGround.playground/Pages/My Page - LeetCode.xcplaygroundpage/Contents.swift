@@ -824,5 +824,10 @@ cache.get(4) // returns 4
 
 // 217. Contains Duplicate
 func containsDuplicate(_ nums: [Int]) -> Bool {
+    var dic : [Int : Int] = [Int : Int]()
+    for num in nums {
+        dic[num] = num
+    }
+    print(dic)
     return false
 }
