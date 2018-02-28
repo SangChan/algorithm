@@ -826,8 +826,20 @@ cache.get(4) // returns 4
 func containsDuplicate(_ nums: [Int]) -> Bool {
     var dic : [Int : Int] = [Int : Int]()
     for num in nums {
-        dic[num] = num
+        if let value = dic[num] {
+            dic[num] = value+1
+        } else {
+            dic[num] = 0
+        }
     }
-    print(dic)
+    
+    for value in dic.values {
+        if value > 0 {
+            return true
+        }
+    }
     return false
 }
+
+var cdEX1 = [1,2,3,4,4,5]
+containsDuplicate(cdEX1)
