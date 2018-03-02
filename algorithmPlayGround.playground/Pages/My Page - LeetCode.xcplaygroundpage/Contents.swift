@@ -843,3 +843,6 @@ func containsDuplicate(_ nums: [Int]) -> Bool {
 
 var cdEX1 = [1,2,3,4,4,5]
 containsDuplicate(cdEX1)
+
+var cdEX2 = [29,33,456,77,22222,123,5347,0,8,579,4569,-1]
+containsDuplicate(cdEX2)
