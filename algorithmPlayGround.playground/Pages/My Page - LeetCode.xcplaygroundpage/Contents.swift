@@ -848,3 +848,24 @@ var cdEX2 = [29,33,456,77,22222,123,5347,0,8,579,4569,-1]
 containsDuplicate(cdEX2)
 
 // 225. Implement Stack using Queues
+
+class MyStack {
+    func push(x : Int) {
+    
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    func pop() -> Int {
+        return Int.min
+    }
+    
+    /** Get the top element. */
+    func top() -> Int {
+        return Int.min
+    }
+    
+    /** Returns whether the stack is empty. */
+    func empty()  -> Bool {
+        return false
+    }
+}
