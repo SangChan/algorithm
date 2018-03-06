@@ -869,3 +869,10 @@ class MyStack {
         return false
     }
 }
+
+let myStack = MyStack()
+myStack.push(x: 1) // [1]
+myStack.push(x: 2) // [2,1]
+myStack.pop() // 2
+myStack.top() // 1
+myStack.empty() // false
