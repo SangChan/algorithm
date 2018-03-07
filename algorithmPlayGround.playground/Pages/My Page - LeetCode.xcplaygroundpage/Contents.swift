@@ -848,10 +848,28 @@ var cdEX2 = [29,33,456,77,22222,123,5347,0,8,579,4569,-1]
 containsDuplicate(cdEX2)
 
 // 225. Implement Stack using Queues
+class Queue<T> {
+    fileprivate var array : [T] = [T]()
+    
+    func size() -> Int {
+        return array.count
+    }
+    
+    func enqueue(x : T) {
+        array.append(x)
+    }
+    
+    func dequeue() -> T? {
+        guard array.isEmpty == false else { return nil }
+        return array.removeFirst()
+    }
+}
 
 class MyStack {
-    func push(x : Int) {
+    var queue : Queue<Int> = Queue<Int>()
     
+    func push(x : Int) {
+        queue.enqueue(x: x)
     }
     
     /** Removes the element on top of the stack and returns that element. */
