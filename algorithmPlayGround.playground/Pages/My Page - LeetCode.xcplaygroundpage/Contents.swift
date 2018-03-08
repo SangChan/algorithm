@@ -874,17 +874,26 @@ class MyStack {
     
     /** Removes the element on top of the stack and returns that element. */
     func pop() -> Int {
+        if let deque = queue.dequeue() {
+            return deque
+        }
         return Int.min
     }
     
     /** Get the top element. */
     func top() -> Int {
+        if let top = queue.dequeue() {
+            return top
+        }
         return Int.min
     }
     
     /** Returns whether the stack is empty. */
     func empty()  -> Bool {
-        return false
+        if queue.array.count > 0 {
+            return false
+        }
+        return true
     }
 }
 
