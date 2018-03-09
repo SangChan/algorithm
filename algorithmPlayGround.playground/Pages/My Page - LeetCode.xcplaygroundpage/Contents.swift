@@ -874,6 +874,7 @@ class MyStack {
     
     /** Removes the element on top of the stack and returns that element. */
     func pop() -> Int {
+        // dequeue until it's nil
         if let deque = queue.dequeue() {
             return deque
         }
@@ -882,6 +883,7 @@ class MyStack {
     
     /** Get the top element. */
     func top() -> Int {
+        // dequeue until it's nil
         if let top = queue.dequeue() {
             return top
         }
