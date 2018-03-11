@@ -875,12 +875,13 @@ class MyStack {
     /** Removes the element on top of the stack and returns that element. */
     func pop() -> Int {
         // dequeue until it's nil
-        for i in 0 ..< queue.size() {
-
-        }
-
-        if let deque = queue.dequeue() {
-            return deque
+        let size = queue.size()
+        for i in 0 ..< size {
+            if let deque = queue.dequeue() {
+                if size - 1 == i {
+                    return deque
+                }
+            }
         }
         return Int.min
     }
@@ -888,13 +889,15 @@ class MyStack {
     /** Get the top element. */
     func top() -> Int {
         // dequeue until it's nil
-        for i in 0 ..< queue.size() {
-
+        let size = queue.size()
+        for i in 0 ..< size {
+            if let deque = queue.dequeue() {
+                if size - 1 == i {
+                    return deque
+                }
+            }
         }
 
-        if let top = queue.dequeue() {
-            return top
-        }
         return Int.min
     }
     
