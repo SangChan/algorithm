@@ -880,6 +880,8 @@ class MyStack {
             if let deque = queue.dequeue() {
                 if size - 1 == i {
                     return deque
+                } else {
+                    push(x:deque)
                 }
             }
         }
@@ -894,6 +896,8 @@ class MyStack {
             if let deque = queue.dequeue() {
                 if size - 1 == i {
                     return deque
+                } else {
+                    push(x:deque)
                 }
             }
         }
