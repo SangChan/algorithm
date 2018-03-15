@@ -868,7 +868,7 @@ class Queue<T> {
 class MyStack {
     var queue : Queue<Int> = Queue<Int>()
     
-    func push(x : Int) {
+    func push(_ x : Int) {
         queue.enqueue(x: x)
     }
     
@@ -881,7 +881,7 @@ class MyStack {
                 if size - 1 == i {
                     return deque
                 } else {
-                    push(x:deque)
+                    push(deque)
                 }
             }
         }
@@ -897,7 +897,7 @@ class MyStack {
                 if size - 1 == i {
                     return deque
                 } else {
-                    push(x:deque)
+                    push(deque)
                 }
             }
         }
@@ -915,8 +915,8 @@ class MyStack {
 }
 
 let myStack = MyStack()
-myStack.push(x: 1) // [1]
-myStack.push(x: 2) // [2,1]
+myStack.push(1) // [1]
+myStack.push(2) // [2,1]
 myStack.pop() // 2
 myStack.top() // 1
 myStack.empty() // false
