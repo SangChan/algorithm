@@ -920,3 +920,25 @@ myStack.push(2) // [2,1]
 myStack.pop() // 2
 myStack.top() // 1
 myStack.empty() // false
+
+// 352. Data Stream as Disjoint Intervals
+
+struct Interval {
+    var start : Int
+    var end : Int
+    
+    func interval() -> Array<Int> {
+        return [start, end]
+    }
+}
+
+class SummaryRanges {
+    func addNum(_ val : Int) {
+        
+    }
+    
+    func getIntervals() -> Array<Int> {
+        return [0,0]
+    }
+};
+
