@@ -927,8 +927,8 @@ struct Interval {
     var start : Int
     var end : Int
     
-    func interval() -> Array<Int> {
-        return [start, end]
+    func interval() -> String {
+        return "Start from \(start), End at \(end)"
     }
 }
 
@@ -937,8 +937,12 @@ class SummaryRanges {
         
     }
     
-    func getIntervals() -> Array<Int> {
-        return [0,0]
+    func getIntervals() -> Array<Interval> {
+        let interval = Interval(start: 0, end: 0)
+        return [interval]
     }
-};
+}
 
+var summary = SummaryRanges()
+summary.addNum(1)
+summary.addNum(2)
