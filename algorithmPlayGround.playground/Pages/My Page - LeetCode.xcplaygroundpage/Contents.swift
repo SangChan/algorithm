@@ -933,13 +933,32 @@ struct Interval {
 }
 
 class SummaryRanges {
+    var intervals : Array<Interval>  = Array<Interval>()
     func addNum(_ val : Int) {
+        guard intervals.count > 0 else {
+            intervals.append(Interval(start: val, end: val))
+            return
+        }
         
+        for var interval in intervals {
+            if val < interval.start {
+                if interval.start - 1 == val {
+                    interval.start = val
+                } else {
+                    //disjoint
+                }
+            } else if val > interval.end {
+                if interval.end + 1 == val {
+                    interval.end = val
+                } else {
+                    //disjoint
+                }
+            }
+        }
     }
     
     func getIntervals() -> Array<Interval> {
-        let interval = Interval(start: 0, end: 0)
-        return [interval]
+        return intervals
     }
 }
 
