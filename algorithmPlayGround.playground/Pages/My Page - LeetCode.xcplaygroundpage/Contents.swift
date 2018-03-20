@@ -940,6 +940,8 @@ class SummaryRanges {
             return
         }
         
+        var index = 0
+        
         for var interval in intervals {
             if val < interval.start {
                 if interval.start - 1 == val {
@@ -954,6 +956,7 @@ class SummaryRanges {
                     //disjoint
                 }
             }
+            index += 1
         }
     }
     
