@@ -966,5 +966,8 @@ class SummaryRanges {
 }
 
 var summary = SummaryRanges()
-summary.addNum(1)
-summary.addNum(2)
+summary.addNum(1) // [1,1]
+summary.addNum(3) // [1,1], [3,3]
+summary.addNum(7) // [1,1], [3,3], [7,7]
+summary.addNum(2) // [1,3], [7,7]
+summary.addNum(6) // [1,3], [6,7]
