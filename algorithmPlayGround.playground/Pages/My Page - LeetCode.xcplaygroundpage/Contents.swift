@@ -946,12 +946,17 @@ class SummaryRanges {
             if val < interval.start {
                 if interval.start - 1 == val {
                     interval.start = val
+                    return
                 } else {
-                    //disjoint
+                    if index > 0 {
+                        intervals.insert(Interval(start:val, end: val), at: index - 1)
+                        return
+                    }
                 }
             } else if val > interval.end {
                 if interval.end + 1 == val {
                     interval.end = val
+                    return
                 } else {
                     //disjoint
                 }
