@@ -958,7 +958,13 @@ class SummaryRanges {
                     interval.end = val
                     return
                 } else {
-                    //disjoint
+                    if index+1 < intervals.count-1 {
+                        var nextInterval = intervals[index+1]
+                        if nextInterval.start - 1 == val {
+                            nextInterval.start = val
+                            return
+                        }
+                    }
                 }
             }
             index += 1
