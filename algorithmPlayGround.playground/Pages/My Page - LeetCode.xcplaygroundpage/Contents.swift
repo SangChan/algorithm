@@ -964,6 +964,9 @@ class SummaryRanges {
                             nextInterval.start = val
                             return
                         }
+                    } else {
+                        intervals.append(Interval(start: val, end: val))
+                        return
                     }
                 }
             }
@@ -974,11 +977,24 @@ class SummaryRanges {
     func getIntervals() -> Array<Interval> {
         return intervals
     }
+    
+    func description() {
+        print("--start--")
+        for interval in getIntervals() {
+            print(interval.interval())
+        }
+        print("---end---")
+    }
 }
 
 var summary = SummaryRanges()
 summary.addNum(1) // [1,1]
+summary.description()
 summary.addNum(3) // [1,1], [3,3]
+summary.description()
 summary.addNum(7) // [1,1], [3,3], [7,7]
+summary.description()
 summary.addNum(2) // [1,3], [7,7]
+summary.description()
 summary.addNum(6) // [1,3], [6,7]
+summary.description()
