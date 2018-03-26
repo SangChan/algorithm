@@ -946,6 +946,7 @@ class SummaryRanges {
             if val < interval.start {
                 if interval.start - 1 == val {
                     interval.start = val
+                    print("start changes : \(interval.interval())")
                     return
                 } else {
                     if index > 0 {
@@ -956,6 +957,7 @@ class SummaryRanges {
             } else if val > interval.end {
                 if interval.end + 1 == val {
                     interval.end = val
+                    print("end changes : \(interval.interval())")
                     return
                 } else {
                     if index+1 < intervals.count-1 {
