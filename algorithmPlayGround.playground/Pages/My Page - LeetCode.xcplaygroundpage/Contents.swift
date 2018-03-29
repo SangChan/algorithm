@@ -951,6 +951,7 @@ class SummaryRanges {
                 } else {
                     if index > 0 {
                         intervals.insert(Interval(start:val, end: val), at: index - 1)
+                        print("Insert at \(index - 1) for \(Interval(start:val, end: val).interval())")
                         return
                     }
                 }
@@ -964,10 +965,12 @@ class SummaryRanges {
                         var nextInterval = intervals[index+1]
                         if nextInterval.start - 1 == val {
                             nextInterval.start = val
+                            print("next Interval's start changes : \(nextInterval.interval())")
                             return
                         }
                     } else {
                         intervals.append(Interval(start: val, end: val))
+                        print("Append for \(Interval(start:val, end: val).interval())")
                         return
                     }
                 }
