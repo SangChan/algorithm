@@ -936,14 +936,18 @@ class SummaryRanges {
     var intervals : Array<Interval>  = Array<Interval>()
     func addNum(_ val : Int) {
         guard intervals.count > 0 else {
+            print("Append : \(val) because there's nothing")
             intervals.append(Interval(start: val, end: val))
             return
         }
         
         var index = 0
         
+        print("Add : \(val)")
+        
         for var interval in intervals {
             if val < interval.start {
+                print("\(val) is smaller than Interval #\(index)'s start \(interval.start)")
                 if interval.start - 1 == val {
                     interval.start = val
                     print("start changes : \(interval.interval())")
@@ -956,6 +960,7 @@ class SummaryRanges {
                     }
                 }
             } else if val > interval.end {
+                print("\(val) is bigger than Interval #\(index)'s end \(interval.end)")
                 if interval.end + 1 == val {
                     interval.end = val
                     print("end changes : \(interval.interval())")
