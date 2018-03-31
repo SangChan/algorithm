@@ -974,8 +974,8 @@ class SummaryRanges {
                             return
                         }
                     } else {
-                        intervals.append(Interval(start: val, end: val))
-                        print("Append for \(Interval(start:val, end: val).interval())")
+                        //intervals.append(Interval(start: val, end: val))
+                        //print("Append for \(Interval(start:val, end: val).interval())")
                         return
                     }
                 }
