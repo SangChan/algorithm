@@ -972,6 +972,10 @@ class SummaryRanges {
                             nextInterval.start = val
                             print("next Interval's start changes : \(nextInterval.interval())")
                             return
+                        } else if nextInterval.end + 1 == val {
+                            nextInterval.end = val
+                            print("next Interval's end changes : \(nextInterval.interval())")
+                            return
                         }
                     } else {
                         intervals.append(Interval(start: val, end: val))
