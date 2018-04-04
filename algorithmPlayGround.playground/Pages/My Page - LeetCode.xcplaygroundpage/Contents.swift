@@ -620,10 +620,10 @@ singleNumberByMath(singleNumberEx2)
 
 extension LinkedList {
     func hasCycle(_ head : ListNode?) -> Bool {
-        var nodes : [ListNode] = []
+        var _ : [ListNode] = []
         var newHead : ListNode? = head
         while newHead != nil {
-            guard let node = newHead else { return false }
+            guard newHead != nil else { return false }
             newHead = newHead?.next
         }
         return false
@@ -771,7 +771,7 @@ func rob(_ nums: [Int]) -> Int {
     var prevNo : Int = 0
     var prevYes : Int = 0;
     for num in nums {
-        var temp = prevNo
+        let temp = prevNo
         prevNo = max(prevNo, prevYes)
         prevYes = num + temp
     }
@@ -1012,3 +1012,4 @@ summary.addNum(2) // [1,3], [7,7]
 summary.description()
 summary.addNum(6) // [1,3], [6,7]
 summary.description()
+
