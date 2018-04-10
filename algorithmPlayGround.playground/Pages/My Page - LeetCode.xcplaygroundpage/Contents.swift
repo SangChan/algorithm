@@ -1012,3 +1012,37 @@ summary.addNum(2) // [1,3], [7,7]
 summary.description()
 summary.addNum(6) // [1,3], [6,7]
 summary.description()
+
+/*
+ 278. First Bad Version
+ 
+ You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+ 
+ Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+ 
+ You are given an API bool isBadVersion(version) which will return whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
+ */
+
+func firstBadVersion(_ n: Int) -> Int {
+    return Int.min
+}
+
+/*
+ 581. Shortest Unsorted Continuous Subarray
+ 
+ Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too.
+ 
+ You need to find the shortest such subarray and output its length.
+ 
+ Example 1:
+ Input: [2, 6, 4, 8, 10, 9, 15]
+ Output: 5
+ Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+ Note:
+ Then length of the input array is in range [1, 10,000].
+ The input array may contain duplicates, so ascending order here means <=.
+ */
+
+func findUnsortedSubarray(_ nums: [Int]) -> Int {
+    return Int.min
+}
