@@ -1046,3 +1046,5 @@ func firstBadVersion(_ n: Int) -> Int {
 func findUnsortedSubarray(_ nums: [Int]) -> Int {
     return Int.min
 }
+
+let answerForFive = findUnsortedSubarray([2,6,4,8,10,9,15])
