@@ -1044,6 +1044,7 @@ func firstBadVersion(_ n: Int) -> Int {
  */
 
 func findUnsortedSubarray(_ nums: [Int]) -> Int {
+    guard nums.count <= 10000 else { return Int.min }
     return Int.min
 }
 
