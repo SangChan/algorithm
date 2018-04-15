@@ -922,6 +922,7 @@ myStack.top() // 1
 myStack.empty() // false
 
 // 352. Data Stream as Disjoint Intervals
+// TODO : Give up at 15th of Apr, 2018.
 
 struct Interval {
     var start : Int
@@ -1024,7 +1025,21 @@ summary.description()
  */
 
 func firstBadVersion(_ n: Int) -> Int {
-    return Int.min
+    var left = 1
+    var right = n
+    while (left < right) {
+        let mid = left + (right - left) / 2;
+        if (isBadVersion(mid)) {
+            right = mid
+        } else {
+            left = mid + 1
+        }
+    }
+    return left
+}
+
+func isBadVersion(_ n : Int) -> Bool {
+    return (Int(arc4random()) % 2 == 0) ? true : false
 }
 
 /*
