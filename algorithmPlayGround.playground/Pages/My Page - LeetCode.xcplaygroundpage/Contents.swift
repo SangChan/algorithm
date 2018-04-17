@@ -124,16 +124,12 @@ judgeCircle(isNotCircle)
 
 class Stack<T> {
     fileprivate var array : [T] = [T]()
-    fileprivate var peekVal : T?
     
     public func size() -> Int {
         return array.count
     }
     
     public func push(x : T) {
-        if x > peekVal {
-            peekVal = x
-        }
         array.append(x)
     }
     
@@ -147,10 +143,6 @@ class Stack<T> {
     
     public func clear() {
         array.removeAll()
-    }
-    
-    public func peek() -> T? {
-        return peekVal
     }
 }
 
@@ -1071,31 +1063,46 @@ func isBadVersion(_ n : Int) -> Bool {
  */
 
 func findUnsortedSubarray(_ nums: [Int]) -> Int {
-    guard nums.count <= 10000 else { return Int.min }
+    var min : Int = Int.max
+    var max : Int = Int.min
+    var flag : Bool = false;
     
-    var stack = Stack<Int>()
-    
-    var l = nums.count
-    var r = 0
-    
-    for var i in 0 ..< nums.count {
-        while !stack.isEmpty() && nums[stack.peek()!] > nums[i] {
-            l = min(l, stack.pop()!)
+    for i in 1 ..< nums.count {
+        if (nums[i] < nums[i - 1]) {
+            flag = true
         }
-        stack.push(x: i)
-    }
-    stack.clear()
-    
-    for var i in nums.count-1 ..< 0 {
-        while !stack.isEmpty() && nums[stack.peek()!] > nums[i] {
-            l = max(l, stack.pop()!)
+        if (flag) {
+            min = (min > nums[i]) ? nums[i] : min
         }
-        stack.push(x: i)
     }
     
-    return (r - l > 0) ? r - l + 1 : 0;
+    flag = false
+    
+    for i in nums.count-2 ..< 1 {
+        if (nums[i] > nums[i + 1]) {
+            flag = true
+        }
+        if (flag) {
+            max = (max > nums[i]) ? max : nums[i]
+        }
+    }
+    
+    var indexOfL : Int = 0
+    for l in 0 ..< nums.count {
+        if (min < nums[l]) {
+            indexOfL = l
+            break
+        }
+    }
+    
+    var indexOfR : Int = 0
+    for r in nums.count-1 ..< 1 {
+        if (max > nums[r]) {
+            indexOfR = r
+            break
+        }
+    }
+    return (indexOfR - indexOfL < 0) ? 0 : indexOfR - indexOfL + 1;
 }
 
 let answerForFive = findUnsortedSubarray([2,6,4,8,10,9,15])
-
-
