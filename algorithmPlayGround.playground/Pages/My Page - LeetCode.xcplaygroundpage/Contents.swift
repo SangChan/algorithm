@@ -1078,7 +1078,7 @@ func findUnsortedSubarray(_ nums: [Int]) -> Int {
     
     flag = false
     
-    for i in nums.count-2 ..< 1 {
+    for i in (1 ..< nums.count-2).reversed() {
         if (nums[i] > nums[i + 1]) {
             flag = true
         }
@@ -1096,7 +1096,7 @@ func findUnsortedSubarray(_ nums: [Int]) -> Int {
     }
     
     var indexOfR : Int = 0
-    for r in nums.count-1 ..< 1 {
+    for r in (1 ..< nums.count-1).reversed() {
         if (max > nums[r]) {
             indexOfR = r
             break
@@ -1105,4 +1105,5 @@ func findUnsortedSubarray(_ nums: [Int]) -> Int {
     return (indexOfR - indexOfL < 0) ? 0 : indexOfR - indexOfL + 1;
 }
 
-let answerForFive = findUnsortedSubarray([2,6,4,8,10,9,15])
+let answerForFive = [2,6,4,8,10,9,15] // return 5
+findUnsortedSubarray(answerForFive)
