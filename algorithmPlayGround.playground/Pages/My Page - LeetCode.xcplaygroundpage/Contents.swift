@@ -941,45 +941,45 @@ class SummaryRanges {
     var intervals : Array<Interval>  = Array<Interval>()
     func addNum(_ val : Int) {
         guard intervals.count > 0 else {
-            print("Append : \(val) because there's nothing")
+            //print("Append : \(val) because there's nothing")
             intervals.append(Interval(start: val, end: val))
             return
         }
         
         var index = 0
         
-        print("Add : \(val)")
+        //print("Add : \(val)")
         
         for var interval in intervals {
             if val < interval.start {
-                print("\(val) is smaller than Interval #\(index)'s start \(interval.start)")
+                //print("\(val) is smaller than Interval #\(index)'s start \(interval.start)")
                 if interval.start - 1 == val {
                     interval.start = val
-                    print("start changes : \(interval.interval())")
+                    //print("start changes : \(interval.interval())")
                     return
                 } else {
                     if index > 0 {
                         intervals.insert(Interval(start:val, end: val), at: index - 1)
-                        print("Insert at \(index - 1) for \(Interval(start:val, end: val).interval())")
+                        //print("Insert at \(index - 1) for \(Interval(start:val, end: val).interval())")
                         return
                     }
                 }
             } else if val > interval.end {
-                print("\(val) is bigger than Interval #\(index)'s end \(interval.end)")
+                //print("\(val) is bigger than Interval #\(index)'s end \(interval.end)")
                 if interval.end + 1 == val {
                     interval.end = val
-                    print("end changes : \(interval.interval())")
+                    //print("end changes : \(interval.interval())")
                     return
                 } else {
                     if index+1 < intervals.count-1 {
                         var nextInterval = intervals[index+1]
                         if nextInterval.start - 1 == val {
                             nextInterval.start = val
-                            print("next Interval's start changes : \(nextInterval.interval())")
+                            //print("next Interval's start changes : \(nextInterval.interval())")
                             return
                         } else if nextInterval.end + 1 == val {
                             nextInterval.end = val
-                            print("next Interval's end changes : \(nextInterval.interval())")
+                            //print("next Interval's end changes : \(nextInterval.interval())")
                             return
                         }
                     } else {
@@ -998,11 +998,11 @@ class SummaryRanges {
     }
     
     func description() {
-        print("--start--")
-        for interval in getIntervals() {
-            print(interval.interval())
-        }
-        print("---end---")
+//        print("--start--")
+//        for interval in getIntervals() {
+//            print(interval.interval())
+//        }
+//        print("---end---")
     }
 }
 
