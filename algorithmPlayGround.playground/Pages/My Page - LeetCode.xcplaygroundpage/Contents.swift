@@ -1108,3 +1108,22 @@ func findUnsortedSubarray(_ nums: [Int]) -> Int {
 let answerForFive = [2,6,4,8,10,9,15] // return 5
 findUnsortedSubarray(answerForFive)
 
+/*
+ 226. Invert Binary Tree
+ Invert a binary tree.
+ 
+      4
+    /   \
+   2     7
+  / \   / \
+ 1   3 6   9
+ 
+ to
+ 
+      4
+    /   \
+   7     2
+  / \   / \
+ 9   6 3   1
+ 
+ */
