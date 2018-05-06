@@ -1127,3 +1127,17 @@ findUnsortedSubarray(answerForFive)
  9   6 3   1
  
  */
+
+protocol TreeNode {
+    var left : TreeNode? { get set }
+    var right : TreeNode? { get set }
+}
+
+func invertTree(_ root: TreeNode?) -> TreeNode? {
+    guard var newRoot = root else { return nil }
+    let right : TreeNode? = invertTree(newRoot.right)
+    let left : TreeNode? = invertTree(newRoot.left)
+    newRoot.left = right
+    newRoot.right = left
+    return newRoot;
+}
