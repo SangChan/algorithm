@@ -1144,20 +1144,21 @@ func invertTree(_ root: TreeNode?) -> TreeNode? {
 
 func invertTreeWithQueue(_ root: TreeNode?) -> TreeNode? {
     guard let newRoot = root else { return nil }
-    var queue : Queue<TreeNode> = Queue<TreeNode>()
+    let queue : Queue<TreeNode> = Queue<TreeNode>()
     queue.enqueue(x: newRoot)
     while queue.size() > 0 {
         var current = queue.dequeue()
-        var temp = current?.left
-        current?.left = current?.right
-        current?.right = temp
+        let temp = current?.left
+        if let copyCurrent = current {
+            current?.left = copyCurrent.right
+            current?.right = temp
+        }
         if let currentLeft = current?.left {
             queue.enqueue(x: currentLeft)
         }
         if let currentRight = current?.right {
             queue.enqueue(x: currentRight)
         }
-        
-        return queue.dequeue()
     }
+     return queue.dequeue()
 }
