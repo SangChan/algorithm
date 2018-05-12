@@ -1182,7 +1182,6 @@ func invertTreeWithQueue(_ root: TreeNode?) -> TreeNode? {
 class QueueUsingStack {
     /** Push element x to the back of queue. */
     func push(_ x : Int) {
-    
     }
     
     /** Removes the element from in front of queue and returns that element. */
