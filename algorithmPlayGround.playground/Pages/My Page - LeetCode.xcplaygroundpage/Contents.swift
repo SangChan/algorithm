@@ -1180,6 +1180,8 @@ func invertTreeWithQueue(_ root: TreeNode?) -> TreeNode? {
  */
 
 class QueueUsingStack {
+    var stack : Stack<Int> = Stack<Int>()
+
     /** Push element x to the back of queue. */
     func push(_ x : Int) {
     }
