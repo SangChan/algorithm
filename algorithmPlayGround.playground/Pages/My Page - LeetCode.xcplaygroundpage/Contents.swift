@@ -1198,6 +1198,6 @@ class QueueUsingStack {
     
     /** Returns whether the queue is empty. */
     func empty() -> Bool {
-        return true
+        return stack.isEmpty()
     }
 }
