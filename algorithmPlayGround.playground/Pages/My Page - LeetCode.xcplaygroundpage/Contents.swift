@@ -1184,15 +1184,22 @@ class QueueUsingStack {
 
     /** Push element x to the back of queue. */
     func push(_ x : Int) {
+        stack.push(x: x)
     }
     
     /** Removes the element from in front of queue and returns that element. */
     func pop() -> Int {
+        if let pop = stack.pop() {
+            return pop
+        }
         return Int.min
     }
     
     /** Get the front element. */
     func peek() -> Int {
+        if let peek = stack.pop() {
+            return peek
+        }
         return Int.min
     }
     
