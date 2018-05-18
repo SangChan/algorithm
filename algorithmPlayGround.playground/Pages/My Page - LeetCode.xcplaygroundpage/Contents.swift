@@ -1198,6 +1198,7 @@ class QueueUsingStack {
     /** Get the front element. */
     func peek() -> Int {
         if let peek = stack.pop() {
+            stack.push(x: peek)
             return peek
         }
         return Int.min
