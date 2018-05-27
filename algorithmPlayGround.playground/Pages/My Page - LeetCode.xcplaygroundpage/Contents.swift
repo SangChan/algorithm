@@ -1220,9 +1220,8 @@ class QueueUsingStack {
 
 extension LinkedList {
     func deleteNode() {
-        if let node = self.head, let next = node.next {
-            node.value = next.value
-            node.next = next.next
-        }
+        guard let node = self.head, let next = node.next else { return }
+        node.value = next.value
+        node.next = next.next
     }
 }
