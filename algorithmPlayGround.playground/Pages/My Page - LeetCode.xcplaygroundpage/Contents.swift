@@ -1252,5 +1252,8 @@ func isAnagram(_ s: String, _ t: String) -> Bool {
             return false
         }
     }
-    return false
+    return true
 }
+
+isAnagram("anagram", "nagaram")
+isAnagram("rat", "car")
