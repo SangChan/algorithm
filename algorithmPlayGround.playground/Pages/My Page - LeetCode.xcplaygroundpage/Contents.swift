@@ -1247,5 +1247,10 @@ extension LinkedList {
  */
 
 func isAnagram(_ s: String, _ t: String) -> Bool {
+    for sCharacter in s {
+        if t.contains(sCharacter) == false {
+            return false
+        }
+    }
     return false
 }
