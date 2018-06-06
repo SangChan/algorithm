@@ -1258,8 +1258,16 @@ func isAnagram(_ s: String, _ t: String) -> Bool {
     }
     var counter : [Int] = Array(repeating: 0, count: 26)
     for i in 0 ..< s.count {
-        counter[s[i]]++
-        counter[t[i]]--
+        let index = s.index(s.startIndex, offsetBy: i)
+        
+        let sCharacter = s[index]
+        let sNum = String(sCharacter).utf8) //- Int(String("a").utf8)
+        counter[sNum]++
+        
+        let tCharacter = t[index]
+        let tNum = String(tCharacter).utf8) //- Int(String("a").utf8)
+        counter[tNum]--
+        
     }
     for count in counter {
         if count != 0 {
