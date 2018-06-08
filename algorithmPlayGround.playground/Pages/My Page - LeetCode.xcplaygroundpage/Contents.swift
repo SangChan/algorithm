@@ -1261,12 +1261,12 @@ func isAnagram(_ s: String, _ t: String) -> Bool {
         let index = s.index(s.startIndex, offsetBy: i)
         
         let sCharacter = s[index]
-        let sNum = String(sCharacter).utf8) //- Int(String("a").utf8)
-        counter[sNum]++
+        //let sNum = String(sCharacter).utf8) //- Int(String("a").utf8)
+        //counter[sNum]++
         
         let tCharacter = t[index]
-        let tNum = String(tCharacter).utf8) //- Int(String("a").utf8)
-        counter[tNum]--
+        //let tNum = String(tCharacter).utf8) //- Int(String("a").utf8)
+        //counter[tNum]--
         
     }
     for count in counter {
