@@ -1247,26 +1247,26 @@ extension LinkedList {
  */
 
 func isAnagram(_ s: String, _ t: String) -> Bool {
-//    for sCharacter in s {
-//        if t.contains(sCharacter) == false {
-//            return false
-//        }
-//    }
-//    return true
     if s.count != t.count {
         return false
     }
     var counter : [Int] = Array(repeating: 0, count: 26)
+    let aNumValue : UInt32 = 97
+    
     for i in 0 ..< s.count {
         let index = s.index(s.startIndex, offsetBy: i)
         
         let sCharacter = s[index]
-        //let sNum = String(sCharacter).utf8) //- Int(String("a").utf8)
-        //counter[sNum]++
+        for element in sCharacter.unicodeScalars {
+            let sNum = Int(element.value - aNumValue)
+            counter[sNum] += 1
+        }
         
         let tCharacter = t[index]
-        //let tNum = String(tCharacter).utf8) //- Int(String("a").utf8)
-        //counter[tNum]--
+        for element in tCharacter.unicodeScalars {
+            let tNum = Int(element.value - aNumValue)
+            counter[tNum] -= 1
+        }
         
     }
     for count in counter {
@@ -1276,23 +1276,6 @@ func isAnagram(_ s: String, _ t: String) -> Bool {
     }
     return true
 }
-/*
-public boolean isAnagram(String s, String t) {
-    if (s.length() != t.length()) {
-        return false;
-    }
-    int[] counter = new int[26];
-    for (int i = 0; i < s.length(); i++) {
-        counter[s.charAt(i) - 'a']++;
-        counter[t.charAt(i) - 'a']--;
-    }
-    for (int count : counter) {
-        if (count != 0) {
-            return false;
-        }
-    }
-    return true;
-}*/
 
 isAnagram("anagram", "nagaram")
 isAnagram("rat", "car")
