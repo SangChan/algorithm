@@ -1294,11 +1294,17 @@ isAnagram("rat", "car")
  */
 
 func missingNumber(_ nums: [Int]) -> Int {
+    if (nums[nums.count-1] != nums.count) {
+        return nums.count
+    } else if (nums[0] != 0) {
+        return 0
+    }
+
     let sorted = nums.sorted()
     let startIndex = nums[0]
     for i in 0 ..< sorted.count {
         if startIndex+i != sorted[i] {
-            return startIndex+i
+            return startIndex+i-1
         }
     }
     return Int.min
