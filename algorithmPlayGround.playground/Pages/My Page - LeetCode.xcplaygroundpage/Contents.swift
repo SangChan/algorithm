@@ -1294,20 +1294,21 @@ isAnagram("rat", "car")
  */
 
 func missingNumber(_ nums: [Int]) -> Int {
-    if (nums[nums.count-1] != nums.count) {
-        return nums.count
-    } else if (nums[0] != 0) {
+    let sorted = nums.sorted()
+    if (sorted[sorted.count-1] != sorted.count) {
+        return sorted.count
+    } else if (sorted[0] != 0) {
         return 0
     }
 
-    let sorted = nums.sorted()
-    let startIndex = nums[0]
+    let startIndex = sorted[0]
     for i in 0 ..< sorted.count {
+        print("now : \(startIndex+i) data : \(sorted[i])")
         if startIndex+i != sorted[i] {
-            return startIndex+i-1
+            return startIndex+i
         }
     }
-    return Int.min
+    return startIndex+1
 }
 
 missingNumber([3,0,1]) // 2
