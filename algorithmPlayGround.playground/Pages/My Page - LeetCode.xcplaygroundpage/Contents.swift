@@ -1303,7 +1303,6 @@ func missingNumber(_ nums: [Int]) -> Int {
 
     let startIndex = sorted[0]
     for i in 0 ..< sorted.count {
-        print("now : \(startIndex+i) data : \(sorted[i])")
         if startIndex+i != sorted[i] {
             return startIndex+i
         }
