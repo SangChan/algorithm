@@ -1331,7 +1331,12 @@ missingNumber([1]) // 0
  */
 
 func moveZeroes(_ nums: inout [Int]) {
-    
+    for i in 0 ..< nums.count {
+        if nums[i] == 0 {
+            nums.remove(at: i)
+            nums.append(0)
+        }
+    }
 }
 
 var testMoveZeroes = [0,1,0,3,12]
