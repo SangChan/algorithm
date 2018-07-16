@@ -1335,14 +1335,13 @@ func moveZeroes(_ nums: inout [Int]) {
     for i in 0 ..< nums.count {
         if nums[i] == 0 {
             nums.remove(at: i)
-            zeroCount += 1
+            nums.append(0)
         }
-    }
-    
-    for _ in 0 ..< zeroCount {
-        nums.append(0)
     }
 }
 
-var testMoveZeroes = [0,1,0,3,12]
-moveZeroes(&testMoveZeroes) //[1,3,12,0,0]
+var testMoveZeroesEx1 = [0,1,0,3,12]
+moveZeroes(&testMoveZeroesEx1) //[1,3,12,0,0]
+var testMoveZeroesEx2 = [0,0,1]
+moveZeroes(&testMoveZeroesEx2) //[1,0,0]
+
