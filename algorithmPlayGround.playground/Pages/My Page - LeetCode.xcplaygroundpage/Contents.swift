@@ -1372,7 +1372,23 @@ func maxArea(_ height: [Int]) -> Int {
      }
      return maxarea;
      */
-    return Int.min
+    
+    /*
+     O(n^2) answer
+     int maxarea = 0;
+     for (int i = 0; i < height.length; i++)
+     for (int j = i + 1; j < height.length; j++)
+     maxarea = Math.max(maxarea, Math.min(height[i], height[j]) * (j - i));
+     return maxarea;
+     */
+    
+    var maxArea = 0
+    for i in 0 ..< height.count {
+        for j in i+1 ..< height.count {
+            maxArea = max(maxArea, min(height[i], height[j]) * (j - i))
+        }
+    }
+    return maxArea
 }
 
 maxArea([1,8,6,2,5,4,8,3,7]) //49
