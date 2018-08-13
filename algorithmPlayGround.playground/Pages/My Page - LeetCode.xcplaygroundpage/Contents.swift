@@ -1361,19 +1361,6 @@ moveZeroes(&testMoveZeroesEx2) //[1,0,0]
 
 func maxArea(_ height: [Int]) -> Int {
     /*
-     O(n) answer
-     int maxarea = 0, l = 0, r = height.length - 1;
-     while (l < r) {
-     maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
-     if (height[l] < height[r])
-     l++;
-     else
-     r--;
-     }
-     return maxarea;
-     */
-    
-    /*
      O(n^2) answer
      int maxarea = 0;
      for (int i = 0; i < height.length; i++)
@@ -1386,6 +1373,34 @@ func maxArea(_ height: [Int]) -> Int {
     for i in 0 ..< height.count {
         for j in i+1 ..< height.count {
             maxArea = max(maxArea, min(height[i], height[j]) * (j - i))
+        }
+    }
+    return maxArea
+}
+
+func maxAreaOpt(_ height: [Int]) -> Int {
+    /*
+     O(n) answer
+     int maxarea = 0, l = 0, r = height.length - 1;
+     while (l < r) {
+     maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
+     if (height[l] < height[r])
+     l++;
+     else
+     r--;
+     }
+     return maxarea;
+     */
+    var maxArea = 0
+    var l = 0
+    var r = height.count-1
+    
+    while (l < r) {
+        maxArea = max(maxArea, min(height[l], height[r]) * (r - l))
+        if height[l] < height[r] {
+            l += 1
+        } else {
+            r -= 1
         }
     }
     return maxArea
