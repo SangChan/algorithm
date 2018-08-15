@@ -1331,11 +1331,20 @@ missingNumber([1]) // 0
  */
 
 func moveZeroes(_ nums: inout [Int]) {
+    var lastNonZeroFoundAt = 0
+    var zeroCounter = 0
     for i in 0 ..< nums.count {
-        if nums[i] == 0 {
+        if nums[i] != 0 {
+            lastNonZeroFoundAt += 1
+            nums[lastNonZeroFoundAt] = nums[i]
+        } else {
+            zeroCounter += 1
             nums.remove(at: i)
-            nums.append(0)
         }
+    }
+    
+    for i in 0 ..< zeroCounter {
+        nums.append(0)
     }
 }
 
