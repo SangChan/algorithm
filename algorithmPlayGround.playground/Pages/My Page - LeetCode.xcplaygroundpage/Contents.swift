@@ -1333,9 +1333,9 @@ missingNumber([1]) // 0
 func moveZeroes(_ nums: inout [Int]) {
     var lastNonZeroFoundAt = 0
     for cur in 0 ..< nums.count {
-        if num[cur] != 0 {
+        if nums[cur] != 0 {
             lastNonZeroFoundAt += 1
-            swap(&nums[lastNonZeroFoundAt], &nums[cur])
+            nums.swapAt(lastNonZeroFoundAt, cur)
         }
     }
 }
