@@ -1421,3 +1421,8 @@ maxAreaOpt([1,8,6,2,5,4,8,3,7]) //49
 func findAndReplacePattern(_ words: [String], _ pattern: String) -> [String] {
     return []
 }
+
+let words =  ["abc","deq","mee","aqq","dkd","ccc"]
+let pattern = "abb"
+
+findAndReplacePattern(words, pattern) // return ["mee", "aqq"]
