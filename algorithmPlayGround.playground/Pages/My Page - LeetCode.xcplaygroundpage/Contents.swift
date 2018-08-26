@@ -1419,6 +1419,24 @@ maxAreaOpt([1,8,6,2,5,4,8,3,7]) //49
  */
 
 func findAndReplacePattern(_ words: [String], _ pattern: String) -> [String] {
+    func createPattern(_ base: String) -> [Int] {
+        var pattern : [Int] = []
+        for char in base {
+            if let hash = pattern.index(of: char.hashValue) {
+                pattern.append(hash)
+            } else {
+                pattern.append(char.hashValue)
+            }
+        }
+        return pattern
+    }
+    
+    print("pattern = \(createPattern(pattern))")
+    
+    for word in words {
+        print("word pattern = \(createPattern(word))")
+    }
+    
     return []
 }
 
