@@ -14,5 +14,7 @@
         <page name='My Page - Patterns'/>
         <page name='My Page - Data Structure'/>
         <page name='My Page - Algorithm'/>
+        <page name='My Page - LeetCode'/>
+        <page name='LeetCode 2'/>
     </pages>
 </playground>
