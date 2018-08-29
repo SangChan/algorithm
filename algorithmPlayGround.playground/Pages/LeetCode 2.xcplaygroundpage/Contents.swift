@@ -33,26 +33,35 @@ import Foundation
 func findAndReplacePattern(_ words: [String], _ pattern: String) -> [String] {
     func createPattern(_ base: String) -> [Int] {
         var pattern : [Int] = []
+        var charMap : [Character : Int] = [Character : Int]()
+        var hashNum = 0
         for char in base {
-            if let hashIndex = pattern.index(of: char.hashValue) {
-                pattern.append(hashIndex)
+            if let hashVal = charMap[char] {
+                pattern.append(hashVal)
             } else {
-                pattern.append(char.hashValue)
+                hashNum += 1
+                charMap[char] = hashNum
+                pattern.append(hashNum)
             }
         }
         return pattern
     }
     
-    print("pattern = \(createPattern(pattern))")
-    
+    let patternFromParam = createPattern(pattern)
+    var samePatterns : [String] = []
     for word in words {
-        print("word pattern = \(createPattern(word))")
+        let patternFromWord = createPattern(word)
+        if patternFromParam == patternFromWord {
+            samePatterns.append(word)
+        }
+        
     }
     
-    return []
+    return samePatterns
 }
 
 let words =  ["abc","deq","mee","aqq","dkd","ccc"]
 let pattern = "abb"
 
 findAndReplacePattern(words, pattern) // return ["mee", "aqq"]
+
