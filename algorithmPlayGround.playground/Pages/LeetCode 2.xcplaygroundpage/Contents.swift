@@ -94,6 +94,9 @@ findAndReplacePattern(words, pattern) // return ["mee", "aqq"]
  */
 
 func zigzagConvert(_ s: String, _ numRows: Int) -> String {
+    if numRows == 1 {
+        return s
+    }
     return ""
     /*
      sort by row
