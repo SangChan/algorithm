@@ -97,6 +97,14 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     if numRows == 1 {
         return s
     }
+    var rows : [String] = [String]()
+    for _ in 0 ..< min(numRows, s.count) {
+        rows.append("")
+    }
+    
+    var curRow = 0
+    var goingDown : Bool = false
+    
     return ""
     /*
      sort by row
