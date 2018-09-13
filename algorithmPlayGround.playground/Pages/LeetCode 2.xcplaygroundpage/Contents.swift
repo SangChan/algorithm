@@ -128,3 +128,90 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
      return ret.toString();
      */
 }
+
+/*
+ 65. Valid Number
+ 
+ alidate if a given string can be interpreted as a decimal number.
+ 
+ Some examples:
+ "0" => true
+ " 0.1 " => true
+ "abc" => false
+ "1 a" => false
+ "2e10" => true
+ " -90e3   " => true
+ " 1e" => false
+ "e3" => false
+ " 6e-1" => true
+ " 99e2.5 " => false
+ "53.5e93" => true
+ " --6 " => false
+ "-+3" => false
+ "95a54e53" => false
+ 
+ Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one. However, here is a list of characters that can be in a valid decimal number:
+ 
+ Numbers 0-9
+ Exponent - "e"
+ Positive/negative sign - "+"/"-"
+ Decimal point - "."
+ Of course, the context of these characters also matters in the input.
+ 
+ Update (2015-02-10):
+ The signature of the C++ function had been updated. If you still see your function signature accepts a const char * argument, please click the reload button to reset your code definition.
+ */
+
+func isNumber(_ s: String) -> Bool {
+    return false
+}
+
+/*
+ 895. Maximum Frequency Stack
+ Implement FreqStack, a class which simulates the operation of a stack-like data structure.
+ 
+ FreqStack has two functions:
+ 
+ push(int x), which pushes an integer x onto the stack.
+ pop(), which removes and returns the most frequent element in the stack.
+ If there is a tie for most frequent element, the element closest to the top of the stack is removed and returned.
+ 
+ Example 1:
+ 
+ Input:
+ ["FreqStack","push","push","push","push","push","push","pop","pop","pop","pop"],
+ [[],[5],[7],[5],[7],[4],[5],[],[],[],[]]
+ Output: [null,null,null,null,null,null,null,5,7,5,4]
+ Explanation:
+ After making six .push operations, the stack is [5,7,5,7,4,5] from bottom to top.  Then:
+ 
+ pop() -> returns 5, as 5 is the most frequent.
+ The stack becomes [5,7,5,7,4].
+ 
+ pop() -> returns 7, as 5 and 7 is the most frequent, but 7 is closest to the top.
+ The stack becomes [5,7,5,4].
+ 
+ pop() -> returns 5.
+ The stack becomes [5,7,4].
+ 
+ pop() -> returns 4.
+ The stack becomes [5,7].
+
+ Note:
+ 
+ Calls to FreqStack.push(int x) will be such that 0 <= x <= 10^9.
+ It is guaranteed that FreqStack.pop() won't be called if the stack has zero elements.
+ The total number of FreqStack.push calls will not exceed 10000 in a single test case.
+ The total number of FreqStack.pop calls will not exceed 10000 in a single test case.
+ The total number of FreqStack.push and FreqStack.pop calls will not exceed 150000 across all test cases.
+ */
+
+class FreqStack {
+    func push(_ x : Int) {
+        
+    }
+    
+    func pop() -> Int {
+        return Int.min
+    }
+}
