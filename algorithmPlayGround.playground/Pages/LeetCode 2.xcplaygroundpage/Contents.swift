@@ -207,11 +207,12 @@ func isNumber(_ s: String) -> Bool {
  */
 
 class FreqStack {
+    var stack : [Int] = [Int]()
     func push(_ x : Int) {
-        
+        stack.append(x)
     }
     
-    func pop() -> Int {
-        return Int.min
+    func pop() -> Int? {
+        return stack.popLast()
     }
 }
