@@ -208,7 +208,12 @@ func isNumber(_ s: String) -> Bool {
 
 class FreqStack {
     var stack : [Int] = [Int]()
+    var freqDic : [Int : Int] = [Int : Int]()
+    
     func push(_ x : Int) {
+        var freqCount = freqDic[x] ?? 0
+        freqCount += 1
+        freqDic[x] = freqCount
         stack.append(x)
     }
     
