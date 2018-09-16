@@ -163,7 +163,11 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
  */
 
 func isNumber(_ s: String) -> Bool {
-    return false
+    if Int(s) != nil || Double(s) != nil {
+        return true
+    } else {
+        return false
+    }
 }
 
 /*
