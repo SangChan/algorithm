@@ -110,7 +110,11 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
         if curRow == 0 || curRow == numRows - 1 {
             goingDown != goingDown
         }
-        curRow += (goingDown) ? 1 : -1
+        if goingDown {
+            curRow += 1
+        } else {
+            curRow -= 1
+        }
     }
     
     var ret = ""
@@ -122,7 +126,7 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     return ret
 }
 
-zigzagConvert("PAYPALISHIRING", 3)
+zigzagConvert("PAYPALISHIRING", 1)
 
 /*
  65. Valid Number
