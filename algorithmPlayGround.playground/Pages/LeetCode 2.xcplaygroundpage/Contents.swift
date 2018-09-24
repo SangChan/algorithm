@@ -94,7 +94,7 @@ findAndReplacePattern(words, pattern) // return ["mee", "aqq"]
  */
 
 func zigzagConvert(_ s: String, _ numRows: Int) -> String {
-    if numRows == 1 {
+    if numRows <= 1 {
         return s
     }
     var rows : [String] = [String]()
@@ -108,7 +108,7 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     for c in s {
         rows[curRow].append(c)
         if curRow == 0 || curRow == numRows - 1 {
-            goingDown != goingDown
+            goingDown = !goingDown
         }
         if goingDown {
             curRow += 1
