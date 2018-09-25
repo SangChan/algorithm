@@ -126,7 +126,7 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     return ret
 }
 
-zigzagConvert("PAYPALISHIRING", 1)
+zigzagConvert("PAYPALISHIRING", 2)
 
 /*
  65. Valid Number
@@ -168,6 +168,22 @@ func isNumber(_ s: String) -> Bool {
         return false
     }
 }
+
+isNumber("0")// => true
+isNumber(" 0.1 ")// => true
+isNumber("abc")// => false
+isNumber("1 a")// => false
+isNumber("2e10")// => true
+isNumber(" -90e3   ")// => true
+isNumber(" 1e")// => false
+isNumber("e3")// => false
+isNumber(" 6e-1")// => true
+isNumber(" 99e2.5 ")// => false
+isNumber("53.5e93")// => true
+isNumber(" --6 ")// => false
+isNumber("-+3")// => false
+isNumber("95a54e53")// => false
+
 
 /*
  895. Maximum Frequency Stack
