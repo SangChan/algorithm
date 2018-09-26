@@ -126,7 +126,7 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     return ret
 }
 
-zigzagConvert("PAYPALISHIRING", 2)
+zigzagConvert("PAYPALISHIRING", 3)
 
 /*
  65. Valid Number
@@ -240,3 +240,15 @@ class FreqStack {
         return stack.popLast()
     }
 }
+
+var fStack = FreqStack()
+fStack.push(5)
+fStack.push(7)
+fStack.push(5)
+fStack.push(7)
+fStack.push(4)
+fStack.push(5)
+fStack.pop()
+fStack.pop()
+fStack.pop()
+fStack.pop()
