@@ -127,6 +127,7 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
 }
 
 zigzagConvert("PAYPALISHIRING", 3)
+zigzagConvert("PAYPALISHIRING", 4)
 
 /*
  65. Valid Number
