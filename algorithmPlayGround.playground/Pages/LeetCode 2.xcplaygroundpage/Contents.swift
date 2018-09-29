@@ -126,6 +126,8 @@ func zigzagConvert(_ s: String, _ numRows: Int) -> String {
     return ret
 }
 
+zigzagConvert("PAYPALISHIRING", 1)
+zigzagConvert("PAYPALISHIRING", 2)
 zigzagConvert("PAYPALISHIRING", 3)
 zigzagConvert("PAYPALISHIRING", 4)
 
