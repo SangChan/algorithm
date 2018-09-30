@@ -240,6 +240,9 @@ class FreqStack {
     }
     
     func pop() -> Int? {
+        for numAndCount in freqDic {
+            print(numAndCount)
+        }
         return stack.popLast()
     }
 }
