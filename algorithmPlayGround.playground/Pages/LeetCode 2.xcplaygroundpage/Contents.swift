@@ -240,9 +240,20 @@ class FreqStack {
     }
     
     func pop() -> Int? {
-        for numAndCount in freqDic {
-            print(numAndCount)
+        var numAndMaxCount : (Int, Int) = (0,0)
+        for (num, count) in freqDic {
+            if numAndMaxCount.1 < count {
+                numAndMaxCount = (num, count)
+            }
         }
+        
+        if numAndMaxCount.0 > 0 && numAndMaxCount.1 > 0 {
+            if let index = stack.firstIndex(of: numAndMaxCount.0) {
+                stack.remove(at: index)
+                return numAndMaxCount.0
+            }
+        }
+        
         return stack.popLast()
     }
 }
