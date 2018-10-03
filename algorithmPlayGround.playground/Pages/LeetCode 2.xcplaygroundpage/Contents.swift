@@ -265,7 +265,17 @@ fStack.push(5)
 fStack.push(7)
 fStack.push(4)
 fStack.push(5)
-fStack.pop()
-fStack.pop()
-fStack.pop()
-fStack.pop()
+print(fStack.pop())
+print(fStack.pop())
+print(fStack.pop())
+print(fStack.pop())
+
+
+func loopHello(_ count : Int) {
+    guard count > 0 && count <= 100 else { return }
+    for _ in 0 ..< count {
+        print("Hello")
+    }
+}
+
+loopHello(-1)
