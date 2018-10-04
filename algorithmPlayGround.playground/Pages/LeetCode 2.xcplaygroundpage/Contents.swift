@@ -279,3 +279,102 @@ func loopHello(_ count : Int) {
 }
 
 loopHello(-1)
+
+
+class Stack {
+    fileprivate var array : [Int] = [Int]()
+    
+    func size() -> Int {
+        return array.count
+    }
+    
+    func push(_ x : Int) {
+        array.append(x)
+    }
+    
+    func pop() -> Int? {
+        return array.popLast()
+    }
+}
+
+func calculator(_ x : String) -> Int {
+    let array = x.split(separator: " ")
+    let stack = Stack()
+    for s in array {
+        if let num = Int(s) {
+            stack.push(num)
+        } else {
+            guard let firstNum = stack.pop(), let secondNum = stack.pop() else { return Int.min }
+            if s == "+" {
+                stack.push(firstNum + secondNum)
+            } else if s == "*" {
+                stack.push(firstNum * secondNum)
+            }
+        }
+    }
+    
+    guard let pop = stack.pop() else { return Int.min }
+    return pop
+}
+
+calculator("1 3 + 5 *")
+
+func rerange(_ x: String) -> String {
+    guard x.count >= 1 && x.count <= 50 else { return x }
+    var answer = ""
+    var subText = ""
+    for c in x.shuffled() {
+        switch c {
+        case "a","e","i","o","u":
+            subText.append(c)
+        default:
+            answer.append(c)
+        }
+    }
+    answer.append(subText)
+    return answer
+}
+
+rerange("interview")
+
+func getSumOfCube(a: Int, b: Int) -> Int {
+    guard a >= 1 && a <= 10000 else { return Int.min }
+    guard b >= 1 && b <= 10 else { return Int.min}
+    let maximumCount : Int = a/b
+    var values : [Int] = [Int]()
+    for i in 1 ... maximumCount {
+        values.append(b*i)
+    }
+    
+    let cubeValues = values.map { (value) -> Int in
+        return value*value*value
+    }
+    
+    var sum = 0
+    for cubeValue in cubeValues {
+        sum += cubeValue
+    }
+    return sum
+}
+
+getSumOfCube(a: 10, b: 3)
+getSumOfCube(a: 20, b: 3)
+
+func fibonacci(_ x : Int ) -> Int {
+    guard x >= 0 && x <= 50 else { return Int.min }
+    if x == 0 || x == 1 { return  x }
+    return fibonacci(x-1) + fibonacci(x-2)
+}
+
+fibonacci(0)
+fibonacci(1)
+fibonacci(2)
+fibonacci(3)
+fibonacci(4)
+fibonacci(5)
+fibonacci(6)
+fibonacci(7)
+fibonacci(8)
+fibonacci(9)
+fibonacci(10)
+fibonacci(11)
