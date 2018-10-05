@@ -265,10 +265,10 @@ fStack.push(5)
 fStack.push(7)
 fStack.push(4)
 fStack.push(5)
-print(fStack.pop())
-print(fStack.pop())
-print(fStack.pop())
-print(fStack.pop())
+fStack.pop()
+fStack.pop()
+fStack.pop()
+fStack.pop()
 
 
 func loopHello(_ count : Int) {
@@ -321,18 +321,18 @@ calculator("1 3 + 5 *")
 
 func rerange(_ x: String) -> String {
     guard x.count >= 1 && x.count <= 50 else { return x }
-    var answer = ""
-    var subText = ""
-    for c in x.shuffled() {
-        switch c {
-        case "a","e","i","o","u":
-            subText.append(c)
-        default:
-            answer.append(c)
+    guard let scalarA = UnicodeScalar("a")?.value else { return x }
+    var alphabets : [Int] = [Int](repeating: 0, count: 26)
+    for c in x {
+        if let value = UnicodeScalar("\(c)")?.value {
+            let index = Int(value - scalarA)
+            alphabets[index] += 1
         }
     }
-    answer.append(subText)
-    return answer
+    
+    //print(alphabets)
+    
+    return x
 }
 
 rerange("interview")
