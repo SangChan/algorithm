@@ -330,9 +330,16 @@ func rerange(_ x: String) -> String {
         }
     }
     
-    //print(alphabets)
+    var answer = ""
+    for count in alphabets {
+        if count > 0 {
+            for _ in 0 ..< count {
+                answer.append("a")
+            }
+        }
+    }
     
-    return x
+    return answer
 }
 
 rerange("interview")
