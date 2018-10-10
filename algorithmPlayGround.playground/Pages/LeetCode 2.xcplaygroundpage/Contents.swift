@@ -331,10 +331,13 @@ func rerange(_ x: String) -> String {
     }
     
     var answer = ""
-    for count in alphabets {
+    for (index, count) in alphabets.enumerated().reversed() {
         if count > 0 {
+            let scalaValue = UInt32(index) + scalarA
             for _ in 0 ..< count {
-                answer.append("a")
+                if let unicodeScala = UnicodeScalar(scalaValue) {
+                    answer.append(Character(unicodeScala))
+                }
             }
         }
     }
