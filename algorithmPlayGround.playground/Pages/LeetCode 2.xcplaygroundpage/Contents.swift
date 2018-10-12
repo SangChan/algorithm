@@ -271,16 +271,6 @@ fStack.pop()
 fStack.pop()
 
 
-func loopHello(_ count : Int) {
-    guard count > 0 && count <= 100 else { return }
-    for _ in 0 ..< count {
-        print("Hello")
-    }
-}
-
-loopHello(-1)
-
-
 class Stack {
     fileprivate var array : [Int] = [Int]()
     
