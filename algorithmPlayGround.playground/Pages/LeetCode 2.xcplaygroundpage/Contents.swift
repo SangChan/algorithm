@@ -165,14 +165,43 @@ zigzagConvert("PAYPALISHIRING", 4)
  */
 
 func isNumber(_ s: String) -> Bool {
-    if Int(s) != nil || Double(s) != nil {
-        return true
-    } else {
-        return false
+    var pointSeen = false;
+    var eSeen = false;
+    var numberSeen = false;
+    var numberAfterE = true;
+    
+    var prevChar : Character = Character(" ")
+    
+    for (index, char) in s.enumerated() {
+        if(char == "0" || char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9") {
+            numberSeen = true
+            numberAfterE = true
+        } else if(char == ".") {
+            if(eSeen || pointSeen) {
+                return false
+            }
+            pointSeen = true
+        } else if(char == "e") {
+            if(eSeen || !numberSeen) {
+                return false
+            }
+            numberAfterE = false
+            eSeen = true;
+        } else if(char == "-" || char == "+") {
+            if(index != 0 && prevChar != "e") {
+                return false
+            }
+        } else {
+            return false
+        }
+        prevChar = char
     }
+    
+    return numberSeen && numberAfterE
 }
 
 isNumber("0")// => true
+isNumber("1 ")// => false
 isNumber(" 0.1 ")// => true
 isNumber("abc")// => false
 isNumber("1 a")// => false
@@ -186,7 +215,6 @@ isNumber("53.5e93")// => true
 isNumber(" --6 ")// => false
 isNumber("-+3")// => false
 isNumber("95a54e53")// => false
-
 
 /*
  895. Maximum Frequency Stack
