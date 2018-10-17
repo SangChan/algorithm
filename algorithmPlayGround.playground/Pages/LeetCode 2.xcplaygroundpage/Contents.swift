@@ -165,7 +165,7 @@ zigzagConvert("PAYPALISHIRING", 4)
  */
 
 func isNumber(_ s: String) -> Bool {
-    let trimmedS = s.replacingOccurrences(of: " ", with: "")
+    //let trimmedS = s.replacingOccurrences(of: " ", with: "")
     
     var pointSeen = false;
     var eSeen = false;
