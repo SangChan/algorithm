@@ -174,7 +174,7 @@ func isNumber(_ s: String) -> Bool {
     
     var prevChar : Character = Character(" ")
     
-    for (index, char) in trimmedS.enumerated() {
+    for (index, char) in s.enumerated() {
         if(char == "0" || char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9") {
             numberSeen = true
             numberAfterE = true
@@ -434,5 +434,5 @@ fibonacci(11)
 */
 
 func myPow(_ x: Double, _ n: Int) -> Double {
-    
+    return 0.0
 }
