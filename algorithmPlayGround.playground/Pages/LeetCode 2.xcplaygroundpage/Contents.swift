@@ -434,5 +434,9 @@ fibonacci(11)
 */
 
 func myPow(_ x: Double, _ n: Int) -> Double {
-    return 0.0
+    return pow(x,Double(n))
 }
+
+myPow(2.00000, 10)
+myPow(2.10000, 3)
+myPow(2.00000, -2)
