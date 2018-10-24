@@ -479,6 +479,14 @@ func solveSudoku(_ board: inout [[Character]]) {
     
 }
 
+func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
+    guard c != "." else { return nil }
+    // todo : only one character at some column
+    // todo : only one character at some row
+    // todo : only one character at 3*3 table
+    return false
+}
+
 var board : [[Character]] = [
     ["5","3",".",".","7",".",".",".","."],
     ["6",".",".","1","9","5",".",".","."],
