@@ -482,8 +482,18 @@ func solveSudoku(_ board: inout [[Character]]) {
 func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
     guard c != "." else { return nil }
     // todo : only one character at some column
+    for _ in 0 ..< 9 {
+        
+    }
     // todo : only one character at some row
+    for _ in 0 ..< 9 {
+    }
     // todo : only one character at 3*3 table
+    for _ in 0 ..< 3 {
+        for _ in 0 ..< 3 {
+            
+        }
+    }
     return false
 }
 
