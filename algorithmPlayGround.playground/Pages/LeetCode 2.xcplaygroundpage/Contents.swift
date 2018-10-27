@@ -476,22 +476,23 @@ myPow(2.00000, -2)
  */
 
 func solveSudoku(_ board: inout [[Character]]) {
-    
+    sudokuValidator(board, x: 0, y: 0, c: board[0][0])
 }
 
 func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
     guard c != "." else { return nil }
     // todo : only one character at some column
-    for _ in 0 ..< 9 {
-        
+    for i in 0 ..< 9 {
+        print(i)
     }
     // todo : only one character at some row
-    for _ in 0 ..< 9 {
+    for j in 0 ..< 9 {
+        print(j)
     }
     // todo : only one character at 3*3 table
-    for _ in 0 ..< 3 {
-        for _ in 0 ..< 3 {
-            
+    for i in 0 ..< 3 {
+        for j in 0 ..< 3 {
+            print("[\(i)][\(j)]")
         }
     }
     return false
