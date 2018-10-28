@@ -481,18 +481,18 @@ func solveSudoku(_ board: inout [[Character]]) {
 
 func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
     guard c != "." else { return nil }
-    // todo : only one character at some column
+    print("print row")
     for i in 0 ..< 9 {
-        print(i)
+        print("board[\(y)][\(i)] = \(board[y][i])")
     }
-    // todo : only one character at some row
+    print("print column")
     for j in 0 ..< 9 {
-        print(j)
+        print("board[\(j)][\(x)] = \(board[j][x])")
     }
-    // todo : only one character at 3*3 table
-    for i in 0 ..< 3 {
-        for j in 0 ..< 3 {
-            print("[\(i)][\(j)]")
+    print("print 3*3")
+    for j in 0 ..< 3 {
+        for i in 0 ..< 3 {
+            print("board[\(j)][\(i)] = \(board[j][i])")
         }
     }
     return false
