@@ -477,6 +477,15 @@ myPow(2.00000, -2)
 
 func solveSudoku(_ board: inout [[Character]]) {
     sudokuValidator(board, x: 0, y: 0, c: board[0][0])
+    sudokuValidator(board, x: 3, y: 1, c: board[1][3])
+    sudokuValidator(board, x: 6, y: 2, c: board[2][6])
+    sudokuValidator(board, x: 1, y: 3, c: board[3][1])
+    sudokuValidator(board, x: 4, y: 4, c: board[4][4])
+    sudokuValidator(board, x: 7, y: 5, c: board[5][7])
+    sudokuValidator(board, x: 2, y: 6, c: board[6][2])
+    sudokuValidator(board, x: 5, y: 7, c: board[7][5])
+    sudokuValidator(board, x: 8, y: 8, c: board[8][8])
+    
 }
 
 func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
@@ -489,10 +498,14 @@ func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) ->
     for j in 0 ..< 9 {
         print("board[\(j)][\(x)] = \(board[j][x])")
     }
+    
+    let xIndex = Int(x / 3)
+    let yIndex = Int(y / 3)
+    print("index of x = \(xIndex), index of y = \(yIndex)")
     print("print 3*3")
     for j in 0 ..< 3 {
         for i in 0 ..< 3 {
-            print("board[\(j)][\(i)] = \(board[j][i])")
+            print("board[\((yIndex*3)+j)][\((xIndex*3)+i)] = \(board[(yIndex*3)+j][(xIndex*3)+i])")
         }
     }
     return false
