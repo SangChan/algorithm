@@ -475,7 +475,7 @@ myPow(2.00000, -2)
  
  */
 
-func solveSudoku(_ board: inout [[Character]]) {
+func solveSudoku(_ board: inout [[Character]]) -> Bool {
     let numbers : [Character] = ["1","2","3","4","5","6","7","8","9"]
     for j in 0 ..< 9 {
         for i in 0 ..< 9 {
@@ -483,13 +483,17 @@ func solveSudoku(_ board: inout [[Character]]) {
                 for k in 0 ..< 9 {
                     if sudokuValidator(board, x: i, y: j, c: numbers[k]) == true {
                         board[j][i] = numbers[k]
+                        if solveSudoku(&board) == true {
+                            return true
+                        }
                     }
+                    board[j][i] = "."
                 }
+                return false
             }
         }
     }
-    
-    print(board)
+    return true
 }
 
 func sudokuValidator(_ board: [[Character]], x : Int, y : Int, c : Character) -> Bool? {
@@ -527,3 +531,4 @@ var board : [[Character]] = [
 ]
 
 solveSudoku(&board)
+print(board)
