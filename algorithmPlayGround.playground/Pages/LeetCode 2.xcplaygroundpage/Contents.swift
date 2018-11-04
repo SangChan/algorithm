@@ -530,5 +530,4 @@ var board : [[Character]] = [
     [".",".",".",".","8",".",".","7","9"]
 ]
 
-solveSudoku(&board)
-print(board)
+//solveSudoku(&board)
