@@ -585,6 +585,14 @@ var board : [[Character]] = [
  */
 
 func isValidSudoku(_ board: [[Character]]) -> Bool {
-    return false
+    for j in 0 ..< 9 {
+        for i in 0 ..< 9 {
+            if sudokuValidator(board, x: i, y: j, c: board[j][i]) == false {
+                return false
+            }
+        }
+    }
+    return true
 }
 
+isValidSudoku(board)
