@@ -585,14 +585,39 @@ var board : [[Character]] = [
  */
 
 func isValidSudoku(_ board: [[Character]]) -> Bool {
+    func validator(_ board: [[Character]], x: Int, y: Int) -> Bool? {
+        let c = board[y][x]
+        guard c != "." else { return nil }
+        
+        for i in 0 ..< 9 {
+            if board[y][i] == c { return false }
+        }
+        
+        for j in 0 ..< 9 {
+            if board[j][x] == c { return false }
+        }
+        
+        let xIndex = Int(x / 3)
+        let yIndex = Int(y / 3)
+        
+        for j in 0 ..< 3 {
+            for i in 0 ..< 3 {
+                if board[(yIndex*3)+j][(xIndex*3)+i] == c { return false }
+            }
+        }
+        return true
+    }
+    
     for j in 0 ..< 9 {
         for i in 0 ..< 9 {
-            if sudokuValidator(board, x: i, y: j, c: board[j][i]) == false {
+            if validator(board, x: i, y: j) == false {
                 return false
             }
         }
     }
     return true
+    
+    
 }
 
 isValidSudoku(board)
