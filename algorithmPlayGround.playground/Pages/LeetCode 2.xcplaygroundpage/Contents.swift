@@ -585,18 +585,22 @@ var board : [[Character]] = [
  */
 
 func isValidSudoku(_ board: [[Character]]) -> Bool {
-    for j in 0 ..< 9 {
+    for rowIndex in 0 ..< 9 {
         //check row
-    }
-    
-    for i in 0 ..< 9 {
-        //check column
-    }
-    
-    for i in 0 ..< 3 {
-        for j in 0 ..< 3 {
-            //check 3*3
+        for x in 0 ..< 9 {
+            print(board[rowIndex][x])
         }
+    }
+    
+    for columnIndex in 0 ..< 9 {
+        //check column
+        for y in 0 ..< 9 {
+            print(board[y][columnIndex])
+        }
+    }
+    
+    for subBoxIndex in 0 ..< 9 {
+        
     }
     return true
     
