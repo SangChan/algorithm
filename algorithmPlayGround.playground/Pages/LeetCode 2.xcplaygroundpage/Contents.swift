@@ -588,19 +588,21 @@ func isValidSudoku(_ board: [[Character]]) -> Bool {
     for rowIndex in 0 ..< 9 {
         //check row
         for x in 0 ..< 9 {
-            print(board[rowIndex][x])
+            print("rowIndx : \(rowIndex), x : \(x), value :\(board[rowIndex][x])")
         }
     }
     
     for columnIndex in 0 ..< 9 {
         //check column
         for y in 0 ..< 9 {
-            print(board[y][columnIndex])
+            print("columnIndex : \(columnIndex), y : \(y) , value :\(board[y][columnIndex])")
         }
     }
     
-    for subBoxIndex in 0 ..< 9 {
-        
+    for subBoxRowIndex in 0 ..< 3 {
+        for subBoxColumnIndex in 0 ..< 3 {
+            print("row : \(subBoxRowIndex), column : \(subBoxColumnIndex)")
+        }
     }
     return true
     
