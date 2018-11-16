@@ -636,3 +636,6 @@ isValidSudoku(board)
 func mySqrt(_ x: Int) -> Int {
     return Int(sqrt(Double(x)))
 }
+
+mySqrt(4)
+mySqrt(8)
