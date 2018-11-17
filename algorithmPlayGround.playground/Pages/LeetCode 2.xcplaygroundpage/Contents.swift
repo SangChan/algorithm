@@ -588,20 +588,20 @@ func isValidSudoku(_ board: [[Character]]) -> Bool {
     for rowIndex in 0 ..< 9 {
         //check row
         for x in 0 ..< 9 {
-            print("rowIndx : \(rowIndex), x : \(x), value :\(board[rowIndex][x])")
+            //print("rowIndx : \(rowIndex), x : \(x), value :\(board[rowIndex][x])")
         }
     }
     
     for columnIndex in 0 ..< 9 {
         //check column
         for y in 0 ..< 9 {
-            print("columnIndex : \(columnIndex), y : \(y) , value :\(board[y][columnIndex])")
+            //print("columnIndex : \(columnIndex), y : \(y) , value :\(board[y][columnIndex])")
         }
     }
     
     for subBoxRowIndex in 0 ..< 3 {
         for subBoxColumnIndex in 0 ..< 3 {
-            print("row : \(subBoxRowIndex), column : \(subBoxColumnIndex)")
+            //print("row : \(subBoxRowIndex), column : \(subBoxColumnIndex)")
         }
     }
     return true
@@ -609,7 +609,7 @@ func isValidSudoku(_ board: [[Character]]) -> Bool {
     
 }
 
-isValidSudoku(board)
+//isValidSudoku(board)
 
 
 /*
