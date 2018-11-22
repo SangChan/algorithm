@@ -639,3 +639,18 @@ func mySqrt(_ x: Int) -> Int {
 
 mySqrt(4)
 mySqrt(8)
+
+// comes from https://www.codeproject.com/Articles/570700/SquareplusRootplusalgorithmplusforplusC
+func powerOfTen(_ num : Int) -> Double {
+    var rst : Double = 1.0
+    if num >= 0 {
+        for _ in 0 ..< num {
+            rst *= 10.0
+        }
+    } else {
+        for _ in 0 ..< (0 - num) {
+            rst *= 0.1
+        }
+    }
+    return rst
+}
