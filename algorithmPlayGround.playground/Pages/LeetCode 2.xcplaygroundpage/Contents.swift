@@ -658,6 +658,15 @@ func powerOfTen(_ num : Int) -> Double {
 powerOfTen(10)
 powerOfTen(-10)
 
+func squareRoot(_ a : Double) -> Double {
+    var z : Double = a
+    var rst : Double = 0.0
+    let max : Int = 8
+    var j : Double = 1.0
+    
+    return rst
+}
+
 /*
  1: double squareRoot(double a)
  2: {
