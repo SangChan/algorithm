@@ -6,9 +6,9 @@ import Foundation
  Sorting
  */
 
-var sortList : Array<Int> = [8,2,10,9,11,1,7,3,4]
+//var sortList : Array<Int> = [8,2,10,9,11,1,7,3,4]
 
-func insertionSort() {
+func insertionSort(_ sortList : inout Array<Int>) {
     var x = 0 ,y = 0
     for key in sortList {
         print("{\(x):\(key)}")
@@ -32,8 +32,8 @@ func insertionSort() {
 
 //insertionSort()
 
-func bubbleSort() {
-    var x,y,z,passes,key: Int
+func bubbleSort(_ sortList : inout Array<Int>) {
+    var z,passes,key: Int
     
     for x in 0..<sortList.count {
         passes = sortList.count - 1 - x
@@ -56,7 +56,7 @@ func bubbleSort() {
 
 //bubbleSort()
 
-func quickSort() {
+func quickSort(_ sortList : inout Array<Int>) {
     
 }
 
