@@ -56,7 +56,7 @@ func bubbleSort(_ sortList : inout Array<Int>) {
 
 //bubbleSort()
 
-func quickSort(_ sortList : inout Array<Int>) {
+func quickSort(_ sortList : [Int], left : Int, right : Int) {
     
 }
 
