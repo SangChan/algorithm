@@ -80,6 +80,10 @@ func quickSort(_ arr : inout [Int], left : Int, right : Int) {
     quickSort(&arr, left: i+1, right: right)
 }
 
+var sortList : [Int] = [8,2,10,9,11,1,7,3,4]
+quickSort(&sortList, left: 0, right: sortList.count-1)
+print(sortList)
+
 /*
  function partition(a, left, right, pivotIndex)
  pivotValue := a[pivotIndex]
