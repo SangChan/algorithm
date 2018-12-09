@@ -147,6 +147,39 @@ print(sortList)
  
  */
 
+/*
+ func quickSort(a : inout [Int]) {
+ quickSort(a: &a, low: 0, high: a.count-1)
+ }
+ 
+ fileprivate func quickSort(a : inout [Int], low : Int, high : Int) {
+ if low >= high { return }
+ let pivot = partition(a: &a, low: low, high: high)
+ quickSort(a: &a, low: low, high: pivot-1)
+ quickSort(a: &a, low: pivot+1, high: high)
+ }
+ 
+ fileprivate func partition(a: inout [Int], low : Int, high : Int) -> Int {
+ var pivot = low
+ let maxNum = high-low+1
+ let rand = (Int(arc4random()) % maxNum) + low
+ swap(a: &a, i: low, j: rand)
+ 
+ for i in low+1 ..< high {
+ if a[i] < a[pivot] {
+ swap(a: &a, i: i, j: pivot+1)
+ swap(a: &a, i: pivot, j: pivot+1)
+ pivot += 1
+ }
+ }
+ 
+ return pivot
+ }
+ var e: [Int] = [23, 1, 2, 34, 5, 98, 46, 1, 7, 57, 0, 8, 68, 6]
+ quickSort(a: &e)
+
+ */
+
 func mergeSort() {
     
 }
