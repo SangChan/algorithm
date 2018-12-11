@@ -56,34 +56,6 @@ func bubbleSort(_ sortList : inout Array<Int>) {
 
 //bubbleSort()
 
-func quickSort(_ arr : inout [Int], left : Int, right : Int) {
-    var i : Int = left
-    var j : Int = right
-    let pivot : Int = arr[left+right/2]
-    var tmp : Int
-    if left < right {
-        while (i < j) {
-            while (arr[j] > pivot) {
-                j -= 1
-            }
-            while (i < j && arr[i] <= pivot) {
-                i += 1
-            }
-            
-            tmp = arr[i]
-            arr[i] = arr[j]
-            arr[j] = tmp
-        }
-    }
-        
-    quickSort(&arr, left: left, right: i-1)
-    quickSort(&arr, left: i+1, right: right)
-}
-
-var sortList : [Int] = [8,2,10,9,11,1,7,3,4]
-quickSort(&sortList, left: 0, right: sortList.count-1)
-print(sortList)
-
 /*
  function partition(a, left, right, pivotIndex)
  pivotValue := a[pivotIndex]
