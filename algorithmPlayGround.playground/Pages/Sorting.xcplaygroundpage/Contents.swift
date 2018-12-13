@@ -56,6 +56,12 @@ func bubbleSort(_ sortList : inout Array<Int>) {
 
 //bubbleSort()
 
+func swap(a : inout [Int], i : Int, j : Int) {
+    let tmp = a[i]
+    a[i] = a[j]
+    a[j] = tmp
+}
+
 func quickSort(a : inout [Int]) {
     quickSort(a: &a, low: 0, high: a.count-1)
 }
