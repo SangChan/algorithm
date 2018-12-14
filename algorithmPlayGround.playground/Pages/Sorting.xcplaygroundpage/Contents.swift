@@ -62,11 +62,7 @@ func swap(a : inout [Int], i : Int, j : Int) {
     a[j] = tmp
 }
 
-func quickSort(a : inout [Int]) {
-    quickSort(a: &a, low: 0, high: a.count-1)
-}
-
-fileprivate func quickSort(a : inout [Int], low : Int, high : Int) {
+func quickSort(a : inout [Int], low : Int, high : Int) {
     if low >= high { return }
     let pivot = partition(a: &a, low: low, high: high)
     quickSort(a: &a, low: low, high: pivot-1)
@@ -91,7 +87,8 @@ fileprivate func partition(a: inout [Int], low : Int, high : Int) -> Int {
 }
 
 var e: [Int] = [23, 1, 2, 34, 5, 98, 46, 1, 7, 57, 0, 8, 68, 6]
-quickSort(a: &e)
+//quickSort(a: &e)
+quickSort(a: &e, low: 0, high: e.count-1)
 
 /*
  function partition(a, left, right, pivotIndex)
