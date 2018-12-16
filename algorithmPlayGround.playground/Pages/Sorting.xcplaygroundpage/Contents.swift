@@ -56,6 +56,10 @@ func bubbleSort(_ sortList : inout Array<Int>) {
 
 //bubbleSort()
 
+func quickSort(a : inout [Int]) {
+    quickSort(a: &a, low: 0, high: a.count-1)
+}
+
 func swap(a : inout [Int], i : Int, j : Int) {
     let tmp = a[i]
     a[i] = a[j]
@@ -69,7 +73,7 @@ func quickSort(a : inout [Int], low : Int, high : Int) {
     quickSort(a: &a, low: pivot+1, high: high)
 }
 
-fileprivate func partition(a: inout [Int], low : Int, high : Int) -> Int {
+func partition(a: inout [Int], low : Int, high : Int) -> Int {
     var pivot = low
     let maxNum = high-low+1
     let rand = (Int(arc4random()) % maxNum) + low
@@ -87,8 +91,8 @@ fileprivate func partition(a: inout [Int], low : Int, high : Int) -> Int {
 }
 
 var e: [Int] = [23, 1, 2, 34, 5, 98, 46, 1, 7, 57, 0, 8, 68, 6]
-//quickSort(a: &e)
-quickSort(a: &e, low: 0, high: e.count-1)
+quickSort(a: &e)
+//quickSort(a: &e, low: 0, high: e.count-1)
 
 /*
  function partition(a, left, right, pivotIndex)
