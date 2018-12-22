@@ -64,21 +64,20 @@ func swap(a : inout [Int], i : Int, j : Int) {
 
 func quickSort(a : inout [Int], low : Int, high : Int) {
     if low >= high { return }
-    let pivot = partition(a: &a, low: low, high: high)
+    let pivot = partition(a: &a, low: low, high: high, pivot: low)
     quickSort(a: &a, low: low, high: pivot-1)
     quickSort(a: &a, low: pivot+1, high: high)
 }
 
-func partition(a: inout [Int], low : Int, high : Int) -> Int {
-    var pivot = low
-    let rand = Int(high / 2)//(Int(arc4random()) % maxNum) + low
+func partition(a: inout [Int], low : Int, high : Int, pivot : Int) -> Int {
+    let rand = Int(high / 2)
     swap(a: &a, i: low, j: rand)
     
     for i in low+1 ..< high {
         if a[i] < a[pivot] {
             swap(a: &a, i: i, j: pivot+1)
             swap(a: &a, i: pivot, j: pivot+1)
-            pivot += 1
+            //pivot += 1
         }
     }
     
