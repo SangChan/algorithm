@@ -68,4 +68,55 @@ public func solution(_ A : inout [Int], _ B : inout [Int], _ M : Int, _ X : Int,
 
 var groupWeight = [60,80,40]//[40,40,100,80,20]
 var groupFloor = [2,3,5]//[3,3,2,2,3]
-print(solution(&groupWeight, &groupFloor, 5, 2, 200))
+//print(solution(&groupWeight, &groupFloor, 5, 2, 200))
+
+/*
+ 배열 A는 N개의 정수값을 가지고 있다.(N>0)
+ 배열의 숫자들이 연속적인 숫자들로 구성되어 있으면 Permutation이라고 할때
+ 배열 A가 Permutation이 맞으면 1, 아니면 0를 리턴하세요.
+ (단 정렬을 하지 않고 구하세요.)
+ 
+ <예1>
+ A[0] = 4, A[1] = 1, A[2] = 3, A[3] = 2 : 1, 2, 3, 4 로 Permutation이 맞으므로 리턴 1
+ 
+ A[0] = 4, A[1] = 1, A[2] = 3 : 1, 3, 4로 Permutaiton이 아니므로 리턴 0
+ */
+
+let A = [4,1,3,2]
+let B = [4,1,3]
+let C = [4,1,1,2]
+
+func checkPermutation(_ list : [Int]) -> Int {
+    func findDuplicates(_ list : [Int]) -> [Int] {
+        var duplicates = Set<Int>()
+        
+        for num in list {
+            duplicates.insert(num)
+        }
+        
+        return Array(duplicates)
+    }
+    
+    var minValue = list[0]
+    var maxValue = list[0]
+    for num in list {
+        if maxValue <= num {
+            maxValue = num
+        }
+        if minValue >= num {
+            minValue = num
+        }
+    }
+    
+    let removeDuplcatesList = findDuplicates(list)
+    
+    if (maxValue - minValue + 1) == list.count && removeDuplcatesList.count == list.count {
+        return 1
+    }
+    
+    return 0
+}
+
+checkPermutation(A)
+checkPermutation(B)
+checkPermutation(C)
