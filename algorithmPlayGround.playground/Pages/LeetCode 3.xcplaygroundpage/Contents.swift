@@ -120,3 +120,12 @@ func checkPermutation(_ list : [Int]) -> Int {
 checkPermutation(A)
 checkPermutation(B)
 checkPermutation(C)
+
+let maxDouble : Double = Double.greatestFiniteMagnitude
+let thirtyDays : TimeInterval = 60 * 60 * 24 * 30
+
+if maxDouble > thirtyDays {
+    print("maxDouble : \(maxDouble)")
+} else {
+    print("thirthyDays : \(thirtyDays)")
+}
