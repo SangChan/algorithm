@@ -129,3 +129,156 @@ if maxDouble > thirtyDays {
 } else {
     print("thirthyDays : \(thirtyDays)")
 }
+
+
+public func solution(_ A : inout [Int]) -> Int {
+    // write your code in Swift 4.2.1 (Linux)
+    var headsCount = 0
+    var tailsCount = 0
+    
+    for face in A {
+        if face == 0 {
+            headsCount += 1
+        }
+    }
+    
+    tailsCount = A.count - headsCount
+    
+    return (headsCount > tailsCount) ? tailsCount : headsCount
+}
+
+var coins = [1,0,0,1,0,0]
+
+solution(&coins)
+
+
+public func solution2(_ A : inout [Int]) -> Int {
+    // write your code in Swift 4.2.1 (Linux)
+    var index = 0
+    var count = 0
+    while (index != -1) {
+        index = A[index]
+        count += 1
+    }
+    return count
+}
+
+var list = [1,4,-1,3,2]
+solution2(&list)
+
+
+public func solution3(_ A : inout [Int]) -> Int {
+    // write your code in Swift 4.2.1 (Linux)
+    func normalize(_ A:[Int]) -> [Int] {
+        var normalTerrain = [Int]()
+        for height in A {
+            if let lastValue = normalTerrain.last {
+                if lastValue != height {
+                    normalTerrain.append(height)
+                }
+            } else {
+                normalTerrain.append(height)
+            }
+        }
+        return normalTerrain
+    }
+    
+    func isHill(_ left : Int, _ medium : Int, _ right : Int) -> Bool {
+        if left < medium && right < medium {
+            return true
+        }
+        return false
+    }
+    
+    func isValley(_ left : Int, _ medium : Int, _ right : Int) -> Bool {
+        if left > medium && right > medium {
+            return true
+        }
+        return false
+    }
+    
+    var hillsCount = 0
+    var valleysCount = 0
+    
+    let normalTerrain = normalize(A)
+    
+    for index in 0 ..< normalTerrain.count {
+        var hill : Bool = false
+        var valley : Bool = false
+        
+        var leftValueForHill = -1000000000
+        var leftValueForValley = 1000000000
+        let mediumValue = normalTerrain[index]
+        var rightValueForHill = -1000000000
+        var rightValueForValley = 1000000000
+        
+        if index > 0 && index < normalTerrain.count - 1 {
+            leftValueForHill = normalTerrain[index-1]
+            leftValueForValley = normalTerrain[index-1]
+            rightValueForHill = normalTerrain[index+1]
+            rightValueForValley = normalTerrain[index+1]
+        }
+        
+        hill = isHill(leftValueForHill,mediumValue,rightValueForHill)
+        valley = isValley(leftValueForValley,normalTerrain[index],rightValueForValley)
+        
+        if hill == true {
+            hillsCount += 1
+        }
+        if valley == true {
+            valleysCount += 1
+        }
+        if hill == true && valley == true {
+            hillsCount -= 1
+        }
+    }
+    
+    print(normalTerrain)
+    
+    return hillsCount + valleysCount
+}
+
+var terrainEx1 = [2,2,3,4,3,3,2,2,1,1,2,5]
+var terrainEx2 = [-3,-3]
+
+solution3(&terrainEx1)
+
+public func solution4(_ A : inout [Int]) -> Int {
+    // write your code in Swift 4.2.1 (Linux)
+    func isAdjacent(_ first : Int, _ second : Int, _ list : [Int]) -> Bool {
+        let smallOne = (first < second) ? first : second
+        let bigOne = (first < second) ? second : first
+        
+        for num in list {
+            if num > smallOne && num < bigOne {
+                return false
+            }
+        }
+        return true
+    }
+    
+    var minimumDistance = Int.max
+    var adjacentCount = 0
+    
+    for p in 0 ..< A.count {
+        let firstValue = A[p]
+        for q in p+1 ..< A.count {
+            let secondValue = A[q]
+            if isAdjacent(firstValue, secondValue, A) == true {
+                adjacentCount += 1
+                if minimumDistance > abs(firstValue - secondValue) {
+                    minimumDistance = abs(firstValue - secondValue)
+                }
+            }
+        }
+    }
+    
+    if adjacentCount == 0 {
+        return -2
+    }
+    
+    return (minimumDistance > 100000000) ? -1 : minimumDistance
+}
+
+var stricyList = [0,3,3,7,5,3,11,1]
+solution4(&stricyList)
