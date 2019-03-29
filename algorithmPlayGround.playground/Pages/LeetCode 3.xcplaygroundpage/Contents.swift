@@ -346,6 +346,7 @@ public func solution4(_ A : inout [Int]) -> Int {
         let smallOne = (first < second) ? first : second
         let bigOne = (first < second) ? second : first
         
+        // todo : remove this for loop
         for num in list {
             if num > smallOne && num < bigOne {
                 return false
