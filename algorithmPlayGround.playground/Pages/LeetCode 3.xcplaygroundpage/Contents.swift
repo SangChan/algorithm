@@ -380,3 +380,53 @@ public func solution4(_ A : inout [Int]) -> Int {
 
 var stricyList = [0,3,3,7,5,3,11,1]
 solution4(&stricyList)
+
+
+public func solution4dash(_ A : inout [Int]) -> Int {
+    // write your code in Swift 4.2.1 (Linux)
+    func isAdjacent(_ first : Int, _ second : Int, _ list : [Int]) -> Bool {
+        let smallOne = (first < second) ? first : second
+        let bigOne = (first < second) ? second : first
+        
+        // todo : remove this for loop
+        
+        for num in list {
+            if num > smallOne && num < bigOne {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func makeSet(_ list : [Int]) -> [Int] {
+        var newList = Set<Int>()
+        for num in list {
+            newList.insert(num)
+        }
+        return Array(newList)
+    }
+    
+    var minimumDistance = Int.max
+    var adjacentCount = 0
+    
+    let removeDuplicateList = makeSet(A)
+    
+    for p in 0 ..< A.count {
+        let firstValue = A[p]
+        for q in p+1 ..< A.count {
+            let secondValue = A[q]
+            if isAdjacent(firstValue, secondValue, removeDuplicateList) == true {
+                adjacentCount += 1
+                if minimumDistance > abs(firstValue - secondValue) {
+                    minimumDistance = abs(firstValue - secondValue)
+                }
+            }
+        }
+    }
+    
+    if adjacentCount == 0 {
+        return -2
+    }
+    
+    return (minimumDistance > 100000000) ? -1 : minimumDistance
+}
