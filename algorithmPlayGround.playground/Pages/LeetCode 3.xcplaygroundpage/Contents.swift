@@ -406,10 +406,23 @@ public func solution4dash(_ A : inout [Int]) -> Int {
         return Array(newList)
     }
     
+    func makeDictinary(_ list : [Int]) -> [Int:Int] {
+        var newDictionary = [Int:Int]()
+        for num in list {
+            if let value = newDictionary[num] {
+                newDictionary[num] = value+1
+            } else {
+                newDictionary[num] = 0
+            }
+        }
+        return newDictionary
+    }
+    
     var minimumDistance = Int.max
     var adjacentCount = 0
     
     let removeDuplicateList = makeSet(A)
+    let dictionary = makeDictinary(A)
     
     for p in 0 ..< A.count {
         let firstValue = A[p]
