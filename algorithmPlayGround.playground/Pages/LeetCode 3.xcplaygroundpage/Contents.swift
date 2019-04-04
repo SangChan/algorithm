@@ -363,6 +363,7 @@ public func solution4(_ A : inout [Int]) -> Int {
         for q in p+1 ..< A.count {
             let secondValue = A[q]
             if isAdjacent(firstValue, secondValue, A) == true {
+                print("[\(p),\(q)]")
                 adjacentCount += 1
                 if minimumDistance > abs(firstValue - secondValue) {
                     minimumDistance = abs(firstValue - secondValue)
@@ -385,6 +386,8 @@ solution4(&stricyList)
 public func solution4dash(_ A : inout [Int]) -> Int {
     // write your code in Swift 4.2.1 (Linux)
     func isAdjacent(_ first : Int, _ second : Int, _ list : [Int]) -> Bool {
+        guard first == second else { return false }
+        guard abs(first - second) == 1 else { return false }
         let smallOne = (first < second) ? first : second
         let bigOne = (first < second) ? second : first
         
