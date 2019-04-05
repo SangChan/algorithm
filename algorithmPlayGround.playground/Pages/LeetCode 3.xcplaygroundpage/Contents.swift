@@ -363,7 +363,7 @@ public func solution4(_ A : inout [Int]) -> Int {
         for q in p+1 ..< A.count {
             let secondValue = A[q]
             if isAdjacent(firstValue, secondValue, A) == true {
-                print("[\(p),\(q)]")
+                print("from old : [\(p),\(q)]")
                 adjacentCount += 1
                 if minimumDistance > abs(firstValue - secondValue) {
                     minimumDistance = abs(firstValue - secondValue)
@@ -386,15 +386,15 @@ solution4(&stricyList)
 public func solution4dash(_ A : inout [Int]) -> Int {
     // write your code in Swift 4.2.1 (Linux)
     func isAdjacent(_ first : Int, _ second : Int, _ list : [Int]) -> Bool {
-        guard first == second else { return false }
-        guard abs(first - second) == 1 else { return false }
         let smallOne = (first < second) ? first : second
         let bigOne = (first < second) ? second : first
         
-        // todo : remove this for loop
+        guard bigOne != smallOne else { return true }
+        guard abs(bigOne - smallOne) != 1 else { return true }
         
-        for num in list {
-            if num > smallOne && num < bigOne {
+        
+        for num in smallOne+1 ..< bigOne {
+            if list.contains(num) {
                 return false
             }
         }
@@ -409,29 +409,17 @@ public func solution4dash(_ A : inout [Int]) -> Int {
         return Array(newList)
     }
     
-    func makeDictinary(_ list : [Int]) -> [Int:Int] {
-        var newDictionary = [Int:Int]()
-        for num in list {
-            if let value = newDictionary[num] {
-                newDictionary[num] = value+1
-            } else {
-                newDictionary[num] = 0
-            }
-        }
-        return newDictionary
-    }
-    
     var minimumDistance = Int.max
     var adjacentCount = 0
     
     let removeDuplicateList = makeSet(A)
-    let dictionary = makeDictinary(A)
     
     for p in 0 ..< A.count {
         let firstValue = A[p]
         for q in p+1 ..< A.count {
             let secondValue = A[q]
             if isAdjacent(firstValue, secondValue, removeDuplicateList) == true {
+                print("from new : [\(p),\(q)]")
                 adjacentCount += 1
                 if minimumDistance > abs(firstValue - secondValue) {
                     minimumDistance = abs(firstValue - secondValue)
@@ -446,3 +434,5 @@ public func solution4dash(_ A : inout [Int]) -> Int {
     
     return (minimumDistance > 100000000) ? -1 : minimumDistance
 }
+
+solution4dash(&stricyList)
