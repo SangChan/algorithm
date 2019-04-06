@@ -363,7 +363,6 @@ public func solution4(_ A : inout [Int]) -> Int {
         for q in p+1 ..< A.count {
             let secondValue = A[q]
             if isAdjacent(firstValue, secondValue, A) == true {
-                print("from old : [\(p),\(q)]")
                 adjacentCount += 1
                 if minimumDistance > abs(firstValue - secondValue) {
                     minimumDistance = abs(firstValue - secondValue)
@@ -419,7 +418,6 @@ public func solution4dash(_ A : inout [Int]) -> Int {
         for q in p+1 ..< A.count {
             let secondValue = A[q]
             if isAdjacent(firstValue, secondValue, removeDuplicateList) == true {
-                print("from new : [\(p),\(q)]")
                 adjacentCount += 1
                 if minimumDistance > abs(firstValue - secondValue) {
                     minimumDistance = abs(firstValue - secondValue)
