@@ -434,3 +434,6 @@ public func solution4dash(_ A : inout [Int]) -> Int {
 }
 
 solution4dash(&stricyList)
+
+var arr = [Int]()
+arr.append(1)
