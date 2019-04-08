@@ -330,8 +330,6 @@ public func solution3(_ A : inout [Int]) -> Int {
         }
     }
     
-    print(normalTerrain)
-    
     return hillsCount + valleysCount
 }
 
@@ -391,7 +389,6 @@ public func solution4dash(_ A : inout [Int]) -> Int {
         guard bigOne != smallOne else { return true }
         guard abs(bigOne - smallOne) != 1 else { return true }
         
-        
         for num in smallOne+1 ..< bigOne {
             if list.contains(num) {
                 return false
@@ -434,6 +431,3 @@ public func solution4dash(_ A : inout [Int]) -> Int {
 }
 
 solution4dash(&stricyList)
-
-var arr = [Int]()
-arr.append(1)
