@@ -431,3 +431,22 @@ public func solution4dash(_ A : inout [Int]) -> Int {
 }
 
 solution4dash(&stricyList)
+
+func makeSet(_ list : [Int]) -> [Int] {
+    var newList = Set<Int>()
+    for num in list {
+        newList.insert(num)
+    }
+    return Array(newList).sorted()
+}
+
+func leftRotateArray(a: [Int], rotate: Int) -> [Int] {
+    var tempArray = a
+    let newRotate = (rotate > a.count) ? rotate % a.count : rotate
+    for index in 0 ..< tempArray.count {
+        let newLocation = (index + (tempArray.count - newRotate)) % tempArray.count
+        tempArray[newLocation] = a[index]
+    }
+    
+    return tempArray
+}
