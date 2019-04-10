@@ -450,3 +450,20 @@ func leftRotateArray(a: [Int], rotate: Int) -> [Int] {
     
     return tempArray
 }
+
+func leftRotateArrayAnother(a: [Int], rotate: Int) -> [Int] {
+    var tempArray = [Int](repeating: 0, count: a.count*2)
+    let newRotate = (rotate > a.count) ? rotate % a.count : rotate
+    for index in 0 ..< a.count * 2{
+        tempArray[index] = a[index%a.count]
+    }
+    var result = [Int](repeating: 0, count: a.count)
+    for index in newRotate ..< newRotate+a.count {
+        result[index-newRotate] = tempArray[index]
+    }
+    return result
+}
+
+let a = [1,2,4,3,5]
+leftRotateArray(a: a, rotate: 2)
+leftRotateArrayAnother(a: a, rotate: 2)
