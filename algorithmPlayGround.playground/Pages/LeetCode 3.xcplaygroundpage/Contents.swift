@@ -465,5 +465,5 @@ func leftRotateArrayAnother(a: [Int], rotate: Int) -> [Int] {
 }
 
 let a = [1,2,4,3,5]
-leftRotateArray(a: a, rotate: 2)
-leftRotateArrayAnother(a: a, rotate: 2)
+leftRotateArray(a: a, rotate: 12)
+leftRotateArrayAnother(a: a, rotate: 12)
