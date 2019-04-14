@@ -472,11 +472,26 @@ func rightRotateArray(a: [Int], rotate: Int) -> [Int] {
     var tempArray = a
     let newRotate = (rotate > a.count) ? rotate % a.count : rotate
     for index in 0 ..< tempArray.count {
-        let newLocation = (index + (tempArray.count - newRotate)) % tempArray.count
+        let newLocation = (index + (tempArray.count + newRotate)) % tempArray.count
         tempArray[newLocation] = a[index]
     }
     
     return tempArray
 }
 
+func rightRotateArrayAnother(a: [Int], rotate: Int) -> [Int] {
+    var tempArray = [Int](repeating: 0, count: a.count*2)
+    let newRotate = (rotate > a.count) ? rotate % a.count : rotate
+    for index in 0 ..< a.count * 2{
+        tempArray[index] = a[index%a.count]
+    }
+    var result = [Int](repeating: 0, count: a.count)
+    let newRotateIndex = a.count - newRotate
+    for index in  newRotateIndex ..< newRotateIndex+a.count {
+        result[index-newRotateIndex] = tempArray[index]
+    }
+    return result
+}
+
 rightRotateArray(a: a, rotate: 2)
+rightRotateArrayAnother(a: a, rotate: 2)
