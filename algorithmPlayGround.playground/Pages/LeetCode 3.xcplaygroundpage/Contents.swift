@@ -495,3 +495,100 @@ func rightRotateArrayAnother(a: [Int], rotate: Int) -> [Int] {
 
 rightRotateArray(a: a, rotate: 2)
 rightRotateArrayAnother(a: a, rotate: 2)
+
+func getMaxElementIndexes(a: [Int], rotate: [Int]) -> [Int] {
+    func getLocationFromRotated(a: [Int], rotate: Int, location: Int) -> Int {
+        let newRotate = (rotate > a.count) ? rotate % a.count : rotate
+        return (location + (a.count - newRotate)) % a.count
+    }
+    
+    var maximumValue = 0
+    var maximumValueIndex = 0
+    
+    for index in 0 ..< a.count {
+        if maximumValue < a[index] {
+            maximumValue = a[index]
+            maximumValueIndex = index
+        }
+    }
+    
+    var result = [Int]()
+    for rotateNum in rotate {
+        result.append(getLocationFromRotated(a: a, rotate: rotateNum, location: maximumValueIndex))
+    }
+    
+    return result
+}
+
+func reassignedPriorities(issuePriorities: [Int]) -> [Int] {
+    // Write your code here
+    func makeSet(_ list : [Int]) -> [Int] {
+        var newList = Set<Int>()
+        for num in list {
+            newList.insert(num)
+        }
+        return Array(newList).sorted()
+    }
+    
+    let issueSet = makeSet(issuePriorities)
+    
+    var result = [Int]()
+    for num in issuePriorities {
+        if let index = issueSet.firstIndex(of: num) {
+            result.append(index+1)
+        }
+    }
+    
+    return result
+}
+
+func findRange(num: Int) -> Int {
+    // Write your code here
+    func makeSet(_ list : [Int]) -> [Int] {
+        var newList = Set<Int>()
+        for num in list {
+            newList.insert(num)
+        }
+        return Array(newList).sorted()
+    }
+    var arrayNum = [Int]()
+    let stringNum = String(num)
+    for charNum in stringNum {
+        if let number = Int(String(charNum)) {
+            arrayNum.append(number)
+        }
+    }
+    
+    let firstNumber = arrayNum[0]
+    let numSet = makeSet(arrayNum)
+    var newNumbers = [Int]()
+    
+    for digit in numSet {
+        for newNum in 0 ..< 10 {
+            let newArrayNum = arrayNum.map { return $0 == digit ? newNum : $0}
+            var tempNumber = String()
+            for num in newArrayNum {
+                tempNumber.append(String(num))
+            }
+            
+            if let newNumber = Int(tempNumber) {
+                if digit != firstNumber || newNum != 0 {
+                    newNumbers.append(newNumber)
+                }
+            }
+        }
+    }
+    
+    var maximumPossible = Int.min
+    var minimumPossible = Int.max
+    for newNumber in newNumbers {
+        if newNumber > maximumPossible {
+            maximumPossible = newNumber
+        }
+        if newNumber < minimumPossible {
+            minimumPossible = newNumber
+        }
+    }
+    
+    return maximumPossible-minimumPossible
+}
