@@ -85,7 +85,7 @@ public func solution2(_ S : inout String) -> String {
         let fileInfo = file.components(separatedBy: ", ")
         let fileNameInfo = fileInfo[0].components(separatedBy: ".")
         let fileName = fileNameInfo[0]
-        let fileExtension = fileNameInfo[1]
+        //let fileExtension = fileNameInfo[1]
         let cityName = fileInfo[1]
         let date = fileInfo[2]
         
