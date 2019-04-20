@@ -11,10 +11,12 @@
         <page name='Shortest Paths'/>
         <page name='Heaps'/>
         <page name='Hash Tables'/>
+        <page name='My Page - Request'/>
         <page name='My Page - Patterns'/>
         <page name='My Page - Data Structure'/>
         <page name='My Page - Algorithm'/>
         <page name='My Page - LeetCode'/>
         <page name='LeetCode 2'/>
+        <page name='LeetCode 3'/>
     </pages>
 </playground>
