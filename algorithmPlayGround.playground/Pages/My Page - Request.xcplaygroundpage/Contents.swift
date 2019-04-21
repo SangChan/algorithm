@@ -2,6 +2,11 @@
 
 import Foundation
 
+enum Result<Value> {
+    case success(Value)
+    case failure(Error)
+}
+
 protocol LocalResponse {
     static func documentsURL() -> URL?
     static func save(_ response : Self)
