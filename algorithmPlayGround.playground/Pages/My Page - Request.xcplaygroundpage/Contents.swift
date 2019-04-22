@@ -42,22 +42,15 @@ class RequestBuilder : RequestBuilderProtocol {
     
     
     static var idiom: String = {
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            return "Phone"
-        case .pad:
-            return "Tablet"
-        case .carPlay:
-            return "Car"
-        case .tv:
-            return "TV"
-        default:
-            return "Unknown"
-        }
+        return "Phone"
+    }()
+    
+    static var version : String = {
+        return "iOS 12.2"
     }()
     
     static var identification: String = {
-        return "\(RequestBuilder.model)/iOS\(UIDevice.current.systemVersion)/\(RequestBuilder.idiom)"
+        return "\(RequestBuilder.model)\(RequestBuilder.version)/\(RequestBuilder.idiom)"
     }()
     
     static func post(_ url: URL) -> URLRequest {
