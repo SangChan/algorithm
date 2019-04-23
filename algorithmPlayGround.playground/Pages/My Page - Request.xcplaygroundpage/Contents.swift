@@ -55,44 +55,18 @@ class RequestBuilder : RequestBuilderProtocol {
     
     static func post(_ url: URL) -> URLRequest {
         var r = URLRequest(url: url)
-        r.setValue(RequestBuilder.identification, forHTTPHeaderField: "deviceMode")
         r.httpMethod = "POST"
         r.addValue("application/json", forHTTPHeaderField: "Content-Type")
         r.addValue("application/json", forHTTPHeaderField: "Accept")
-        return r
-    }
-    
-    static func post(_ url: URL, token: String, sessionid: String) -> URLRequest {
-        var r = URLRequest(url: url)
-        r.setValue(token, forHTTPHeaderField: "token")
-        r.setValue(sessionid, forHTTPHeaderField: "sessionid")
-        r.setValue(RequestBuilder.identification, forHTTPHeaderField: "deviceMode")
-        r.httpMethod = "POST"
-        r.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        r.addValue("application/json", forHTTPHeaderField: "Accept")
-        
         return r
     }
     
     static func get(_ url: URL) -> URLRequest {
         var r = URLRequest(url: url)
-        r.setValue(RequestBuilder.identification, forHTTPHeaderField: "deviceMode")
         r.httpMethod = "GET"
         r.addValue("application/json", forHTTPHeaderField: "Accept")
         return r
     }
-    
-    static func get(_ url: URL, token: String, sessionid: String) -> URLRequest {
-        var r = URLRequest(url: url)
-        r.setValue(token, forHTTPHeaderField: "token")
-        r.setValue(sessionid, forHTTPHeaderField: "sessionid")
-        r.setValue(RequestBuilder.identification, forHTTPHeaderField: "deviceMode")
-        r.httpMethod = "GET"
-        r.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        return r
-    }
-    
     
 }
 
