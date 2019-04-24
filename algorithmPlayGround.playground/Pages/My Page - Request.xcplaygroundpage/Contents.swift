@@ -23,12 +23,11 @@ protocol WebServiceProtocol {
 
 protocol RequestBuilderProtocol {
     static func post(_ url: URL) -> URLRequest
-    static func post(_ url: URL, token: String, sessionid: String) -> URLRequest
     static func get(_ url: URL) -> URLRequest
-    static func get(_ url: URL, token: String, sessionid: String) -> URLRequest
 }
 
 class RequestBuilder : RequestBuilderProtocol {
+    
     static var model: String = {
         var systemInfo = utsname()
         uname(&systemInfo)
