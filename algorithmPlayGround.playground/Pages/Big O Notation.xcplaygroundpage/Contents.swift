@@ -48,5 +48,14 @@ func binarySearch(key: Int, iMin: Int, iMax: Int) {
 
 
 /*
- Linked List
+ Stack for Common Storage
  */
+
+struct CommonStorage {
+    let state : String
+    let place : [String]
+}
+
+class StackForCommonStorage {
+    
+}
