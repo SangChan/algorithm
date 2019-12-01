@@ -54,8 +54,32 @@ func binarySearch(key: Int, iMin: Int, iMax: Int) {
 struct CommonStorage {
     let state : String
     let place : [String]
+    
+    init() {
+        state = "default"
+        place = ["1","2","3"]
+    }
 }
 
 class StackForCommonStorage {
+    private var _array : [CommonStorage] = [CommonStorage]()
     
+    init(with storage: CommonStorage? = nil) {
+        _array.append(storage ?? CommonStorage())
+    }
+    
+    func push(_ x : CommonStorage) {
+        _array.append(x)
+    }
+    
+    func pop() -> CommonStorage {
+        if let last = _array.popLast() {
+            return last
+        }
+        return _array[0]
+    }
+    
+    var current : CommonStorage {
+        return _array[_array.count - 1]
+    }
 }
