@@ -61,25 +61,34 @@ struct CommonStorage {
     }
 }
 
-class StackForCommonStorage {
-    private var _array : [CommonStorage] = [CommonStorage]()
+class StackForStorage {
+    private var array : [CommonStorage] = [CommonStorage]()
     
-    init(with storage: CommonStorage? = nil) {
-        _array.append(storage ?? CommonStorage())
+    init() {
+        self.push(CommonStorage())
     }
-    
-    func push(_ x : CommonStorage) {
-        _array.append(x)
+    func push(_ x: CommonStorage) {
+        array.append(x)
     }
     
     func pop() -> CommonStorage {
-        if let last = _array.popLast() {
+        if array.count > 1, let last = array.last {
+            array.removeLast()
             return last
         }
-        return _array[0]
+        return array[0]
     }
     
     var current : CommonStorage {
-        return _array[_array.count - 1]
+        if let last = array.last {
+            return last
+        }
+        return array[0]
     }
+}
+
+var stackForStorage = StackForStorage()
+
+var cstorage : CommonStorage {
+    return stackForStorage.current
 }
