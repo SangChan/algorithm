@@ -18,5 +18,6 @@
         <page name='My Page - LeetCode'/>
         <page name='LeetCode 2'/>
         <page name='LeetCode 3'/>
+        <page name='LeetCode 4'/>
     </pages>
 </playground>
