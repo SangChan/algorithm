@@ -19,11 +19,13 @@ var str = "Hello, playground"
  Input: [[1,2],[2,3],[3,4],[1,3]]
  Output: 1
  Explanation: [1,3] can be removed and the rest of intervals are non-overlapping.
+ 
  Example 2:
 
  Input: [[1,2],[1,2],[1,2]]
  Output: 2
  Explanation: You need to remove two [1,2] to make the rest of intervals non-overlapping.
+ 
  Example 3:
 
  Input: [[1,2],[2,3]]
@@ -49,13 +51,6 @@ func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
  456. 132 Pattern
  Medium
 
- 934
-
- 58
-
- Add to List
-
- Share
  Given a sequence of n integers a1, a2, ..., an, a 132 pattern is a subsequence ai, aj, ak such that i < j < k and ai < ak < aj. Design an algorithm that takes a list of n numbers as input and checks whether there is a 132 pattern in the list.
 
  Note: n will be less than 15,000.
@@ -67,6 +62,7 @@ func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
  Output: False
 
  Explanation: There is no 132 pattern in the sequence.
+ 
  Example 2:
 
  Input: [3, 1, 4, 2]
@@ -74,6 +70,7 @@ func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
  Output: True
 
  Explanation: There is a 132 pattern in the sequence: [1, 4, 2].
+ 
  Example 3:
 
  Input: [-1, 3, 2, 0]
@@ -94,13 +91,6 @@ func find132pattern(_ nums: [Int]) -> Bool {
  393. UTF-8 Validation
  Medium
 
- 173
-
- 847
-
- Add to List
-
- Share
  A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:
 
  For 1-byte character, the first bit is a 0, followed by its unicode code.
@@ -125,6 +115,7 @@ func find132pattern(_ nums: [Int]) -> Bool {
 
  Return true.
  It is a valid utf-8 encoding for a 2-bytes character followed by a 1-byte character.
+ 
  Example 2:
 
  data = [235, 140, 4], which represented the octet sequence: 11101011 10001100 00000100.
