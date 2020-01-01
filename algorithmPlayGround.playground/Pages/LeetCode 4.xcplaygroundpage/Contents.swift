@@ -1,11 +1,4 @@
-//: [Previous](@previous)
-
 import Foundation
-
-var str = "Hello, playground"
-
-//: [Next](@next)
-
 /*
 
  435. Non-overlapping Intervals
@@ -41,10 +34,17 @@ var str = "Hello, playground"
 
 */
 
+var ex1_435 = [[1,2],[2,3],[3,4],[1,3]]
+var ex2_435 = [[1,2],[1,2],[1,2]]
+var ex3_435 = [[1,2],[2,3]]
+
 func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
-    
+    return 0
 }
 
+eraseOverlapIntervals(ex1_435) // 1
+eraseOverlapIntervals(ex2_435) // 2
+eraseOverlapIntervals(ex3_435) // 0
 
 /*
  
@@ -83,7 +83,7 @@ func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
  */
 
 func find132pattern(_ nums: [Int]) -> Bool {
-    
+    return false
 }
 
 /*
@@ -128,5 +128,5 @@ func find132pattern(_ nums: [Int]) -> Bool {
  */
 
 func validUtf8(_ data: [Int]) -> Bool {
-    
+    return false
 }
