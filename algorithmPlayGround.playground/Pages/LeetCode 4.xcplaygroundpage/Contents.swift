@@ -34,9 +34,9 @@ import Foundation
 
 */
 
-var ex1_435 = [[1,2],[2,3],[3,4],[1,3]]
-var ex2_435 = [[1,2],[1,2],[1,2]]
-var ex3_435 = [[1,2],[2,3]]
+let ex1_435 = [[1,2],[2,3],[3,4],[1,3]]
+let ex2_435 = [[1,2],[1,2],[1,2]]
+let ex3_435 = [[1,2],[2,3]]
 
 func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
     return 0
@@ -82,9 +82,17 @@ eraseOverlapIntervals(ex3_435) // 0
  
  */
 
+let ex1_456 = [1, 2, 3, 4]
+let ex2_456 = [1, 2, 3, 4]
+let ex3_456 = [-1, 3, 2, 0]
+
 func find132pattern(_ nums: [Int]) -> Bool {
     return false
 }
+
+find132pattern(ex1_456) //false
+find132pattern(ex2_456) //true
+find132pattern(ex3_456) //true
 
 /*
  
@@ -127,6 +135,12 @@ func find132pattern(_ nums: [Int]) -> Bool {
  
  */
 
+let ex1_393 = [197, 130, 1] //true
+let ex2_393 = [235, 140, 4] //false
+
 func validUtf8(_ data: [Int]) -> Bool {
     return false
 }
+
+validUtf8(ex1_393) //true
+validUtf8(ex2_393) //false
