@@ -341,7 +341,7 @@ calculator("1 3 + 5 *")
 
 func rerange(_ x: String) -> String {
     guard x.count >= 1 && x.count <= 50 else { return x }
-    guard let scalarA = UnicodeScalar("a")?.value else { return x }
+    let scalarA = UnicodeScalar("a").value
     var alphabets : [Int] = [Int](repeating: 0, count: 26)
     for c in x {
         if let value = UnicodeScalar("\(c)")?.value {
