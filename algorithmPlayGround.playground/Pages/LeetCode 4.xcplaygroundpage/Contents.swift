@@ -39,6 +39,9 @@ let ex2_435 = [[1,2],[1,2],[1,2]]
 let ex3_435 = [[1,2],[2,3]]
 
 func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
+    intervals.map { (array) -> Int in
+        array.
+    }
     return 0
 }
 
