@@ -40,7 +40,8 @@ let ex3_435 = [[1,2],[2,3]]
 
 func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
     intervals.map { (array) -> Int in
-        array.
+        let min = array.min() ?? Int.min
+        let max = array.max() ?? Int.max
     }
     return 0
 }
