@@ -39,15 +39,18 @@ let ex2_435 = [[1,2],[1,2],[1,2]]
 let ex3_435 = [[1,2],[2,3]]
 
 func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
-    var intervalMin = Int.min
-    var intervalMax = Int.min
-    let (min, max) = intervals.map { (array) -> (Int, Int) in
-        let min = array.min() ?? Int.min
-        let max = array.max() ?? Int.max
-        return (min, max)
+    guard intervals.count > 2 else { return 0 }
+    
+    var nonOverlapping = [[Int]]()
+    for interval in intervals {
+        if nonOverlapping.count == 0 {
+            nonOverlapping.append(interval)
+        } else {
+            
+        }
     }
     
-    return 0
+    return intervals.count - nonOverlapping.count
 }
 
 eraseOverlapIntervals(ex1_435) // 1
