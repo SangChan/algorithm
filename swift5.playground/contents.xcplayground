@@ -3,5 +3,6 @@
     <pages>
         <page name='A Swift Tour'/>
         <page name='Language Guide'/>
+        <page name='Playground'/>
     </pages>
 </playground>
