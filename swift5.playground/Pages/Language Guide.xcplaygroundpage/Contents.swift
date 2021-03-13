@@ -330,8 +330,345 @@ print("six times three is \(threeTimesTable[6])")
 // Inheritance
 // Initialization
 // Deinitialization
+// Optional Chaning
+// Error Handling
+// Type Casting
+// Nested Types
+// Extensions
+// Protocols
 
+protocol SomeProtocol {
+    var mustBeSettable: Int { get set }
+    var doesNotNeedToBeSettable: Int { get }
+}
+
+protocol AnotherProtocol {
+    static var someTypeProperty: Int { get set }
+}
+
+protocol FullyNamed {
+    var fullName: String { get }
+}
+
+struct Person: FullyNamed {
+    var fullName: String
+}
+let john = Person(fullName: "John Appleseed")
+
+class Starship: FullyNamed {
+    var prefix: String?
+    var name: String
+    init(name: String, prefix: String? = nil) {
+        self.name = name
+        self.prefix = prefix
+    }
+    var fullName: String {
+        return (prefix != nil ? prefix! + " " : "") + name
+    }
+}
+var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
+
+protocol RandomNumberGenerator {
+    func random() -> Double
+}
+
+class LinearCongruentialGenerator: RandomNumberGenerator {
+    var lastRandom = 42.0
+    let m = 139968.0
+    let a = 3877.0
+    let c = 29573.0
+    func random() -> Double {
+        lastRandom = ((lastRandom * a + c)
+            .truncatingRemainder(dividingBy:m))
+        return lastRandom / m
+    }
+}
+let generator = LinearCongruentialGenerator()
+print("Here's a random number: \(generator.random())")
+// Prints "Here's a random number: 0.3746499199817101"
+print("And another one: \(generator.random())")
+// Prints "And another one: 0.729023776863283"
+
+protocol Togglable {
+    mutating func toggle()
+}
+
+enum OnOffSwitch: Togglable {
+    case off, on
+    mutating func toggle() {
+        switch self {
+        case .off:
+            self = .on
+        case .on:
+            self = .off
+        }
+    }
+}
+var lightSwitch = OnOffSwitch.off
+lightSwitch.toggle()
+
+class Dice {
+    let sides: Int
+    let generator: RandomNumberGenerator
+    init(sides: Int, generator: RandomNumberGenerator) {
+        self.sides = sides
+        self.generator = generator
+    }
+    func roll() -> Int {
+        return Int(generator.random() * Double(sides)) + 1
+    }
+}
+
+protocol DiceGame {
+    var dice: Dice { get }
+    func play()
+}
+protocol DiceGameDelegate: AnyObject {
+    func gameDidStart(_ game: DiceGame)
+    func game(_ game: DiceGame, didStartNewTurnWithDiceRoll diceRoll: Int)
+    func gameDidEnd(_ game: DiceGame)
+}
+
+class SnakesAndLadders: DiceGame {
+    let finalSquare = 25
+    let dice = Dice(sides: 6, generator: LinearCongruentialGenerator())
+    var square = 0
+    var board: [Int]
+    init() {
+        board = Array(repeating: 0, count: finalSquare + 1)
+        board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
+        board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
+    }
+    weak var delegate: DiceGameDelegate?
+    func play() {
+        square = 0
+        delegate?.gameDidStart(self)
+        gameLoop: while square != finalSquare {
+            let diceRoll = dice.roll()
+            delegate?.game(self, didStartNewTurnWithDiceRoll: diceRoll)
+            switch square + diceRoll {
+            case finalSquare:
+                break gameLoop
+            case let newSquare where newSquare > finalSquare:
+                continue gameLoop
+            default:
+                square += diceRoll
+                square += board[square]
+            }
+        }
+        delegate?.gameDidEnd(self)
+    }
+}
+
+class DiceGameTracker: DiceGameDelegate {
+    var numberOfTurns = 0
+    func gameDidStart(_ game: DiceGame) {
+        numberOfTurns = 0
+        if game is SnakesAndLadders {
+            print("Started a new game of Snakes and Ladders")
+        }
+        print("The game is using a \(game.dice.sides)-sided dice")
+    }
+    func game(_ game: DiceGame, didStartNewTurnWithDiceRoll diceRoll: Int) {
+        numberOfTurns += 1
+        print("Rolled a \(diceRoll)")
+    }
+    func gameDidEnd(_ game: DiceGame) {
+        print("The game lasted for \(numberOfTurns) turns")
+    }
+}
+
+let tracker = DiceGameTracker()
+let game = SnakesAndLadders()
+game.delegate = tracker
+game.play()
+
+// Generics
+
+func swapTwoValues<T>(_ a: inout T, _ b: inout T) {
+    let temporaryA = a
+    a = b
+    b = temporaryA
+}
+
+var someInt2 = 3
+var anotherInt2 = 107
+swapTwoValues(&someInt2, &anotherInt2)
+// someInt is now 107, and anotherInt is now 3
+
+var someString2 = "hello"
+var anotherString2 = "world"
+swapTwoValues(&someString2, &anotherString2)
+// someString is now "world", and anotherString is now "hello"
+
+struct Stack<Element> {
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+}
+
+var stackOfStrings = Stack<String>()
+stackOfStrings.push("uno")
+stackOfStrings.push("dos")
+stackOfStrings.push("tres")
+stackOfStrings.push("cuatro")
+// the stack now contains 4 strings
+
+extension Stack {
+    var topItem: Element? {
+        return items.isEmpty ? nil : items[items.count - 1]
+    }
+}
+
+func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
+    for (index, value) in array.enumerated() {
+        if value == valueToFind {
+            return index
+        }
+    }
+    return nil
+}
+
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+
+struct IntStack: Container {
+    // original IntStack implementation
+    var items = [Int]()
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    mutating func pop() -> Int {
+        return items.removeLast()
+    }
+    // conformance to the Container protocol
+    typealias Item = Int
+    mutating func append(_ item: Int) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Int {
+        return items[i]
+    }
+}
+
+// Opaque Types
 // Automatic Reference Counting
+
+class Personn {
+    let name: String
+    init(name: String) {
+        self.name = name
+        print("\(name) is being initialized")
+    }
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+}
+
+//var reference1: Personn?
+//var reference2: Personn?
+//var reference3: Personn?
+//
+//reference1 = Personn(name: "John Appleseed")
+//// Prints "John Appleseed is being initialized"
+//reference2 = reference1
+//reference3 = reference1
+//
+//reference1 = nil
+//reference2 = nil
+//reference3 = nil
+
+class Personnn {
+    let name: String
+    init(name: String) { self.name = name }
+    var apartment: Apartment?
+    deinit { print("\(name) is being deinitialized") }
+}
+
+class Apartment {
+    let unit: String
+    init(unit: String) { self.unit = unit }
+    weak var tenant: Personnn?
+    deinit { print("Apartment \(unit) is being deinitialized") }
+}
+
+var johnn: Personnn?
+var unit4A: Apartment?
+
+johnn = Personnn(name: "John Appleseed 2")
+unit4A = Apartment(unit: "4A")
+
+johnn!.apartment = unit4A
+unit4A!.tenant = johnn
+
+johnn = nil
+unit4A = nil
+
+class Customer {
+    let name: String
+    var card: CreditCard?
+    init(name: String) {
+        self.name = name
+    }
+    deinit { print("\(name) is being deinitialized") }
+}
+
+class CreditCard {
+    let number: UInt64
+    unowned let customer: Customer
+    init(number: UInt64, customer: Customer) {
+        self.number = number
+        self.customer = customer
+    }
+    deinit { print("Card #\(number) is being deinitialized") }
+}
+
+var sam: Customer?
+sam = Customer(name: "Sam Hopstead")
+sam!.card = CreditCard(number: 1234_5678_9012_3456, customer: sam!)
+
+sam = nil
+
+class Department {
+    var name: String
+    var courses: [Course]
+    init(name: String) {
+        self.name = name
+        self.courses = []
+    }
+}
+
+class Course {
+    var name: String
+    unowned var department: Department
+    unowned var nextCourse: Course?
+    init(name: String, in department: Department) {
+        self.name = name
+        self.department = department
+        self.nextCourse = nil
+    }
+}
+
+let department = Department(name: "Horticulture")
+
+let intro = Course(name: "Survey of Plants", in: department)
+let intermediate = Course(name: "Growing Common Herbs", in: department)
+let advanced = Course(name: "Caring for Tropical Plants", in: department)
+
+intro.nextCourse = intermediate
+intermediate.nextCourse = advanced
+department.courses = [intro, intermediate, advanced]
 
 class HTMLElement {
 
@@ -360,3 +697,43 @@ class HTMLElement {
 var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
 print(paragraph!.asHTML())
 paragraph = nil
+
+// Memory Safety
+// Access Control
+
+//public class SomePublicClass {}
+//internal class SomeInternalClass {}
+//fileprivate class SomeFilePrivateClass {}
+//private class SomePrivateClass {}
+//
+//public var somePublicVariable = 0
+//internal let someInternalConstant = 0
+//fileprivate func someFilePrivateFunction() {}
+//private func somePrivateFunction() {}
+
+//class SomeInternalClass {}              // implicitly internal
+//let someInternalConstant = 0            // implicitly internal
+
+public class SomePublicClass {                  // explicitly public class
+    public var somePublicProperty = 0            // explicitly public class member
+    var someInternalProperty = 0                 // implicitly internal class member
+    fileprivate func someFilePrivateMethod() {}  // explicitly file-private class member
+    private func somePrivateMethod() {}          // explicitly private class member
+}
+
+class SomeInternalClass {                       // implicitly internal class
+    var someInternalProperty = 0                 // implicitly internal class member
+    fileprivate func someFilePrivateMethod() {}  // explicitly file-private class member
+    private func somePrivateMethod() {}          // explicitly private class member
+}
+
+fileprivate class SomeFilePrivateClass {        // explicitly file-private class
+    func someFilePrivateMethod() {}              // implicitly file-private class member
+    private func somePrivateMethod() {}          // explicitly private class member
+}
+
+private class SomePrivateClass {                // explicitly private class
+    func somePrivateMethod() {}                  // implicitly private class member
+}
+
+// Advanced Operations
