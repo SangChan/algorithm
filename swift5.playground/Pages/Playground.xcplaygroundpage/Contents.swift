@@ -791,7 +791,6 @@ func magic(_ maps:[[Int]], _ p:Int, _ r:Int) -> Int {
     for i in -r ..< maps.count + r {
         for j in -r ..< maps.count + r {
             let processdKillingCount = process(j, i)
-            print(processdKillingCount)
             if processdKillingCount >= maximum {
                 maximum = processdKillingCount
             }
