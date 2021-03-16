@@ -771,13 +771,17 @@ func magic(_ maps:[[Int]], _ p:Int, _ r:Int) -> Int {
     )
     
     let missileRect = magicMissile.fullRect
+    
+    print(missileRect)
 
     func process(_ x: Int, _ y: Int) -> Int {
         var killingCount = 0
         for i in 0 ..< missileRect.count {
             for j in 0 ..< missileRect.count {
-                if x + j >= 0 && y + i >= 0 && x + j < maps.count && y + i < maps.count {
-                    if maps[y+i][x+j] <= missileRect[j][i] {
+                let mapPositionX = x+j
+                let mapPositionY = y+i
+                if mapPositionX >= 0 && mapPositionY >= 0 && mapPositionX < maps.count && mapPositionY < maps.count {
+                    if maps[mapPositionY][mapPositionX] <= missileRect[j][i] {
                         killingCount += 1
                     }
                 }
@@ -791,6 +795,9 @@ func magic(_ maps:[[Int]], _ p:Int, _ r:Int) -> Int {
     for i in -r ..< maps.count + r {
         for j in -r ..< maps.count + r {
             let processdKillingCount = process(j, i)
+            if processdKillingCount == 11 {
+                print("i = \(i), j = \(j) ")
+            }
             if processdKillingCount >= maximum {
                 maximum = processdKillingCount
             }
@@ -808,3 +815,84 @@ magic([[1, 28, 41, 22, 25, 79, 4], [39, 20, 10, 17, 19, 18, 8], [21, 4, 13, 12, 
 magic([[47, 8, 99, 9, 85, 3, 8], [90, 93, 8, 25, 98, 15, 97], [9, 95, 91, 87, 8, 81, 9], [98, 88, 82, 89, 79, 81, 97], [97, 35, 31, 97, 81, 2, 92], [32, 16, 49, 9, 91, 89, 17], [53, 6, 35, 12, 13, 98, 5]], 78, 6) // 11
 magic([[9, 8, 17, 55, 19, 7], [1, 25, 5, 39, 28, 8], [88, 19, 28, 3, 2, 9], [76, 73, 7, 18, 16, 14], [99, 8, 8, 7, 11, 9], [1, 18, 4, 10, 3, 6]], 16, 4)
 magic([[6, 3, 2, 7, 3], [7, 2, 1, 6, 8], [8, 9, 8, 4, 9], [7, 9, 2, 7, 1], [6, 3, 6, 8, 4]], 5, 2)
+
+struct NewMagicMissile {
+    let power : Int
+    let radius : Int
+    
+    var fullRect : [Int] {
+        var rect : [Int] = [Int].init(repeating: power, count: radius * radius)
+        for i in 0 ..< rect.count {
+            let positionX : Int = i % radius
+            let positionY : Int = i / radius
+            
+            let positionZero = radius / 2
+            let x = (positionX >= positionZero) ? (positionX - positionZero) + 1 : positionX - positionZero
+            let y = (positionY >= positionZero) ? (positionY - positionZero) + 1 : positionY - positionZero
+            let distance = abs(x) + abs(y)
+            if distance >  positionZero + 1 { rect[i] = 0 }
+            else if distance == positionZero + 1 { rect[i] /= 2 }
+            
+        }
+        
+        return rect
+    }
+}
+
+
+func flattenMagic(_ maps:[[Int]], _ p:Int, _ r:Int) -> Int {
+    let magicMissile : NewMagicMissile = .init(power: p, radius: r)
+    let missileBounds : [Int] = magicMissile.fullRect
+    print(missileBounds)
+    
+    let mapLength : Int = maps.count
+    let newMaps = maps.flatMap { $0 }
+    print(newMaps)
+    
+    func process(_ x: Int, _ y: Int) -> Int {
+        var killingCount = 0
+        for i in 0 ..< missileBounds.count {
+            let positionX : Int = i % magicMissile.radius
+            let positionY : Int = i / magicMissile.radius
+            let mapPositionX = x + positionX
+            let mapPositionY = y + positionY
+            let processedPosition = mapPositionX + (mapPositionY * mapLength)
+            
+            if processedPosition >= 0 && processedPosition < newMaps.count {
+                print("mv = \(newMaps[processedPosition]), xv = \(missileBounds[positionX + (positionY * magicMissile.radius)])")
+                
+                if newMaps[processedPosition] <= missileBounds[positionX + (positionY * magicMissile.radius)] {
+                    killingCount += 1
+                }
+            }
+            
+        }
+        return killingCount
+    }
+    
+    var maximum : Int = 0
+    
+//    for i in -(r*r) ..< newMaps.count + (r*r) {
+//        let processdKillingCount = process(i % mapLength, i / mapLength)
+//        if processdKillingCount >= maximum {
+//            maximum = processdKillingCount
+//        }
+//    }
+    
+//    for i in -r ..< maps.count + r {
+//        for j in -r ..< maps.count + r {
+//            let processdKillingCount = process(j, i)
+//            if processdKillingCount >= maximum {
+//                maximum = processdKillingCount
+//            }
+//        }
+//    }
+    maximum = process(1, 0)
+    return maximum
+}
+
+
+flattenMagic([[1, 28, 41, 22, 25, 79, 4], [39, 20, 10, 17, 19, 18, 8], [21, 4, 13, 12, 9, 29, 19], [58, 1, 20, 5, 8, 16, 9], [5, 6, 15, 2, 39, 8, 29],[39, 7, 17, 5, 4, 49, 5], [74, 46, 8, 11, 25, 2, 11]], 19, 6) // 17
+flattenMagic([[47, 8, 99, 9, 85, 3, 8], [90, 93, 8, 25, 98, 15, 97], [9, 95, 91, 87, 8, 81, 9], [98, 88, 82, 89, 79, 81, 97], [97, 35, 31, 97, 81, 2, 92], [32, 16, 49, 9, 91, 89, 17], [53, 6, 35, 12, 13, 98, 5]], 78, 6) // 11
+flattenMagic([[9, 8, 17, 55, 19, 7], [1, 25, 5, 39, 28, 8], [88, 19, 28, 3, 2, 9], [76, 73, 7, 18, 16, 14], [99, 8, 8, 7, 11, 9], [1, 18, 4, 10, 3, 6]], 16, 4)
+flattenMagic([[6, 3, 2, 7, 3], [7, 2, 1, 6, 8], [8, 9, 8, 4, 9], [7, 9, 2, 7, 1], [6, 3, 6, 8, 4]], 5, 2)
