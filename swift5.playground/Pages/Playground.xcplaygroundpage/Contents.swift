@@ -816,6 +816,24 @@ magic([[47, 8, 99, 9, 85, 3, 8], [90, 93, 8, 25, 98, 15, 97], [9, 95, 91, 87, 8,
 magic([[9, 8, 17, 55, 19, 7], [1, 25, 5, 39, 28, 8], [88, 19, 28, 3, 2, 9], [76, 73, 7, 18, 16, 14], [99, 8, 8, 7, 11, 9], [1, 18, 4, 10, 3, 6]], 16, 4)
 magic([[6, 3, 2, 7, 3], [7, 2, 1, 6, 8], [8, 9, 8, 4, 9], [7, 9, 2, 7, 1], [6, 3, 6, 8, 4]], 5, 2)
 
+class MagicLeaf {
+    let x : Int
+    let y : Int
+    let power : Int
+    let next : MagicLeaf?
+    
+    init(x: Int, y: Int, power: Int, next: MagicLeaf? = nil) {
+        self.x = x
+        self.y = y
+        self.power = power
+        self.next = next
+    }
+    
+    func hasNext() -> Bool {
+        return (next != nil)
+    }
+}
+
 struct NewMagicMissile {
     let power : Int
     let radius : Int
