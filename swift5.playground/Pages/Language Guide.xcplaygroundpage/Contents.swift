@@ -737,3 +737,58 @@ private class SomePrivateClass {                // explicitly private class
 }
 
 // Advanced Operations
+protocol Say {
+    var desc : String { get }
+    func say()
+}
+
+
+class A {
+    static let shared : A = A()
+    
+    private init() {
+        
+    }
+    
+    func desc() {
+        print("It's A!!!")
+    }
+}
+
+class B : A, Say {
+    internal var desc : String = "Not A"
+    
+    func say() {
+        print("say = \(desc)")
+    }
+}
+
+A.shared.desc()
+B.shared.desc()
+
+
+class AB {
+    var ab : Int
+    init() {
+        ab = 1
+    }
+    
+    func next() {
+        print("ab = \(ab)")
+    }
+}
+
+class CD : AB {
+    override func next() {
+        print("cd = \(ab)")
+    }
+}
+
+let ab : AB = AB()
+let cd : CD = CD()
+
+if ab === cd {
+    ab.next()
+} else {
+    cd.next()
+}
