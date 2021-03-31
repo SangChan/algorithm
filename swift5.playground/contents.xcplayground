@@ -6,5 +6,6 @@
         <page name='Playground'/>
         <page name='SwiftUI'/>
         <page name='Dispatch Queue'/>
+        <page name='Un Cafe'/>
     </pages>
 </playground>
