@@ -124,7 +124,7 @@ class WeatherData : Subject {
     }
     
     func removeObserver(_ o: Observer) {
-        
+        observers.first { $0 == o }
     }
     
     func notifyObserver() {
@@ -160,3 +160,5 @@ protocol Observer {
 protocol DisplayElement {
     func display()
 }
+
+
