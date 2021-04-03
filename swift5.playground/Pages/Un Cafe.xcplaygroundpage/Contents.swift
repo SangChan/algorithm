@@ -2,6 +2,8 @@
 
 import Foundation
 
+// oop
+
 class Customer {
     func order(menuName: String, menu: Menu, barista: Barista) {
         if let menuItem: MenuItem = menu.choose(name: menuName) {
@@ -62,6 +64,8 @@ customer.order(menuName:"에스프레소", menu: menu, barista: barista)
 customer.order(menuName:"콜드브루", menu: menu, barista: barista)
 customer.order(menuName:"박카스", menu: menu, barista: barista)
 
+// strategy
+
 protocol FlyBehavior {
     func fly()
 }
@@ -115,6 +119,8 @@ let mallardDuck : MallardDuck = MallardDuck()
 mallardDuck.performFly()
 mallardDuck.performQuack()
 
+// Observer
+
 class WeatherData : Subject {
     private var observers : [Observer] = []
     private var weather : Weather?
@@ -124,11 +130,16 @@ class WeatherData : Subject {
     }
     
     func removeObserver(_ o: Observer) {
-        observers.first { $0 == o }
+        if let index = observers.firstIndex(where: { $0.id == o.id }) {
+            observers.remove(at: index)
+        }
     }
     
     func notifyObserver() {
-        
+        guard let w = weather else { return }
+        observers.forEach { (o) in
+            o.update(w)
+        }
     }
     
     func measermentsChanged() {
@@ -154,6 +165,7 @@ protocol Subject {
 }
 
 protocol Observer {
+    var id: String { set get }
     func update(_ w: Weather)
 }
 
@@ -161,4 +173,237 @@ protocol DisplayElement {
     func display()
 }
 
+class CurrentWeatherDisplay : Observer, DisplayElement {
+    private var weather : Weather?
+    private let weatherData : Subject
+    var id: String
+    
+    init(_ weatherData: Subject, id: String) {
+        self.weatherData = weatherData
+        self.id = id
+        weatherData.registerObserver(self)
+    }
+    
+    func update(_ w: Weather) {
+        self.weather = w
+        display()
+    }
+    
+    func display() {
+        guard let weather = weather else { return }
+        print("current weather = \(weather.humidity), \(weather.pressure), \(weather.temp)")
+    }
+    
+    
+}
 
+let wd : WeatherData = WeatherData()
+let currentDisplay : CurrentWeatherDisplay = CurrentWeatherDisplay(wd, id: "test")
+wd.setMeasurements(.init(temp: 30, humidity: 20, pressure: 10))
+wd.setMeasurements(.init(temp: 100, humidity: 100, pressure: 100))
+wd.setMeasurements(.init(temp: 120, humidity: 1, pressure: 100000))
+
+// decorator
+
+protocol Beverage {
+    var description : String { get set }
+    func getDescription() -> String
+    func cost() -> Double
+}
+
+extension Beverage {
+    var description: String { return "이름없는 음료" }
+    
+    func getDescription() -> String {
+        return description
+    }
+    
+    func cost() -> Double {
+        return 0.0
+    }
+}
+
+protocol CondimentDecorator : Beverage {
+    var beverage : Beverage { get }
+}
+
+class Espresso : Beverage {
+    var description: String = "에스프레소"
+    
+    func cost() -> Double {
+        return 1.99
+    }
+}
+
+class HouseBlend : Beverage {
+    var description: String = "하우스 블렌드 커피"
+    
+    func cost() -> Double {
+        return 0.89
+    }
+}
+
+class Mocha: CondimentDecorator {
+    var description: String = "모카 추가"
+    
+    var beverage : Beverage
+    init(_ beverage: Beverage) {
+        self.beverage = beverage
+    }
+    
+    func getDescription() -> String {
+        return "\(beverage.getDescription()) , 모카"
+    }
+    
+    func cost() -> Double {
+        return 0.20 + beverage.cost()
+    }
+}
+
+let beverage : Beverage = Espresso()
+print("\(beverage.getDescription()) = $\(beverage.cost())")
+var beverage2 : Beverage = HouseBlend()
+print("\(beverage2.getDescription()) = $\(beverage2.cost())")
+beverage2 = Mocha(beverage2)
+print("\(beverage2.getDescription()) = $\(beverage2.cost())")
+
+// Factory Method
+
+struct Pizza {
+    let name : String
+}
+
+class SimplePizzaFactory {
+    func create(type: String) -> Pizza {
+        switch type {
+        case "cheese":
+            return Pizza(name: "cheese")
+        case "pepperoni":
+            return Pizza(name: "pepperoni")
+        default:
+            return Pizza(name: "new")
+        }
+    }
+}
+
+class PizzaStore {
+    let factory : SimplePizzaFactory = SimplePizzaFactory()
+    
+    func order(type: String) -> Pizza {
+        let pizza = factory.create(type: type)
+        
+        return pizza
+    }
+}
+
+// Abstract Factory
+
+protocol PizzaIngredientFactory {
+    func createDough()
+    func createSauce()
+    func createCheese()
+    func createVeggies()
+    func createPepperoni()
+    func createClam()
+}
+
+class NYPizzaIngredientFactory : PizzaIngredientFactory {
+    func createDough() {
+        print("ny : create dough")
+    }
+    
+    func createSauce() {
+        print("ny : create sauce")
+    }
+    
+    func createCheese() {
+        print("ny : create cheese")
+    }
+    
+    func createVeggies() {
+        print("ny : create veggies")
+    }
+    
+    func createPepperoni() {
+        print("ny : create pepperoni")
+    }
+    
+    func createClam() {
+        print("ny : create clam")
+    }
+    
+}
+
+class ChicagoPizzaIngredientFactory : PizzaIngredientFactory {
+    func createDough() {
+        print("chicago : create dough")
+    }
+    
+    func createSauce() {
+        print("chicago : create sauce")
+    }
+    
+    func createCheese() {
+        print("chicago : create cheese")
+    }
+    
+    func createVeggies() {
+        print("chicago : create veggies")
+    }
+    
+    func createPepperoni() {
+        print("chicago : create pepperoni")
+    }
+    
+    func createClam() {
+        print("chicago : create clam")
+    }
+}
+
+// Singleton
+
+class Singleton {
+    static let shared : Singleton = Singleton()
+    
+    private var number : Int = 0
+    private init() {}
+    
+    func jingle() {
+        print("\(number)")
+    }
+    
+    func setNumber(_ x : Int) {
+        number = x
+    }
+    
+    func add(_ x : Int) {
+        number += x
+    }
+    
+    func multiple(_ x : Int) {
+        number *= x
+    }
+}
+
+Singleton.shared.add(10)
+Singleton.shared.add(12)
+Singleton.shared.add(1)
+Singleton.shared.multiple(2)
+Singleton.shared.jingle()
+Singleton.shared.setNumber(0)
+Singleton.shared.jingle()
+
+
+DispatchQueue.global(qos: .background).async {
+    for i in 1 ... 100 {
+        Singleton.shared.setNumber(i)
+        Singleton.shared.jingle()
+    }
+}
+
+DispatchQueue.global(qos: .userInteractive).async {
+    for i in 1000 ... 1100 {
+        Singleton.shared.setNumber(i)
+        Singleton.shared.jingle()
+    }
+}
