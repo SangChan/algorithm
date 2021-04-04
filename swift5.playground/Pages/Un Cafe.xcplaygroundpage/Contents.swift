@@ -365,12 +365,10 @@ class ChicagoPizzaIngredientFactory : PizzaIngredientFactory {
 class Singleton {
     static let shared : Singleton = Singleton()
     
-    private var number : Int = 0
-    private init() {}
-    
-    func jingle() {
-        print("\(number)")
+    private var number : Int = 0 {
+        didSet { print(number) }
     }
+    private init() {}
     
     func setNumber(_ x : Int) {
         number = x
@@ -389,21 +387,17 @@ Singleton.shared.add(10)
 Singleton.shared.add(12)
 Singleton.shared.add(1)
 Singleton.shared.multiple(2)
-Singleton.shared.jingle()
 Singleton.shared.setNumber(0)
-Singleton.shared.jingle()
 
 
 DispatchQueue.global(qos: .background).async {
     for i in 1 ... 100 {
         Singleton.shared.setNumber(i)
-        Singleton.shared.jingle()
     }
 }
 
 DispatchQueue.global(qos: .userInteractive).async {
     for i in 1000 ... 1100 {
         Singleton.shared.setNumber(i)
-        Singleton.shared.jingle()
     }
 }
