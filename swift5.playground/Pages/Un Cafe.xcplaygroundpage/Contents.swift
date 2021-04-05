@@ -390,14 +390,63 @@ Singleton.shared.multiple(2)
 Singleton.shared.setNumber(0)
 
 
-DispatchQueue.global(qos: .background).async {
-    for i in 1 ... 100 {
-        Singleton.shared.setNumber(i)
+//DispatchQueue.global(qos: .background).async {
+//    for i in 1 ... 100 {
+//        Singleton.shared.setNumber(i)
+//    }
+//}
+//
+//DispatchQueue.global(qos: .userInteractive).async {
+//    for i in 1000 ... 1100 {
+//        Singleton.shared.setNumber(i)
+//    }
+//}
+
+// Command
+
+struct Light {
+    var isOn : Bool = false
+    
+    mutating func on() {
+        self.isOn = true
+        print("light is on")
     }
 }
 
-DispatchQueue.global(qos: .userInteractive).async {
-    for i in 1000 ... 1100 {
-        Singleton.shared.setNumber(i)
+protocol Command {
+    func execute()
+}
+
+class LightOnCommand : Command {
+    var light : Light
+    
+    init(_ light : Light) {
+        self.light = light
+    }
+    
+    func execute() {
+        light.on()
     }
 }
+
+class SimpleRemoteControl {
+    var slot : Command?
+    
+    func setCommand(_ command : Command) {
+        slot = command
+    }
+    
+    func buttonPressed() {
+        slot?.execute()
+    }
+}
+
+var simpleRemoteControl : SimpleRemoteControl = SimpleRemoteControl()
+var light : Light = Light()
+var lightOn : LightOnCommand = LightOnCommand(light)
+simpleRemoteControl.setCommand(lightOn)
+simpleRemoteControl.buttonPressed()
+
+// Adaptor
+
+
