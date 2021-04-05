@@ -449,4 +449,72 @@ simpleRemoteControl.buttonPressed()
 
 // Adaptor
 
+protocol EnumerationProtocol {
+    associatedtype T
+    func hasMoreElements() -> Bool
+    func nextElement() -> T
+}
 
+class Enumeration<A> : EnumerationProtocol {
+    typealias T = A
+    private var data : Array<T>
+    
+    init(_ data: Array<T>) {
+        self.data = data
+    }
+    func hasMoreElements() -> Bool {
+        return !data.isEmpty
+    }
+    
+    func nextElement() -> T {
+        return data.last!
+    }
+}
+
+protocol IteratorProtocol {
+    associatedtype T
+    func hasNext() -> Bool
+    func next() -> T
+    func remove()
+}
+
+class Iterator<A> : IteratorProtocol {
+    typealias T = A
+    private var data : Array<T>
+    
+    init(_ data: Array<T>) {
+        self.data = data
+    }
+    func hasNext() -> Bool {
+        return !data.isEmpty
+    }
+    func next() -> T {
+        return data.last!
+    }
+    func remove() {
+        data.removeLast()
+    }
+}
+
+
+class EnumerationIterator : Iterator<Int> {
+    var enumeration : Enumeration<Int>?
+    
+    func set(_ enumeration: Enumeration<Int>) {
+        self.enumeration = enumeration
+    }
+    
+    override func hasNext() -> Bool {
+        guard let enumeration = self.enumeration else { return false }
+        return enumeration.hasMoreElements()
+    }
+    
+    override func next() -> Int {
+        guard let enumeration = self.enumeration else { return Int.min }
+        return enumeration.nextElement()
+    }
+    
+    override func remove() {
+        print("error")
+    }
+}
