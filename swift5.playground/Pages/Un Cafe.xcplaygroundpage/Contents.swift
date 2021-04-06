@@ -524,3 +524,104 @@ class EnumerationIterator<A> : IteratorProtocol {
         print("error")
     }
 }
+
+// facade
+
+protocol OnOffCommand {
+    func on()
+    func off()
+}
+
+protocol DimCommand {
+    func dim(_ brightness : Int)
+}
+
+protocol UpDownCommand {
+    func up()
+    func down()
+}
+
+protocol ProjectorCommand {
+    func widescreenMode()
+}
+
+protocol AmpCommand {
+    func plug(_ player: PlayerCommand)
+    func setSurroundSound()
+}
+
+protocol PlayerCommand {
+    func play(_ name: String)
+    func stop()
+    func eject()
+}
+
+protocol PopperCommand {
+    func pop()
+}
+    
+protocol Amplifier : OnOffCommand, AmpCommand {}
+protocol Tuner : OnOffCommand {}
+protocol DVDPlayer : OnOffCommand, PlayerCommand {}
+protocol CDPlayer : OnOffCommand, PlayerCommand {}
+protocol Projector : OnOffCommand, ProjectorCommand{}
+protocol TheaterLights : OnOffCommand, DimCommand{}
+protocol Screen : OnOffCommand, UpDownCommand {}
+protocol PopcornPopper : OnOffCommand, PopperCommand {}
+
+class HomeTheaterFacade {
+    var amp : Amplifier!
+    var tuner : Tuner!
+    var dvd : DVDPlayer!
+    var cd : CDPlayer!
+    var projector : Projector!
+    var lights : TheaterLights!
+    var screen : Screen!
+    var popper : PopcornPopper!
+    
+    init(amp : Amplifier,
+         tuner : Tuner,
+         dvd : DVDPlayer,
+         cd : CDPlayer,
+         projector : Projector,
+         lights : TheaterLights,
+         screen : Screen,
+         popper : PopcornPopper) {
+        self.amp = amp
+        self.tuner = tuner
+        self.dvd = dvd
+        self.cd = cd
+        self.projector = projector
+        self.lights = lights
+        self.screen = screen
+        self.popper
+    }
+    
+    func watch(movie: String) {
+        print("start to watch \(movie)")
+        amp.on()
+        amp.plug(dvd)
+        tuner.on()
+        dvd.on()
+        cd.on()
+        projector.on()
+        lights.on()
+        screen.on()
+        popper.on()
+        dvd.play(movie)
+    }
+    
+    func endMovie() {
+        print("shutting down all systems")
+        amp.off()
+        tuner.off()
+        dvd.stop()
+        dvd.eject()
+        dvd.off()
+        cd.off()
+        projector.off()
+        lights.off()
+        screen.off()
+        popper.off()
+    }
+}
