@@ -625,3 +625,55 @@ class HomeTheaterFacade {
         popper.off()
     }
 }
+
+// template method
+
+protocol CaffeinBevarage {
+    func prepareRecipe()
+    func brew()
+    func addCondiments()
+    func boilWater()
+    func pourInCup()
+}
+
+extension CaffeinBevarage {
+    func prepareRecipe() {
+        boilWater()
+        brew()
+        pourInCup()
+        addCondiments()
+    }
+    
+    func boilWater() {
+        print("물 끓이는 중")
+    }
+    func pourInCup() {
+        print("컵에 따르는 중")
+    }
+}
+
+class CoffeeV2 : CaffeinBevarage {
+    func brew() {
+        print("필터를 통해서 커피를 우려내는 중")
+    }
+
+    func addCondiments() {
+        print("설탕과 우유를 추가하는 중")
+    }
+}
+
+class Tea : CaffeinBevarage {
+    func brew() {
+        print("차를 우려내는 중")
+    }
+    
+    func addCondiments() {
+        print("레몬을 추가하는 중")
+    }
+}
+
+let cafe : CoffeeV2 = CoffeeV2()
+cafe.prepareRecipe()
+
+let tea : Tea = Tea()
+tea.prepareRecipe()
