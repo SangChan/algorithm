@@ -634,6 +634,7 @@ protocol CaffeinBevarage {
     func addCondiments()
     func boilWater()
     func pourInCup()
+    func customerWantsCondiments() -> Bool
 }
 
 extension CaffeinBevarage {
@@ -641,7 +642,9 @@ extension CaffeinBevarage {
         boilWater()
         brew()
         pourInCup()
-        addCondiments()
+        if customerWantsCondiments() {
+            addCondiments()
+        }
     }
     
     func boilWater() {
@@ -650,15 +653,32 @@ extension CaffeinBevarage {
     func pourInCup() {
         print("컵에 따르는 중")
     }
+    func customerWantsCondiments() -> Bool {
+        return true
+    }
 }
 
-class CoffeeV2 : CaffeinBevarage {
+class CoffeeWithHook : CaffeinBevarage {
     func brew() {
         print("필터를 통해서 커피를 우려내는 중")
     }
 
     func addCondiments() {
         print("설탕과 우유를 추가하는 중")
+    }
+    
+    func customerWantsCondiments() -> Bool {
+        let answer : String = getUserInput()
+        
+        if answer.lowercased().hasPrefix("y") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getUserInput() -> String {
+        return "y"
     }
 }
 
@@ -672,7 +692,7 @@ class Tea : CaffeinBevarage {
     }
 }
 
-let cafe : CoffeeV2 = CoffeeV2()
+let cafe : CoffeeWithHook = CoffeeWithHook()
 cafe.prepareRecipe()
 
 let tea : Tea = Tea()
