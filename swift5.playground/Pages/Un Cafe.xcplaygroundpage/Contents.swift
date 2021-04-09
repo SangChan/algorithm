@@ -697,3 +697,68 @@ cafe.prepareRecipe()
 
 let tea : Tea = Tea()
 tea.prepareRecipe()
+
+// Iterator
+
+struct FoodMenuItem : Component {
+    typealias T = Self
+    
+    let name : String
+    let description : String
+    let vegetarian : Bool
+    let price : Double
+}
+
+class DinerMenuIterator<FoodMenuItem> : IteratorProtocol {
+    typealias T = FoodMenuItem
+    private var position : Int = 0
+    var items : [FoodMenuItem] = []
+    
+    init(_ items: [FoodMenuItem]) {
+        self.items = items
+    }
+    
+    func hasNext() -> Bool {
+        if position >= items.count {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func next() -> FoodMenuItem {
+        let item = items[position]
+        position += 1
+        return item
+    }
+    
+    func remove() {
+        print("no remove")
+    }
+    
+
+}
+
+// Composite
+
+protocol Leaf {
+    func operation()
+}
+
+protocol Composite {
+    associatedtype T
+    func add(_ t: T)
+    func remove(_ t: T)
+    func getChild(_ i: Int)
+    func operation()
+}
+
+protocol Component : Leaf, Composite {
+}
+
+extension Component {
+    func add(_ t: T) { }
+    func remove(_ t: T) { }
+    func getChild(_ i: Int) { }
+    func operation() { }
+}
