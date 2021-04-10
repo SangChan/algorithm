@@ -753,12 +753,95 @@ protocol Composite {
     func operation()
 }
 
-protocol Component : Leaf, Composite {
-}
+protocol Component : Leaf, Composite {}
 
 extension Component {
     func add(_ t: T) { }
     func remove(_ t: T) { }
     func getChild(_ i: Int) { }
     func operation() { }
+}
+
+// State
+
+enum Coin : Int {
+    case SOLD_OUT = 0
+    case NO_QUARTER = 1
+    case HAS_QUATER = 2
+    case SOLD = 3
+}
+
+class GumballMachine {
+    var state : Coin = .SOLD_OUT
+    var count : Int = 0
+    
+    init(_ count : Int) {
+        self.count = count
+        if count > 0 {
+            state = .NO_QUARTER
+        }
+    }
+    
+    func insertQuarter() {
+        switch state {
+        case .HAS_QUATER:
+            print("동전은 한개만 넣어주세요")
+        case .NO_QUARTER:
+            state = .HAS_QUATER
+            print("동전을 넣으셨습니다.")
+        case .SOLD_OUT:
+            print("매진되었습니다. 다음 기회에 이용해주세요")
+        case .SOLD:
+            print("잠깐만 기다려 주세요. 알맹이가 나가고 있습니다.")
+        }
+    }
+    
+    func ejectQuarter() {
+        switch state {
+        case .HAS_QUATER:
+            print("동전이 반환됩니다.")
+            state = .NO_QUARTER
+        case .NO_QUARTER:
+            print("동전을 넣어주세요")
+        case .SOLD_OUT:
+            print("이미 알맹이를 뽑으셨습니다.")
+        case .SOLD:
+            print("동전을 넣지 않으셨습니다. 동전이 반환되지 않습니다.")
+        }
+    }
+    
+    func turnCrank() {
+        switch state {
+        case .NO_QUARTER:
+            print("동전을 넣어주세요")
+        case .HAS_QUATER:
+            print("손잡이를 돌리셨습니다.")
+            state = .SOLD
+            dispense()
+        case .SOLD_OUT:
+            print("매진되었습니다.")
+        case .SOLD:
+            print("손잡이는 한번만 돌려주세요.")
+        }
+    }
+    
+    func dispense() {
+        switch state {
+        case .HAS_QUATER:
+            print("알맹이가 나갈 수 없습니다.")
+        case .NO_QUARTER:
+            print("동전을 넣어주세요.")
+        case .SOLD_OUT:
+            print("매진입니다")
+        case .SOLD:
+            print("알맹이가 나가고 있습니다.")
+            count -= 1
+            if count == 0 {
+                print("더이상 알맹이가 없습니다.")
+                state = .SOLD_OUT
+            } else {
+                state = .NO_QUARTER
+            }
+        }
+    }
 }
