@@ -769,6 +769,7 @@ enum Coin : Int {
     case NO_QUARTER = 1
     case HAS_QUATER = 2
     case SOLD = 3
+    case WINNER = 4
 }
 
 class GumballMachine : CustomStringConvertible {
@@ -780,6 +781,7 @@ class GumballMachine : CustomStringConvertible {
     var noQuarterState : MachineState!
     var hasQuarterState : MachineState!
     var soldState : MachineState!
+    var winnerState : MachineState!
     
     lazy var state : MachineState = soldOutState
     var count : Int = 0
@@ -789,6 +791,7 @@ class GumballMachine : CustomStringConvertible {
         self.hasQuarterState = HasQuarterState(gumballMachine: self)
         self.soldState = SoldState(gumballMachine: self)
         self.soldOutState = SoldOutState(gumballMachine: self)
+        self.winnerState = WinnerState(gumballMachine: self)
         self.count = count
         if count > 0 {
             state = noQuarterState
@@ -825,6 +828,7 @@ class GumballMachine : CustomStringConvertible {
         case .SOLD: return soldState
         case .HAS_QUATER: return hasQuarterState
         case .NO_QUARTER: return noQuarterState
+        case .WINNER: return winnerState
         }
     }
 }
@@ -910,7 +914,12 @@ class HasQuarterState : MachineState {
     
     func turnCrank() {
         print("손잡이를 돌리셨습니다.")
-        gumballMachine.setState(gumballMachine.getState(.SOLD))
+        let winner : Int = Int.random(in: 0 ..< 10)
+        if winner == 0 && gumballMachine.count > 1 {
+            gumballMachine.setState(gumballMachine.getState(.WINNER))
+        } else {
+            gumballMachine.setState(gumballMachine.getState(.SOLD))
+        }
     }
     
     func dispense() {
@@ -973,3 +982,41 @@ class SoldOutState : MachineState {
         print("매진입니다")
     }
 }
+
+class WinnerState : MachineState {
+    let state : Coin = .WINNER
+    var gumballMachine : GumballMachine!
+    
+    init(gumballMachine : GumballMachine) {
+        self.gumballMachine = gumballMachine
+    }
+    
+    func insertQuarter() {
+        print("잠깐만 기다려 주세요. 알맹이가 나가고 있습니다.")
+    }
+    
+    func ejectQuarter() {
+        print("동전을 넣지 않으셨습니다. 동전이 반환되지 않습니다.")
+    }
+    
+    func turnCrank() {
+        print("손잡이는 한번만 돌려주세요.")
+    }
+    
+    func dispense() {
+        print("축하드립니다! 알맹이를 하나 더 받으실 수 있습니다.")
+        gumballMachine.releaseBall()
+        if gumballMachine.count == 0 {
+            gumballMachine.setState(gumballMachine.getState(.SOLD_OUT))
+        } else {
+            gumballMachine.releaseBall()
+            if gumballMachine.count > 0 {
+                gumballMachine.setState(gumballMachine.getState(.NO_QUARTER))
+            } else {
+                print("더 이상 알맹이가 없습니다")
+                gumballMachine.setState(gumballMachine.getState(.SOLD_OUT))
+            }
+        }
+    }
+}
+
