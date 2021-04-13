@@ -1020,3 +1020,22 @@ class WinnerState : MachineState {
     }
 }
 
+// Proxy
+
+protocol Remote {}
+
+protocol MyRemote : Remote {
+    func sayHello() throws -> String
+}
+
+class MyRemoteImpl : MyRemote {
+    func sayHello() throws -> String {
+        return "Server says, \"hey\""
+    }
+}
+
+protocol Icon {
+    func getIconWidth() -> Int
+    func getIconHeight() -> Int
+    func paintIcon()
+}
