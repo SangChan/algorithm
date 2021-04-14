@@ -1039,3 +1039,42 @@ protocol Icon {
     func getIconHeight() -> Int
     func paintIcon()
 }
+
+struct ImageIcon : Icon {
+    func getIconWidth() -> Int {
+        return 800
+    }
+    
+    func getIconHeight() -> Int {
+        return 600
+    }
+    
+    func paintIcon() {
+        print("draw")
+    }
+}
+
+class ImageProxy : Icon {
+    let imageIcon : ImageIcon = ImageIcon()
+    var url : URL!
+    
+    init(_ url : URL) {
+        self.url = url
+    }
+    
+    func getIconWidth() -> Int {
+        return imageIcon.getIconWidth()
+    }
+    
+    func getIconHeight() -> Int {
+        return imageIcon.getIconHeight()
+    }
+    
+    func paintIcon() {
+        imageIcon.paintIcon()
+    }
+}
+
+// Compound
+
+
