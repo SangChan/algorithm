@@ -7,5 +7,6 @@
         <page name='SwiftUI'/>
         <page name='Dispatch Queue'/>
         <page name='Un Cafe'/>
+        <page name='Compound Pattern'/>
     </pages>
 </playground>
