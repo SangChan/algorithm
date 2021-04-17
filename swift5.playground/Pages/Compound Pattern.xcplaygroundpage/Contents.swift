@@ -59,20 +59,52 @@ class QuackDuck : Quackable {
 }
 
 class RedheadDuck : Quackable {
+    lazy var observable : Observable = Observable(self)
+    
     func quack() {
         print("Quack")
+        notifyObservers()
+    }
+    
+    func register(observer: Observer) {
+        observable.register(observer: observer)
+    }
+    
+    func notifyObservers() {
+        observable.notifyObservers()
     }
 }
 
 class DuckCall : Quackable {
+    lazy var observable : Observable = Observable(self)
     func quack() {
         print("Kwak")
+        notifyObservers()
+    }
+    
+    func register(observer: Observer) {
+        observable.register(observer: observer)
+    }
+    
+    func notifyObservers() {
+        observable.notifyObservers()
     }
 }
 
 class RubberDuck : Quackable {
+    lazy var observable : Observable = Observable(self)
+    
     func quack() {
         print("Squeak")
+        notifyObservers()
+    }
+    
+    func register(observer: Observer) {
+        observable.register(observer: observer)
+    }
+    
+    func notifyObservers() {
+        observable.notifyObservers()
     }
 }
 
@@ -83,6 +115,7 @@ class Goose {
 }
 
 class GooseAdapter : Quackable {
+    lazy var observable : Observable = Observable(self)
     let goose : Goose!
     init(_ goose: Goose) {
         self.goose = goose
@@ -90,6 +123,15 @@ class GooseAdapter : Quackable {
     
     func quack() {
         goose.honk()
+        notifyObservers()
+    }
+    
+    func register(observer: Observer) {
+        observable.register(observer: observer)
+    }
+    
+    func notifyObservers() {
+        observable.notifyObservers()
     }
 }
 
@@ -108,6 +150,14 @@ class QuackCounter : Quackable {
     
     static func getQuacks() -> Int {
         return Self.numberOfQuacks
+    }
+    
+    func register(observer: Observer) {
+        duck.register(observer: observer)
+    }
+    
+    func notifyObservers() {
+        duck.notifyObservers()
     }
 }
 
@@ -149,6 +199,8 @@ class CountingDuckFactory: AbstractDuckFactory {
 }
 
 class Flock : Quackable {
+    func notifyObservers() { }
+    
     private var quackers : [Quackable] = []
     
     func add(_ quacker : Quackable) {
@@ -158,6 +210,12 @@ class Flock : Quackable {
     func quack() {
         quackers.forEach { (quacker) in
             quacker.quack()
+        }
+    }
+    
+    func register(observer: Observer) {
+        quackers.forEach { (quacker) in
+            quacker.register(observer: observer)
         }
     }
 }
@@ -193,6 +251,10 @@ class DuckSimulator {
         flockOfQuacks.add(quackFour)
         
         flockOfDucks.add(flockOfQuacks)
+        
+        print("Duck Simulator: With Observer")
+        let quackologist : Quackologist = Quackologist()
+        flockOfDucks.register(observer: quackologist)
         
         print("Duck Simulator : Whole Flock Simulation")
         simulate(flockOfDucks)
