@@ -272,3 +272,78 @@ class DuckSimulator {
 
 DuckSimulator.main()
 
+// MVC
+
+protocol BeatObserver {}
+protocol BPMObserver {}
+
+protocol BeatModelInterface {
+    func initialize()
+    func on()
+    func off()
+    func setBPM(bpm: Int)
+    func getBPM() -> Int
+    func register(beatObserver: BeatObserver)
+    func remove(beatObserver: BeatObserver)
+    func register(bpmObserver: BPMObserver)
+    func remove(bpmObserver: BPMObserver)
+}
+
+protocol Sequencer {
+    func start()
+    func stop()
+    func setTempoInBPM(_ bpm: Int)
+}
+
+
+
+class BeatModel : BeatModelInterface {
+    var bpm : Int = 90
+    let sequencer : Sequencer! = nil
+    var beatObservers : [BeatObserver] = []
+    var bpmObservers : [BPMObserver] = []
+    
+    func initialize() {
+        
+    }
+    
+    func on() {
+        sequencer.start()
+        setBPM(bpm: 90)
+    }
+    
+    func off() {
+        setBPM(bpm: 0)
+        sequencer.stop()
+    }
+    
+    func setBPM(bpm: Int) {
+        self.bpm = bpm
+        sequencer.setTempoInBPM(self.getBPM())
+        
+    }
+    
+    func getBPM() -> Int {
+        return bpm
+    }
+    
+    func beatEvent() {
+        
+    }
+    
+    func register(beatObserver: BeatObserver) {
+        <#code#>
+    }
+    
+    func remove(beatObserver: BeatObserver) {
+        <#code#>
+    }
+    
+    func register(bpmObserver: BPMObserver) {
+        <#code#>
+    }
+    
+    func remove(bpmObserver: BPMObserver) {
+        <#code#>
+    }
+}
