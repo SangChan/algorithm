@@ -274,8 +274,12 @@ DuckSimulator.main()
 
 // MVC
 
-protocol BeatObserver {}
-protocol BPMObserver {}
+protocol BeatObserver {
+    func updateBeat()
+}
+protocol BPMObserver {
+    func updateBPM()
+}
 
 protocol BeatModelInterface {
     func initialize()
@@ -320,7 +324,7 @@ class BeatModel : BeatModelInterface {
     func setBPM(bpm: Int) {
         self.bpm = bpm
         sequencer.setTempoInBPM(self.getBPM())
-        
+        notifyBPMObervers()
     }
     
     func getBPM() -> Int {
@@ -328,22 +332,144 @@ class BeatModel : BeatModelInterface {
     }
     
     func beatEvent() {
-        
+        notifyBeatObervers()
     }
     
     func register(beatObserver: BeatObserver) {
-        <#code#>
+        beatObservers.append(beatObserver)
     }
     
     func remove(beatObserver: BeatObserver) {
-        <#code#>
+        beatObservers.popLast()
     }
     
     func register(bpmObserver: BPMObserver) {
-        <#code#>
+        bpmObservers.append(bpmObserver)
     }
     
     func remove(bpmObserver: BPMObserver) {
-        <#code#>
+        bpmObservers.popLast()
+    }
+    
+    func notifyBPMObervers() {
+        bpmObservers.forEach { (o) in
+            o.updateBPM()
+        }
+    }
+    
+    func notifyBeatObervers() {
+        beatObservers.forEach { (o) in
+            o.updateBeat()
+        }
     }
 }
+
+protocol ControllerInterface {
+    func start()
+    func stop()
+    func increaseBPM()
+    func decreaseBPM()
+    func setBPM(_ bpm: Int)
+}
+
+protocol ActionEvent {
+    func getSource() -> String
+}
+
+protocol ActionListener {
+    func actionPerformed(_ event: ActionEvent)
+}
+
+class DJView : ActionListener, BeatObserver, BPMObserver {
+    
+    var model : BeatModelInterface!
+    var controller : ControllerInterface!
+    
+    init(controller : ControllerInterface, model : BeatModelInterface) {
+        self.controller = controller
+        self.model = model
+        model.register(bpmObserver: self)
+        model.register(beatObserver: self)
+    }
+    
+    func createView() {
+        
+    }
+    
+    func createControls() {
+        
+    }
+    
+    func enableStopMenuItem() {
+        
+    }
+    
+    func disableStopMenuItem() {
+        
+    }
+    
+    func enableStartMenuItem() {
+        
+    }
+    
+    func disableStartMenuItem() {
+        
+    }
+    
+    func updateBPM() {
+        print(model.getBPM())
+    }
+    
+    func updateBeat() {
+        
+    }
+    
+    func actionPerformed(_ event: ActionEvent) {
+        print(event.getSource())
+    }
+    
+}
+
+class BeatController: ControllerInterface {
+    let model : BeatModelInterface!
+    var view : DJView!
+    
+    init(model : BeatModelInterface) {
+        self.model = model
+        self.view = DJView(controller: self, model: model)
+        view.createView()
+        view.createControls()
+        view.disableStopMenuItem()
+        view.enableStartMenuItem()
+        model.initialize()
+    }
+    
+    func start() {
+        model.on()
+        view.disableStartMenuItem()
+        view.enableStopMenuItem()
+    }
+    
+    func stop() {
+        model.off()
+        view.disableStopMenuItem()
+        view.enableStartMenuItem()
+    }
+    
+    func increaseBPM() {
+        model.setBPM(bpm: model.getBPM() + 1)
+    }
+    
+    func decreaseBPM() {
+        model.setBPM(bpm: model.getBPM() - 1)
+    }
+    
+    func setBPM(_ bpm: Int) {
+        model.setBPM(bpm: bpm)
+    }
+    
+    
+}
+
+let model : BeatModelInterface = BeatModel()
+let controller : ControllerInterface = BeatController(model: model)
