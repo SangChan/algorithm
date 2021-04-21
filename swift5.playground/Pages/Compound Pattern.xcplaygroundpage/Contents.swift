@@ -473,3 +473,66 @@ class BeatController: ControllerInterface {
 
 let model : BeatModelInterface = BeatModel()
 let controller : ControllerInterface = BeatController(model: model)
+
+// Bridge
+
+protocol Implementor {
+    func on()
+    func off()
+    func tuneChannel()
+}
+
+protocol RemoteControl {
+    var implementor : Implementor { get }
+    func on()
+    func off()
+    func setChannel()
+}
+
+extension RemoteControl {
+    func on() {
+        implementor.on()
+    }
+    
+    func off() {
+        implementor.off()
+    }
+    
+    func setChannel() {
+        implementor.tuneChannel()
+    }
+}
+
+class ConcreteRemote : RemoteControl {
+    var implementor: Implementor
+    
+    init(_ implementor: Implementor) {
+        self.implementor = implementor
+    }
+}
+
+protocol TV : Implementor {
+    func on()
+    func off()
+    func tuneChannel()
+}
+
+class RCA : TV {
+    func on() {
+        print("on")
+    }
+    
+    func off() {
+        print("off")
+    }
+    
+    func tuneChannel() {
+        print("tune channel")
+    }
+    
+}
+let rcatv : RCA = RCA()
+let remocon : ConcreteRemote = ConcreteRemote(rcatv)
+remocon.on()
+remocon.off()
+remocon.setChannel()
