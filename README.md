@@ -1,4 +1,4 @@
-# Algorithm
+# into c folders
 - [x] linear queue
 - [x] circular queue
 - [x] linked list
@@ -16,11 +16,7 @@
 - [x] check alphametic
 - [x] self descriptive
 
-# Issues
-
-see also.. [#1](/../../issues/1)
-
 # SWIFT PLAYGROUND
 
-- Leetcode
-- 
+- algorithmPlaygroud : Leetcode and etc..
+- swift5 : start from swift 5 and patterns
