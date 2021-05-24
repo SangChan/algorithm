@@ -4,6 +4,7 @@
 - swift5 : start from swift 5 and patterns
 
 # into c folders
+
 - linear queue
 - circular queue
 - linked list
