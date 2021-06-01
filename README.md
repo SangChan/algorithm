@@ -1,7 +1,13 @@
 # SWIFT PLAYGROUND
 
-- algorithmPlaygroud : Leetcode and etc..
-- swift5 : start from swift 5 and patterns
+## algorithmPlaygroud
+
+- Leetcode and etc..
+
+## swift5 
+
+- start from swift 5 
+- patterns
 
 # into c folders
 
