@@ -2,7 +2,9 @@
 
 ## algorithmPlaygroud
 
-- Leetcode and etc..
+- leetcode
+- several coding tests
+- etc..
 
 ## swift5 
 
