@@ -1,17 +1,21 @@
-# SWIFT PLAYGROUND
+# Algorithm
 
-## algorithmPlaygroud
+algorithm playground
+
+## SWIFT PLAYGROUND
+
+### algorithmPlaygroud
 
 - leetcode
 - several coding tests
 - etc..
 
-## swift5 
+### swift5 
 
 - start from swift 5 
 - patterns
 
-# into c folders
+## into c folders
 
 - linear queue
 - circular queue
