@@ -20,5 +20,6 @@
         <page name='LeetCode 3'/>
         <page name='LeetCode 4'/>
         <page name='Swift5'/>
+        <page name='LeetCode 5'/>
     </pages>
 </playground>
