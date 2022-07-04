@@ -15,6 +15,8 @@ algorithm playground
 - start from swift 5 
 - patterns
 
+## into python folders
+
 ## into c folders
 
 - linear queue
