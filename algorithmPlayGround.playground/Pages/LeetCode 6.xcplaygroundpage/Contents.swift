@@ -103,51 +103,35 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
  */
 
 let romanTable : [Int: String] = [
-    1 : "I",
-    5 : "V",
-    10 : "X",
-    50 : "L",
-    100 : "C",
-    500 : "D",
     1000 : "M",
+    900 : "CM",
+    500 : "D",
+    400 : "CD",
+    100 : "C",
+    90 : "XC",
+    50 : "L",
+    40 : "XL",
+    10 : "X",
+    9 : "IX",
+    5 : "V",
+    4 : "IV",
+    1 : "I",
 ]
 
 func intToRoman(_ num: Int) -> String {
     guard num > 0 && num < 4000 else { return "" }
     
-    func processWith(_ input: Int, roman: String, num: Int) -> (Int, String) {
-        guard
-            input > 0,
-            Int(input / num) > 0
-        else {
-            if num > 1 && input == num - 1 {
-                let prevString : String = "I"+roman
-                return (input, prevString)
-            }
-            return (0, "")
-        }
-        var count : Int = Int(input / num)
-        
-        var resultOutput : Int = 0
-        var resultRoman : String  = ""
-        
-        resultOutput = (count * num)
-        for _ in 0 ..< count {
-            resultRoman.append(roman)
-        }
-        
-        return (resultOutput, resultRoman)
-    }
-    
     var roman : String = ""
-    var cNum = num
-    var (processedNum, newRoman) : (Int, String) = (0, "")
+    var inputNum : Int = num
+    let keys : [Int] = romanTable.keys.sorted{ $0 > $1 }
     
-    romanTable.keys.sorted{ $0 > $1 }.forEach { key in
-        if let romanValue = romanTable[key] {
-            (processedNum, newRoman) = processWith(cNum, roman: romanValue, num: key)
-            cNum -= processedNum
-            roman.append(newRoman)
+    while inputNum != 0 {
+        for key in keys {
+            if inputNum >= key, let value = romanTable[key] {
+                inputNum -= key
+                roman += value
+                break
+            }
         }
     }
     
@@ -164,5 +148,7 @@ intToRoman(7)
 intToRoman(8)
 intToRoman(9)
 intToRoman(10)
+intToRoman(20)
+intToRoman(42)
 intToRoman(58)
 intToRoman(1994)
