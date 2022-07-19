@@ -152,3 +152,133 @@ intToRoman(20)
 intToRoman(42)
 intToRoman(58)
 intToRoman(1994)
+
+/*
+ Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+
+ Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+ - 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+
+ Example
+
+
+ Return '12:01:00'.
+
+
+ Return '00:01:00'.
+
+ Function Description
+
+ Complete the timeConversion function in the editor below. It should return a new string representing the input time in 24 hour format.
+
+ timeConversion has the following parameter(s):
+
+ string s: a time in  hour format
+ Returns
+
+ string: the time in  hour format
+ Input Format
+
+ A single string  that represents a time in -hour clock format (i.e.:  or ).
+
+ Constraints
+
+ All input times are valid
+ Sample Input
+
+ 07:05:45PM
+ Sample Output
+
+ 19:05:45
+ */
+func timeConversion(s: String) -> String {
+    // Write your code here
+    let isAM = s.hasSuffix("AM")
+    let processedTime = s[...s.index(s.startIndex, offsetBy: 7)]
+    let times = processedTime.split(separator: ":")
+    let hh : String = {
+        var intHH = Int(times[0]) ?? 0
+        if isAM == true {
+            if intHH == 12 {
+                intHH = 0
+            }
+        }
+        else {
+            if intHH < 12 {
+                intHH += 12
+            }
+        }
+        return String(format: "%02d", intHH)
+    }()
+    let mm = times[1]
+    let ss = times[2]
+    return "\(hh):\(mm):\(ss)"
+}
+
+timeConversion(s: "07:05:45PM")
+timeConversion(s: "12:00:01AM")
+
+/*
+ 15. 3Sum
+ 
+ Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+ Notice that the solution set must not contain duplicate triplets.
+
+  
+
+ Example 1:
+
+ Input: nums = [-1,0,1,2,-1,-4]
+ Output: [[-1,-1,2],[-1,0,1]]
+ Explanation:
+ nums[0] + nums[1] + nums[1] = (-1) + 0 + 1 = 0.
+ nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+ The distinct triplets are [-1,0,1] and [-1,-1,2].
+ Notice that the order of the output and the order of the triplets does not matter.
+ Example 2:
+
+ Input: nums = [0,1,1]
+ Output: []
+ Explanation: The only possible triplet does not sum up to 0.
+ Example 3:
+
+ Input: nums = [0,0,0]
+ Output: [[0,0,0]]
+ Explanation: The only possible triplet sums up to 0.
+  
+
+ Constraints:
+
+ 3 <= nums.length <= 3000
+ -105 <= nums[i] <= 105
+ 
+ */
+func threeSum(_ nums: [Int]) -> [[Int]] {
+    let sortedNums : [Int] = nums.sorted { $0 < $1 }
+    var resultSet : Set<[Int]> = []
+    for index in 0 ..< sortedNums.count {
+        var leftIndex : Int = index + 1
+        var rightIndex : Int = sortedNums.count - 1
+        while leftIndex < rightIndex {
+            if sortedNums[index] + sortedNums[leftIndex] + sortedNums[rightIndex] < 0 {
+                leftIndex += 1
+            } else if sortedNums[index] + sortedNums[leftIndex] + sortedNums[rightIndex] == 0 {
+                resultSet.insert([sortedNums[index], sortedNums[leftIndex], sortedNums[rightIndex]])
+                leftIndex += 1
+                rightIndex -= 1
+            } else {
+                rightIndex -= 1
+            }
+        }
+    }
+    
+    return resultSet.map { nums in
+        return nums
+    }
+}
+
+threeSum([-1,0,1,2,-1,-4])
+threeSum([0,1,1])
+threeSum([0,0,0])
