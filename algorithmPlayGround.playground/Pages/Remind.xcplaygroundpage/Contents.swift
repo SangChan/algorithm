@@ -220,9 +220,101 @@ queue.remove()
 
 // Binary Search
 
+let sorted : [Int] = [5,10,14,25,27,32,39,45,52,60]
+
+func binarySearchIteration(_ key: Int, low: Int, high: Int) -> Int {
+    var low : Int = low
+    var high : Int = high
+    while low <= high {
+        let mid: Int = low + ((high - low)/2)
+        if sorted[mid] == key {
+            return mid
+        } else if sorted[mid] > key {
+            high = mid - 1
+        } else {
+            low = mid + 1
+        }
+     }
+    return -1
+}
+
+func binarySearchRecursion(_ key: Int, low: Int, high: Int) -> Int {
+    guard low <= high else { return -1 }
+    let mid : Int = low + ((high - low)/2)
+    
+    if sorted[mid] == key {
+        return mid
+    } else if sorted[mid] > key {
+        return binarySearchRecursion(key, low: low, high: mid - 1)
+    } else {
+        return binarySearchRecursion(key, low: mid + 1, high: high)
+    }
+}
+
+binarySearchIteration(32, low: 0, high: sorted.count - 1)
+binarySearchRecursion(32, low: 0, high: sorted.count - 1)
+
 // Bubble Sort
 
+func swap(with arr : inout [Int], i : Int, j : Int) {
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+}
+
+var bubbleArr : [Int] = [7,4,5,1,3]
+
+func bubbleSort(with arr : inout [Int]) {
+    
+    for i in 0 ..< arr.count {
+        for j in 0 ..< arr.count - i - 1 {
+            if arr[j] > arr[j+1] {
+                swap(with: &arr, i: j, j: j+1)
+            }
+        }
+    }
+}
+
+bubbleSort(with: &bubbleArr)
+
 // Quick Sort
+
+var quickArr : [Int] = [5,3,8,4,9,1,6,2,7]
+
+func partition(with arr : inout [Int], left: Int, right : Int) -> Int {
+    var low : Int = left
+    var high : Int = right + 1
+    let pivot = arr[left]
+    
+    repeat {
+        repeat {
+            low += 1
+        } while (low <= right && arr[low] < pivot)
+        
+        repeat {
+            high -= 1
+        }while (high>=left && arr[high] > pivot)
+        
+        if low < high {
+            swap(with: &arr, i: low, j: high)
+        }
+    } while (low < high)
+    
+    swap(with: &arr, i: left, j: high)
+    
+    return high
+}
+
+func quickSort(with arr : inout [Int], left : Int, right : Int) {
+    if left < right {
+        let q = partition(with: &arr, left: left, right: right)
+        
+        quickSort(with: &arr, left: left, right: q - 1)
+        quickSort(with: &arr, left: q + 1, right: right)
+    }
+}
+
+quickSort(with: &quickArr, left: 0, right: quickArr.count - 1)
 
 // DFS
 
