@@ -282,3 +282,363 @@ func threeSum(_ nums: [Int]) -> [[Int]] {
 threeSum([-1,0,1,2,-1,-4])
 threeSum([0,1,1])
 threeSum([0,0,0])
+
+/*
+1. Two Sum
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Example 2:
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Example 3:
+
+Input: nums = [3,3], target = 6
+Output: [0,1]
+ 
+
+Constraints:
+
+2 <= nums.length <= 104
+-109 <= nums[i] <= 109
+-109 <= target <= 109
+Only one valid answer exists.
+*/
+
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    var dict : [Int : Int] = [:]
+    
+    var i : Int = 0
+    for num in nums {
+        if let remain = dict[target - num] {
+            return [i, remain]
+        }
+        
+        dict[num] = i
+        i += 1
+    }
+    
+    return []
+}
+
+twoSum([2,7,11,15], 9)
+twoSum([3,2,4], 6)
+twoSum([3,3], 6)
+
+/*
+ 
+ 7. Reverse Integer
+ Medium
+
+ Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+ Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+  
+
+ Example 1:
+
+ Input: x = 123
+ Output: 321
+ Example 2:
+
+ Input: x = -123
+ Output: -321
+ Example 3:
+
+ Input: x = 120
+ Output: 21
+  
+ */
+
+func reverse(_ x: Int) -> Int {
+    let strX : String = String(abs(x))
+    var newStr : String = ""
+    for c in strX.reversed() {
+        newStr.append(c)
+    }
+    let value : Int = (x >= 0) ? Int(newStr)! : Int(newStr)! * -1
+    return (value <= Int32.max && value >= Int32.min) ? value : 0
+}
+
+reverse(123) // 321
+reverse(-123) // -321
+reverse(120) // 21
+
+/*
+86. Partition List
+Medium
+
+Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+
+You should preserve the original relative order of the nodes in each of the two partitions.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,4,3,2,5,2], x = 3
+Output: [1,2,2,4,3,5]
+Example 2:
+
+Input: head = [2,1], x = 2
+Output: [1,2]
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [0, 200].
+-100 <= Node.val <= 100
+-200 <= x <= 200
+*/
+
+let numbers = [1,4,3,2,5,2] //[1,2,2,4,3,5]
+var headList : ListNode? = ListNode()
+for num in numbers {
+    headList?.next = ListNode(num, headList?.next)
+}
+
+func partition(_ head: ListNode?, _ x: Int) -> ListNode? {
+    // 링크드 리스트 두개 만들어서 x 보다 작은 것과 x 보다 큰 애들을 따로 모은 다음 리스트 두개 합치기
+    let beforeList : ListNode? = ListNode()
+    var before : ListNode? = beforeList
+    let afterList : ListNode? = ListNode()
+    var after : ListNode? = afterList
+    var curr : ListNode? = head
+    while curr != nil {
+        if curr!.val < x {
+            before?.next = curr
+            before = before?.next
+        } else {
+            after?.next = curr
+            after = after?.next
+        }
+        curr = curr?.next
+    }
+    
+    after?.next = nil
+    before?.next = afterList?.next
+    return beforeList?.next
+}
+
+let list = partition(headList?.next, 3)
+
+func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -> Double {
+    let merged : [Int] = (nums1 + nums2).sorted()
+    let mid : Int = (merged.count) / 2
+    return (merged.count % 2 == 1) ? Double(merged[mid]) : (Double(merged[mid-1]) + Double(merged[mid])) / 2.0
+}
+
+findMedianSortedArrays([1,3], [2])
+findMedianSortedArrays([1,2], [3,4])
+//findMedianSortedArrays([], [1])
+//findMedianSortedArrays([], [])
+
+/*
+ 13. Roman to Integer
+ 
+ Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+ Symbol       Value
+ I             1
+ V             5
+ X             10
+ L             50
+ C             100
+ D             500
+ M             1000
+ For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+ Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+ I can be placed before V (5) and X (10) to make 4 and 9.
+ X can be placed before L (50) and C (100) to make 40 and 90.
+ C can be placed before D (500) and M (1000) to make 400 and 900.
+ Given a roman numeral, convert it to an integer.
+
+  
+
+ Example 1:
+
+ Input: s = "III"
+ Output: 3
+ Explanation: III = 3.
+ Example 2:
+
+ Input: s = "LVIII"
+ Output: 58
+ Explanation: L = 50, V= 5, III = 3.
+ Example 3:
+
+ Input: s = "MCMXCIV"
+ Output: 1994
+ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+  
+
+ Constraints:
+
+ 1 <= s.length <= 15
+ s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
+ It is guaranteed that s is a valid roman numeral in the range [1, 3999].
+ */
+
+func romanToInt(_ s: String) -> Int {
+    let romanTable : [Character : Int] = [
+        "I"     :   1,
+        "V"     :   5,
+        "X"     :   10,
+        "L"     :   50,
+        "C"     :   100,
+        "D"     :   500,
+        "M"     :   1000
+    ]
+    
+    var romanInt : Int = 0
+    
+    var romanStr : String = s
+    romanStr = romanStr.replacingOccurrences(of: "IV", with: "IIII")
+    romanStr = romanStr.replacingOccurrences(of: "IX", with: "VIIII")
+    romanStr = romanStr.replacingOccurrences(of: "XL", with: "XXXX")
+    romanStr = romanStr.replacingOccurrences(of: "XC", with: "LXXXX")
+    romanStr = romanStr.replacingOccurrences(of: "CD", with: "CCCC")
+    romanStr = romanStr.replacingOccurrences(of: "CM", with: "DCCCC")
+    
+    for char in romanStr {
+        if let num = romanTable[char] {
+            romanInt += num
+        }
+    }
+    
+    return romanInt
+}
+
+romanToInt("III")
+romanToInt("LVIII")
+romanToInt("MCMXCIV")
+
+/*
+ 
+ 315. Count of Smaller Numbers After Self
+ 
+ You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+
+  
+
+ Example 1:
+
+ Input: nums = [5,2,6,1]
+ Output: [2,1,1,0]
+ Explanation:
+ To the right of 5 there are 2 smaller elements (2 and 1).
+ To the right of 2 there is only 1 smaller element (1).
+ To the right of 6 there is 1 smaller element (1).
+ To the right of 1 there is 0 smaller element.
+ Example 2:
+
+ Input: nums = [-1]
+ Output: [0]
+ Example 3:
+
+ Input: nums = [-1,-1]
+ Output: [0,0]
+  
+
+ Constraints:
+
+ 1 <= nums.length <= 105
+ -104 <= nums[i] <= 104
+ */
+
+func countSmaller(_ nums: [Int]) -> [Int] {
+    var countList : [Int] = []
+    for (index, num) in nums.enumerated() {
+        var count : Int = 0
+        for j in index + 1 ..< nums.count {
+            if num > nums[j] {
+                count += 1
+            }
+        }
+        countList.append(count)
+    }
+    return countList
+}
+
+countSmaller([5,2,6,1])
+countSmaller([-1])
+countSmaller([-1,-1])
+
+/*
+ 29. Divide Two Integers
+ Medium
+ 
+ Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
+
+ The integer division should truncate toward zero, which means losing its fractional part. For example, 8.345 would be truncated to 8, and -2.7335 would be truncated to -2.
+
+ Return the quotient after dividing dividend by divisor.
+
+ Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−231, 231 − 1]. For this problem, if the quotient is strictly greater than 231 - 1, then return 231 - 1, and if the quotient is strictly less than -231, then return -231.
+
+  
+
+ Example 1:
+
+ Input: dividend = 10, divisor = 3
+ Output: 3
+ Explanation: 10/3 = 3.33333.. which is truncated to 3.
+ Example 2:
+
+ Input: dividend = 7, divisor = -3
+ Output: -2
+ Explanation: 7/-3 = -2.33333.. which is truncated to -2.
+  
+
+ Constraints:
+
+ -231 <= dividend, divisor <= 231 - 1
+ divisor != 0
+ */
+
+func divide(_ dividend: Int, _ divisor: Int) -> Int {
+    let numNegative : Int = (dividend < 0) ? -1 : 1
+    let divNegative : Int = (divisor < 0) ? -1 : 1
+    var num : Int = abs(dividend)
+    let div : Int = abs(divisor)
+    
+    if div == 1 {
+        let justNum : Int = num * numNegative * divNegative
+        
+        if justNum > Int32.max { return Int(Int32.max) }
+        if justNum < Int32.min { return Int(Int32.min) }
+        return justNum
+    }
+    
+    var count : Int = 0
+    while num > 0 {
+        num -= div
+        if num >= 0 { count += 1}
+    }
+    let answer : Int = count * numNegative * divNegative
+    
+    if answer > Int32.max { return Int(Int32.max) }
+    if answer < Int32.min { return Int(Int32.min) }
+    return answer
+}
+
+divide(10, 3)
+
+10 >> 4
+10 << 3
