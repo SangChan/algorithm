@@ -878,3 +878,70 @@ func permute(_ nums: [Int]) -> [[Int]] {
     return answer
 }
 permute([1,2,3])
+
+var testArr : [Int] = [1,3,5,67,99,2,3,5,1]
+let new = testArr.compactMap { ($0 > 10) ? $0 : $0 * 10 }
+print(new)
+
+func sum(_ max : Int) -> Int {
+    var sum : Int = 0
+    for i in 1 ... 10 {
+        sum += i
+    }
+    return sum
+    return (1 ... 10).reduce(0) { $0 + $1 }
+    return max * (max + 1) / 2
+}
+sum(10)
+/*
+47. Permutations II
+Medium
+
+Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,2]
+Output:
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+Example 2:
+
+Input: nums = [1,2,3]
+Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ 
+
+Constraints:
+
+1 <= nums.length <= 8
+-10 <= nums[i] <= 10
+ */
+
+func permuteUnique(_ nums: [Int]) -> [[Int]] {
+    guard nums.count != 0 else { return [] }
+    
+    // [1]
+    var answer : [[Int]] = []
+    let firstList : [Int] = [nums[0]]
+    answer.append(firstList)
+    
+    // [1] -> [1,2], [2,1]
+    // [1,2], [2,1] -> [3,1,2], [1,3,2], [1,2,3], [3,2,1], [2,3,1], [2,1,3]
+    for i in 1 ..< nums.count {
+        var newAnswer : Set<[Int]> = .init()
+        for j in 0 ... i {
+            for list in answer {
+                var newList = list
+                newList.insert(nums[i], at: j)
+                newAnswer.insert(newList)
+            }
+        }
+        answer = newAnswer.compactMap { $0 }
+    }
+    
+    return answer
+}
+permuteUnique([1,1,2])
