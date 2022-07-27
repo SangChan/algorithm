@@ -884,12 +884,15 @@ let new = testArr.compactMap { ($0 > 10) ? $0 : $0 * 10 }
 print(new)
 
 func sum(_ max : Int) -> Int {
+    // brute force
     var sum : Int = 0
     for i in 1 ... 10 {
         sum += i
     }
     return sum
+    // swift api
     return (1 ... 10).reduce(0) { $0 + $1 }
+    // 11+11+11+11+11 -> n*(n+1)/2
     return max * (max + 1) / 2
 }
 sum(10)
@@ -922,14 +925,14 @@ Constraints:
 
 func permuteUnique(_ nums: [Int]) -> [[Int]] {
     guard nums.count != 0 else { return [] }
-    
+    // input [1,1,2]
     // [1]
     var answer : [[Int]] = []
     let firstList : [Int] = [nums[0]]
     answer.append(firstList)
     
-    // [1] -> [1,2], [2,1]
-    // [1,2], [2,1] -> [3,1,2], [1,3,2], [1,2,3], [3,2,1], [2,3,1], [2,1,3]
+    // [1] -> [1,1], [1,2]
+    // [1,1], [1,2] -> [2,1,1], [1,2,1], [1,1,2], [1,1,2], [1,1,2], [1,2,1] -> [2,1,1], [1,2,1], [1,1,2]
     for i in 1 ..< nums.count {
         var newAnswer : Set<[Int]> = .init()
         for j in 0 ... i {
@@ -945,3 +948,73 @@ func permuteUnique(_ nums: [Int]) -> [[Int]] {
     return answer
 }
 permuteUnique([1,1,2])
+
+func lonelyinteger(a: [Int]) -> Int {
+    // Write your code here
+    var dict : [Int : Int] = [:]
+    for i in a {
+        if let value = dict[i] {
+            dict[i] = value + 1
+        } else {
+            dict[i] = 1
+        }
+    }
+    var answer : Int = 0
+    for key in dict.keys {
+        if let value = dict[key], value == 1 {
+            answer = key
+        }
+    }
+    return answer
+}
+
+lonelyinteger(a: [1,1])
+
+var squareMatrix : [[Int]] = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+
+for i in 0 ..< squareMatrix.count {
+    for j in 0 ..< squareMatrix[i].count {
+        print("[i = \(i), j =\(j)] \(squareMatrix[i][j])")
+    }
+}
+
+func diagonalDifference(arr: [[Int]]) -> Int {
+    // Write your code here
+    let size : Int = arr.count
+    var leftDiagnal : Int = 0
+    var rightDiagnal : Int = 0
+    for i in 0 ..< size {
+        leftDiagnal += arr[i][i]
+        rightDiagnal += arr[size-i-1][i]
+    }
+    return abs(leftDiagnal-rightDiagnal)
+}
+
+func flipMatrix(matrix: [[Int]]) -> Int {
+    var sum : Int = 0
+    let n : Int = matrix.count / 2
+
+    for r in 0 ..< n {
+        for c in 0 ..< n {
+            let p1 = matrix[r][matrix.count - c - 1]
+            let p2 = matrix[r][c]
+            let p3 = matrix[matrix.count - r - 1][c]
+            let p4 = matrix[matrix.count - r - 1][matrix.count - c - 1]
+            print("\(p1),\(p2),\(p3),\(p4)")
+            sum += max(p1, p2, p3, p4)
+        }
+    }
+    
+    return sum
+}
+
+flipMatrix(matrix: [
+    [112,42,83,119],
+    [56,125,56,49],
+    [15,78,101,43],
+    [62,98,114,108]
+])

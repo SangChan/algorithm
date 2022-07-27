@@ -319,3 +319,23 @@ quickSort(with: &quickArr, left: 0, right: quickArr.count - 1)
 // DFS
 
 // BFS
+
+var array : [Int] = [1,2,3,4,5]
+array.sorted()
+array.sorted { $0 < $1 }
+let strArr : [String] = array.map { num -> String in
+    return "\(num)"
+}
+array.compactMap { num in
+    return String(format: "%02d", num)
+}
+array.insert(0, at: 0)
+array.firstIndex(of: 3)
+array.firstIndex { $0 == 3 }
+array.lastIndex(of: 3)
+var strings : String = "hello world"
+strings[strings.index(strings.startIndex, offsetBy: 0)]
+strings[strings.index(strings.startIndex, offsetBy: 4)]
+String(strings[...strings.index(strings.startIndex, offsetBy: 4)])
+strings.range(of: "world")
+let binary = String(255, radix:2)

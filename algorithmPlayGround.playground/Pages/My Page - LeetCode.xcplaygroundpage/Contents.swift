@@ -26,7 +26,7 @@ func sum2(a: [Int], sum: Int) -> Bool {
     }
     
     for i in dic.keys {
-        if let withA = dic[i], let _ = a.index(of: withA) {
+        if let withA = dic[i], let _ = a.firstIndex(of: withA) {
             return true
         }
     }
@@ -39,7 +39,7 @@ func sum3(a: [Int], sum: Int) -> Bool {
     var index = 0
     for i in a {
         let withA = sum - i
-        if let withAIndex = a.index(of: withA), withAIndex != index {
+        if let withAIndex = a.firstIndex(of: withA), withAIndex != index {
             return true
         }
         index += 1
