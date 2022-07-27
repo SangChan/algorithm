@@ -1018,3 +1018,43 @@ flipMatrix(matrix: [
     [15,78,101,43],
     [62,98,114,108]
 ])
+
+class TreeNode {
+    var val : Int
+    var left : TreeNode?
+    var right : TreeNode?
+    
+    init(_ val: Int, left: TreeNode? = nil, right: TreeNode? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
+    }
+}
+
+// root -> left -> right
+
+func preorder(current : TreeNode?) {
+    guard let current = current else { return }
+    preorder(current: current.left)
+    preorder(current: current.right)
+}
+
+func findPreorder(current : TreeNode?, p : TreeNode?, q : TreeNode?) -> TreeNode? {
+    guard let current = current else { return nil }
+    
+    if current.val == p?.val { return current }
+    if current.val == q?.val { return current }
+    
+    let left = findPreorder(current: current.left, p: p, q: q)
+    let right = findPreorder(current: current.right, p: p, q: q)
+    
+    if left != nil && right != nil {
+        return current
+    } else if left == nil && right != nil {
+        return right
+    } else if left != nil && right == nil {
+        return left
+    } else {
+        return nil
+    }
+}
