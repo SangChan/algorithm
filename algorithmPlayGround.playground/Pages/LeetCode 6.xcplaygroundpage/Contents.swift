@@ -1107,3 +1107,71 @@ mySqrt(1)
 mySqrt(2)
 mySqrt(4)
 mySqrt(8)
+
+class Twitter {
+    private var _tweets : [Int:Set<Int>]
+    private var _followers : [Int: Set<Int>]
+    private var _news : [Int]
+    
+    init() {
+        _tweets = [:]
+        _followers = [:]
+        _news = []
+    }
+    
+    func postTweet(_ userId: Int, _ tweetId: Int) {
+        if var tweet = _tweets[userId] {
+            tweet.insert(tweetId)
+            _tweets[userId] = tweet
+        } else {
+            _tweets[userId] = [tweetId]
+        }
+        _news.append(tweetId)
+    }
+    
+    func getNewsFeed(_ userId: Int) -> [Int] {
+        var newsfeed : [Int] = []
+        _news.reversed().forEach { tweetId in
+            if newsfeed.count >= 10 { return }
+            if let _ = _tweets[userId]?.firstIndex(of: tweetId) {
+                newsfeed.append(tweetId)
+            } else if let follwers = _followers[userId] {
+                follwers.map { follower in
+                    if let _ = _tweets[follower]?.firstIndex(of: tweetId) {
+                        newsfeed.append(tweetId)
+                    }
+                }
+            }
+            
+        }
+        
+        return newsfeed
+    }
+    
+    func follow(_ followerId: Int, _ followeeId: Int) {
+        if var follower = _followers[followerId] {
+            follower.insert(followeeId)
+            _followers[followerId] = follower
+        } else {
+            _followers[followerId] = [followeeId]
+        }
+    }
+    
+    func unfollow(_ followerId: Int, _ followeeId: Int) {
+        if var follower = _followers[followerId] {
+            if let index = follower.firstIndex(of: followeeId) {
+                follower.remove(at: index)
+                _followers[followerId] = follower
+            }
+        }
+    }
+}
+
+var twitter : Twitter = .init()
+twitter.postTweet(1, 5) // User 1 posts a new tweet (id = 5).
+twitter.getNewsFeed(1)  // User 1's news feed should return a list with 1 tweet id -> [5]. return [5]
+twitter.follow(1, 2)    // User 1 follows user 2.
+twitter.postTweet(2, 6) // User 2 posts a new tweet (id = 6).
+twitter.getNewsFeed(1)  // User 1's news feed should return a list with 2 tweet ids -> [6, 5]. Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
+twitter.unfollow(1, 2)  // User 1 unfollows user 2.
+twitter.getNewsFeed(1)  // User 1's news feed should return a list with 1 tweet id -> [5], since user 1 is no longer following user 2.
