@@ -339,3 +339,141 @@ strings[strings.index(strings.startIndex, offsetBy: 4)]
 String(strings[...strings.index(strings.startIndex, offsetBy: 4)])
 strings.range(of: "world")
 let binary = String(255, radix:2)
+
+/*
+ Single Responsibility
+ 
+ Each class have only one sole purpose and not be filled with excessive funcinality
+ 
+ Open Closed
+ 
+ Classes should be open for extensions, closed for modification. You should have not to rewrite an exsiting class for new feature
+ 
+ Liskov Substitution
+ 
+ Every subclass or derived class should be substitutable for their base or parent class
+ 
+ Interface Segregation
+ 
+ Interface should not force classes to implement what they can't do. Large interfaces should be divided into small ones.
+ 
+ Dependecy Inversion
+ 
+ Component should depend on abstractions, not on concretions.
+ */
+
+
+class Circle : Shape {
+    var radius : Double
+    
+    init(radius : Double) {
+        self.radius = radius
+    }
+    
+    func area() -> Double {
+        return Double.pi * pow(radius, 2)
+    }
+}
+
+class Square : Shape {
+    var size : Int
+    
+    init(size : Int) {
+        self.size = size
+    }
+    
+    func area() -> Double {
+        return Double(size * size)
+    }
+}
+
+// Single Responsibility
+// Dependency Inversion
+class AreaPrinter {
+    private let calc : CalculatorProtocol
+    
+    init(with calculator : CalculatorProtocol) {
+        self.calc = calculator
+    }
+    
+    func json(_ list: [Shape]) -> String {
+        return """
+        {
+            "sum":\(calc.sum(with: list))
+        }
+        """
+    }
+    
+    func csv(_ list : [Shape]) -> String {
+        return "sum,\(calc.sum(with: list))"
+    }
+}
+
+// Open Closed
+protocol Shape {
+    func area() -> Double
+}
+
+// Interface Segregation
+protocol ThreeDimensionShape {
+    func volume() -> Double
+}
+
+class Cube : Shape, ThreeDimensionShape {
+    var width : Int
+    var height : Int
+    var depth : Int
+    init(w: Int, h: Int, d: Int) {
+        self.width = w
+        self.height = h
+        self.depth = d
+    }
+    func area() -> Double {
+        return Double(width * height)
+    }
+    func volume() -> Double {
+        return Double(width * height * depth)
+    }
+}
+
+// Liskov Substitution
+
+enum LiskovError : Error {
+    case newError
+}
+
+class NoShape : Shape {
+    func area() -> Double {
+        return Double.nan
+    }
+    
+//    func area() throws -> Double {
+//        throw LiskovError.newError
+//    }
+}
+
+// Dependency Inversion
+protocol CalculatorProtocol {
+    func sum(with items: [Shape]) -> Double
+}
+class AreaCalcurator : CalculatorProtocol {
+    func sum(with items: [Shape]) -> Double {
+        var sum : Double = 0
+        for item in items {
+            sum += item.area()
+        }
+        return sum
+    }
+}
+
+var calculator : CalculatorProtocol = AreaCalcurator()
+let circle : Shape = Circle(radius: 5.0)
+let square : Shape = Square(size: 5)
+let cube : Shape = Cube(w: 3, h: 4, d: 5)
+let noShape : Shape = NoShape()
+let shapes : [Shape] = [circle, square, cube]
+let sum = calculator.sum(with: shapes)
+
+var printer : AreaPrinter = .init(with: calculator)
+printer.json(shapes)
+printer.csv(shapes)
