@@ -1216,3 +1216,287 @@ twitter.postTweet(2, 6) // User 2 posts a new tweet (id = 6).
 twitter.getNewsFeed(1)  // User 1's news feed should return a list with 2 tweet ids -> [6, 5]. Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
 twitter.unfollow(1, 2)  // User 1 unfollows user 2.
 twitter.getNewsFeed(1)  // User 1's news feed should return a list with 1 tweet id -> [5], since user 1 is no longer following user 2.
+
+/*
+ 705. Design HashSet
+ Easy
+ 
+ Design a HashSet without using any built-in hash table libraries.
+
+ Implement MyHashSet class:
+
+ void add(key) Inserts the value key into the HashSet.
+ bool contains(key) Returns whether the value key exists in the HashSet or not.
+ void remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.
+  
+
+ Example 1:
+
+ Input
+ ["MyHashSet", "add", "add", "contains", "contains", "add", "contains", "remove", "contains"]
+ [[], [1], [2], [1], [3], [2], [2], [2], [2]]
+ Output
+ [null, null, null, true, false, null, true, null, false]
+
+ Explanation
+ MyHashSet myHashSet = new MyHashSet();
+ myHashSet.add(1);      // set = [1]
+ myHashSet.add(2);      // set = [1, 2]
+ myHashSet.contains(1); // return True
+ myHashSet.contains(3); // return False, (not found)
+ myHashSet.add(2);      // set = [1, 2]
+ myHashSet.contains(2); // return True
+ myHashSet.remove(2);   // set = [1]
+ myHashSet.contains(2); // return False, (already removed)
+  
+
+ Constraints:
+
+ 0 <= key <= 106
+ At most 104 calls will be made to add, remove, and contains.
+ Accepted
+ 243,953
+ Submissions
+ 369,272
+ */
+class MyHashSet {
+    var hash: [Int]
+    
+    init() {
+        hash = []
+    }
+    
+    func add(_ key: Int) {
+        if hash.firstIndex(of: key) != nil { return }
+        hash.append(key)
+    }
+    
+    func remove(_ key: Int) {
+        if let index = hash.firstIndex(of: key) {
+            hash.remove(at: index)
+        }
+    }
+    
+    func contains(_ key: Int) -> Bool {
+        return hash.firstIndex(of: key) != nil
+    }
+}
+
+/*
+ 1396. Design Underground System
+ Medium
+
+ An underground railway system is keeping track of customer travel times between different stations. They are using this data to calculate the average time it takes to travel from one station to another.
+
+ Implement the UndergroundSystem class:
+
+ void checkIn(int id, string stationName, int t)
+ A customer with a card ID equal to id, checks in at the station stationName at time t.
+ A customer can only be checked into one place at a time.
+ void checkOut(int id, string stationName, int t)
+ A customer with a card ID equal to id, checks out from the station stationName at time t.
+ double getAverageTime(string startStation, string endStation)
+ Returns the average time it takes to travel from startStation to endStation.
+ The average time is computed from all the previous traveling times from startStation to endStation that happened directly, meaning a check in at startStation followed by a check out from endStation.
+ The time it takes to travel from startStation to endStation may be different from the time it takes to travel from endStation to startStation.
+ There will be at least one customer that has traveled from startStation to endStation before getAverageTime is called.
+ You may assume all calls to the checkIn and checkOut methods are consistent. If a customer checks in at time t1 then checks out at time t2, then t1 < t2. All events happen in chronological order.
+
+  
+
+ Example 1:
+
+ Input
+ ["UndergroundSystem","checkIn","checkIn","checkIn","checkOut","checkOut","checkOut","getAverageTime","getAverageTime","checkIn","getAverageTime","checkOut","getAverageTime"]
+ [[],[45,"Leyton",3],[32,"Paradise",8],[27,"Leyton",10],[45,"Waterloo",15],[27,"Waterloo",20],[32,"Cambridge",22],["Paradise","Cambridge"],["Leyton","Waterloo"],[10,"Leyton",24],["Leyton","Waterloo"],[10,"Waterloo",38],["Leyton","Waterloo"]]
+
+ Output
+ [null,null,null,null,null,null,null,14.00000,11.00000,null,11.00000,null,12.00000]
+
+ Explanation
+ UndergroundSystem undergroundSystem = new UndergroundSystem();
+ undergroundSystem.checkIn(45, "Leyton", 3);
+ undergroundSystem.checkIn(32, "Paradise", 8);
+ undergroundSystem.checkIn(27, "Leyton", 10);
+ undergroundSystem.checkOut(45, "Waterloo", 15);  // Customer 45 "Leyton" -> "Waterloo" in 15-3 = 12
+ undergroundSystem.checkOut(27, "Waterloo", 20);  // Customer 27 "Leyton" -> "Waterloo" in 20-10 = 10
+ undergroundSystem.checkOut(32, "Cambridge", 22); // Customer 32 "Paradise" -> "Cambridge" in 22-8 = 14
+ undergroundSystem.getAverageTime("Paradise", "Cambridge"); // return 14.00000. One trip "Paradise" -> "Cambridge", (14) / 1 = 14
+ undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 11.00000. Two trips "Leyton" -> "Waterloo", (10 + 12) / 2 = 11
+ undergroundSystem.checkIn(10, "Leyton", 24);
+ undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 11.00000
+ undergroundSystem.checkOut(10, "Waterloo", 38);  // Customer 10 "Leyton" -> "Waterloo" in 38-24 = 14
+ undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 12.00000. Three trips "Leyton" -> "Waterloo", (10 + 12 + 14) / 3 = 12
+ Example 2:
+
+ Input
+ ["UndergroundSystem","checkIn","checkOut","getAverageTime","checkIn","checkOut","getAverageTime","checkIn","checkOut","getAverageTime"]
+ [[],[10,"Leyton",3],[10,"Paradise",8],["Leyton","Paradise"],[5,"Leyton",10],[5,"Paradise",16],["Leyton","Paradise"],[2,"Leyton",21],[2,"Paradise",30],["Leyton","Paradise"]]
+
+ Output
+ [null,null,null,5.00000,null,null,5.50000,null,null,6.66667]
+
+ Explanation
+ UndergroundSystem undergroundSystem = new UndergroundSystem();
+ undergroundSystem.checkIn(10, "Leyton", 3);
+ undergroundSystem.checkOut(10, "Paradise", 8); // Customer 10 "Leyton" -> "Paradise" in 8-3 = 5
+ undergroundSystem.getAverageTime("Leyton", "Paradise"); // return 5.00000, (5) / 1 = 5
+ undergroundSystem.checkIn(5, "Leyton", 10);
+ undergroundSystem.checkOut(5, "Paradise", 16); // Customer 5 "Leyton" -> "Paradise" in 16-10 = 6
+ undergroundSystem.getAverageTime("Leyton", "Paradise"); // return 5.50000, (5 + 6) / 2 = 5.5
+ undergroundSystem.checkIn(2, "Leyton", 21);
+ undergroundSystem.checkOut(2, "Paradise", 30); // Customer 2 "Leyton" -> "Paradise" in 30-21 = 9
+ undergroundSystem.getAverageTime("Leyton", "Paradise"); // return 6.66667, (5 + 6 + 9) / 3 = 6.66667
+  
+
+ Constraints:
+
+ 1 <= id, t <= 106
+ 1 <= stationName.length, startStation.length, endStation.length <= 10
+ All strings consist of uppercase and lowercase English letters and digits.
+ There will be at most 2 * 104 calls in total to checkIn, checkOut, and getAverageTime.
+ Answers within 10-5 of the actual value will be accepted.
+ Accepted
+ 140,395
+ Submissions
+ 190,809
+ */
+
+
+class UndergroundSystem {
+    
+    enum CheckType {
+        case checkIn
+        case checkOut
+    }
+    struct UserActivity {
+        let id : Int
+        let stationName : String
+        let time : Int
+        let checkType : CheckType
+    }
+    struct AverageTime {
+        let startStation : String
+        let endStation : String
+        let time : Int
+    }
+    
+    private var _userActivities : [UserActivity]
+    private var _averageTimes : [AverageTime]
+
+    init() {
+        _userActivities = []
+        _averageTimes = []
+    }
+    
+    func checkIn(_ id: Int, _ stationName: String, _ t: Int) {
+        _userActivities.append(.init(id: id, stationName: stationName, time: t, checkType : .checkIn))
+    }
+    
+    func checkOut(_ id: Int, _ stationName: String, _ t: Int) {
+        let activities = _userActivities.filter { activity in
+            activity.id == id && activity.checkType == .checkIn
+        }
+        guard let checkIn = activities.last else { return }
+        _userActivities.append(.init(id: id, stationName: stationName, time: t, checkType : .checkOut))
+        _averageTimes.append(.init(startStation: checkIn.stationName, endStation: stationName, time: t - checkIn.time))
+    }
+    
+    func getAverageTime(_ startStation: String, _ endStation: String) -> Double {
+        let averageTimes = _averageTimes.filter { time in
+            time.startStation == startStation && time.endStation == endStation
+        }
+        
+        let sum :Int = averageTimes.reduce(0) { $0 + $1.time }
+        
+        return Double(sum) / Double(averageTimes.count)
+    }
+}
+
+class UndergroundSystemV2 {
+    
+    enum CheckType {
+        case checkIn
+        case checkOut
+    }
+    struct StationCheckTime {
+        let stationName : String
+        let time : Int
+        let checkType : CheckType
+    }
+    struct RouteInfo : Hashable {
+        let startStation : String
+        let endStation : String
+    }
+    
+    private var _userData : [Int: [StationCheckTime]]
+    private var _timeData : [RouteInfo: [Int]]
+
+    init() {
+        _userData = [:]
+        _timeData = [:]
+    }
+    
+    func checkIn(_ id: Int, _ stationName: String, _ t: Int) {
+        if var userData = _userData[id] {
+            userData.append(.init(stationName: stationName, time: t, checkType: .checkIn))
+            _userData[id] = userData
+        } else {
+            _userData[id] = [
+                StationCheckTime(stationName: stationName, time: t, checkType: .checkIn),
+            ]
+        }
+    }
+    
+    func checkOut(_ id: Int, _ stationName: String, _ t: Int) {
+        guard
+            var userData = _userData[id],
+            let checkIn = userData.last,
+            checkIn.checkType == .checkIn
+        else { return }
+        userData.append(.init(stationName: stationName, time: t, checkType: .checkOut))
+        _userData[id] = userData
+        let route : RouteInfo = .init(startStation: checkIn.stationName, endStation: stationName)
+        let time : Int = t - checkIn.time
+        if var timeData = _timeData[route] {
+            timeData.append(time)
+            _timeData[route] = timeData
+        } else {
+            _timeData[route] = [
+                time,
+            ]
+        }
+    }
+    
+    func getAverageTime(_ startStation: String, _ endStation: String) -> Double {
+        guard let timeData = _timeData[.init(startStation: startStation, endStation: endStation)] else { return 0.0 }
+        let sum : Int = timeData.reduce(0) { $0 + $1 }
+        return Double(sum) / Double(timeData.count)
+    }
+}
+
+
+var undergroundSystem : UndergroundSystemV2 = .init()
+undergroundSystem.checkIn(45, "Leyton", 3);
+undergroundSystem.checkIn(32, "Paradise", 8);
+undergroundSystem.checkIn(27, "Leyton", 10);
+undergroundSystem.checkOut(45, "Waterloo", 15);  // Customer 45 "Leyton" -> "Waterloo" in 15-3 = 12
+undergroundSystem.checkOut(27, "Waterloo", 20);  // Customer 27 "Leyton" -> "Waterloo" in 20-10 = 10
+undergroundSystem.checkOut(32, "Cambridge", 22); // Customer 32 "Paradise" -> "Cambridge" in 22-8 = 14
+undergroundSystem.getAverageTime("Paradise", "Cambridge"); // return 14.00000. One trip "Paradise" -> "Cambridge", (14) / 1 = 14
+undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 11.00000. Two trips "Leyton" -> "Waterloo", (10 + 12) / 2 = 11
+undergroundSystem.checkIn(10, "Leyton", 24);
+undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 11.00000
+undergroundSystem.checkOut(10, "Waterloo", 38);  // Customer 10 "Leyton" -> "Waterloo" in 38-24 = 14
+undergroundSystem.getAverageTime("Leyton", "Waterloo");    // return 12.00000. Three trips "Leyton" -> "Waterloo", (10 + 12 + 14) / 3 = 12
+
+var undergroundSystem2 : UndergroundSystemV2 = .init()
+undergroundSystem2.checkIn(10, "Leyton", 3);
+undergroundSystem2.checkOut(10, "Paradise", 8); // Customer 10 "Leyton" -> "Paradise" in 8-3 = 5
+undergroundSystem2.getAverageTime("Leyton", "Paradise"); // return 5.00000, (5) / 1 = 5
+undergroundSystem2.checkIn(5, "Leyton", 10);
+undergroundSystem2.checkOut(5, "Paradise", 16); // Customer 5 "Leyton" -> "Paradise" in 16-10 = 6
+undergroundSystem2.getAverageTime("Leyton", "Paradise"); // return 5.50000, (5 + 6) / 2 = 5.5
+undergroundSystem2.checkIn(2, "Leyton", 21);
+undergroundSystem2.checkOut(2, "Paradise", 30); // Customer 2 "Leyton" -> "Paradise" in 30-21 = 9
+undergroundSystem2.getAverageTime("Leyton", "Paradise"); // return 6.66667, (5 + 6 + 9) / 3 = 6.66667
