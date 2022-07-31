@@ -390,9 +390,9 @@ class Square : Shape {
 // Single Responsibility
 // Dependency Inversion
 class AreaPrinter {
-    private let calc : CalculatorProtocol
+    private let calc : Calculating
     
-    init(with calculator : CalculatorProtocol) {
+    init(with calculator : Calculating) {
         self.calc = calculator
     }
     
@@ -453,10 +453,10 @@ class NoShape : Shape {
 }
 
 // Dependency Inversion
-protocol CalculatorProtocol {
+protocol Calculating {
     func sum(with items: [Shape]) -> Double
 }
-class AreaCalcurator : CalculatorProtocol {
+class AreaCalcurator : Calculating {
     func sum(with items: [Shape]) -> Double {
         var sum : Double = 0
         for item in items {
@@ -465,8 +465,14 @@ class AreaCalcurator : CalculatorProtocol {
         return sum
     }
 }
+class AreaCaluratorV2 : Calculating {
+    func sum(with items: [Shape]) -> Double {
+        return items.reduce(0.0) { $0 + $1.area() }
+    }
+}
 
-var calculator : CalculatorProtocol = AreaCalcurator()
+//var calculator : Calculating = AreaCalurator()
+var calculator : Calculating = AreaCaluratorV2()
 let circle : Shape = Circle(radius: 5.0)
 let square : Shape = Square(size: 5)
 let cube : Shape = Cube(w: 3, h: 4, d: 5)
