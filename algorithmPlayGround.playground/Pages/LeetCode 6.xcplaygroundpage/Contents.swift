@@ -1585,3 +1585,89 @@ browserHistory.visit("linkedin.com");     // You are in "facebook.com". Visit "l
 browserHistory.forward(2);                // You are in "linkedin.com", you cannot move forward any steps.
 browserHistory.back(2);                   // You are in "linkedin.com", move back two steps to "facebook.com" then to "google.com". return "google.com"
 browserHistory.back(7);                   // You are in "google.com", you can move back only one step to "leetcode.com". return "leetcode.com"
+
+/*
+ 79. Word Search
+ Medium
+
+ Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+
+ The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+  
+
+ Example 1:
+
+
+ Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+ Output: true
+ Example 2:
+
+
+ Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+ Output: true
+ Example 3:
+
+
+ Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+ Output: false
+  
+
+ Constraints:
+
+ m == board.length
+ n = board[i].length
+ 1 <= m, n <= 6
+ 1 <= word.length <= 15
+ board and word consists of only lowercase and uppercase English letters.
+  
+
+ Follow up: Could you use search pruning to make your solution faster with a larger board?
+ */
+func exist(_ board: [[Character]], _ word: String) -> Bool {
+    let m : Int = board.count
+    let n : Int = board[0].count
+    let array = Array(word)
+    var visited = Array(repeating: Array(repeating: false, count: n), count: m)
+    
+    for i in 0 ..< m {
+        for j in 0 ..< n {
+            if board[i][j] == array[0] {
+                if dfs(m, n, i, j, &visited, 0, array, board) {
+                    return true
+                }
+            }
+        }
+    }
+    return false
+}
+
+func dfs(_ m: Int, _ n: Int, _ x: Int, _ y: Int, _ visited: inout [[Bool]], _ index: Int, _ array: [Character], _ board: [[Character]]) -> Bool {
+    guard x < m, y < n, x >= 0, y >= 0 else { return false }
+    
+    if visited[x][y] {
+        return false
+    }
+    
+    if board[x][y] != array[index] {
+        return false
+    }
+    
+    if index == array.count - 1 {
+        return true
+    }
+    
+    visited[x][y] = true
+    if dfs(m, n, x + 1, y, &visited, index + 1, array, board)
+    || dfs(m, n, x - 1, y, &visited, index + 1, array, board)
+    || dfs(m, n, x, y + 1, &visited, index + 1, array, board)
+    || dfs(m, n, x, y - 1, &visited, index + 1, array, board) {
+        return true
+    }
+    visited[x][y] = false
+    return false
+}
+
+exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED")
+exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "SEE")
+exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB")
