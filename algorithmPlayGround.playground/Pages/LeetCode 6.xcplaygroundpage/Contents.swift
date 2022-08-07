@@ -1897,3 +1897,220 @@ func numTrees(_ n: Int) -> Int {
     }
     return result
 }
+
+/*
+ 1220. Count Vowels Permutation
+ Hard
+
+ Given an integer n, your task is to count how many strings of length n can be formed under the following rules:
+
+ Each character is a lower case vowel ('a', 'e', 'i', 'o', 'u')
+ Each vowel 'a' may only be followed by an 'e'.
+ Each vowel 'e' may only be followed by an 'a' or an 'i'.
+ Each vowel 'i' may not be followed by another 'i'.
+ Each vowel 'o' may only be followed by an 'i' or a 'u'.
+ Each vowel 'u' may only be followed by an 'a'.
+ Since the answer may be too large, return it modulo 10^9 + 7.
+
+  
+
+ Example 1:
+
+ Input: n = 1
+ Output: 5
+ Explanation: All possible strings are: "a", "e", "i" , "o" and "u".
+ Example 2:
+
+ Input: n = 2
+ Output: 10
+ Explanation: All possible strings are: "ae", "ea", "ei", "ia", "ie", "io", "iu", "oi", "ou" and "ua".
+ Example 3:
+
+ Input: n = 5
+ Output: 68
+  
+
+ Constraints:
+
+ 1 <= n <= 2 * 10^4
+ */
+
+func countVowelPermutation(_ n: Int) -> Int {
+    var dp = (0..<n).map{_ in (0..<5).map{_ in 0 } }
+    let mod = Int(1E9+7)
+    for i in 0..<5 {
+        dp[0][i] = 1
+    }
+    for i in 1..<n {
+        dp[i][0] = (dp[i-1][1] + dp[i-1][2] + dp[i-1][4])// % mod
+        dp[i][1] = (dp[i-1][0] + dp[i-1][2]) //% mod
+        dp[i][2] = (dp[i-1][1] + dp[i-1][3]) //% mod
+        dp[i][3] = dp[i-1][2]
+        dp[i][4] = (dp[i-1][2] + dp[i-1][3]) //% mod
+    }
+    var res = 0
+    for i in 0..<5 {
+        res += dp[n-1][i]
+    }
+    return res //% mod
+}
+
+countVowelPermutation(1) // 5 "a", "e", "i" , "o" and "u".
+countVowelPermutation(2) // 10 "ae", "ea", "ei", "ia", "ie", "io", "iu", "oi", "ou" and "ua".
+countVowelPermutation(5) // 68
+
+/*
+ 9. Palindrome Number
+ Easy
+
+ 6657
+
+ 2243
+
+ Add to List
+
+ Share
+ Given an integer x, return true if x is palindrome integer.
+
+ An integer is a palindrome when it reads the same backward as forward.
+
+ For example, 121 is a palindrome while 123 is not.
+  
+
+ Example 1:
+
+ Input: x = 121
+ Output: true
+ Explanation: 121 reads as 121 from left to right and from right to left.
+ Example 2:
+
+ Input: x = -121
+ Output: false
+ Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+ Example 3:
+
+ Input: x = 10
+ Output: false
+ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+  
+
+ Constraints:
+
+ -231 <= x <= 231 - 1
+ */
+
+func isPalindrome(_ x: Int) -> Bool {
+    let string = String(x)
+    let reverseString : [Character] = String(x).reversed()
+    
+    for (index, char) in string.enumerated() {
+        if reverseString[index] != char { return false }
+    }
+    
+    return true
+}
+
+isPalindrome(121)
+isPalindrome(-121)
+isPalindrome(10)
+
+/*
+ 211. Design Add and Search Words Data Structure
+ Medium
+ 
+ Design a data structure that supports adding new words and finding if a string matches any previously added string.
+
+ Implement the WordDictionary class:
+
+ WordDictionary() Initializes the object.
+ void addWord(word) Adds word to the data structure, it can be matched later.
+ bool search(word) Returns true if there is any string in the data structure that matches word or false otherwise. word may contain dots '.' where dots can be matched with any letter.
+  
+
+ Example:
+
+ Input
+ ["WordDictionary","addWord","addWord","addWord","search","search","search","search"]
+ [[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+ Output
+ [null,null,null,null,false,true,true,true]
+
+ Explanation
+ WordDictionary wordDictionary = new WordDictionary();
+ wordDictionary.addWord("bad");
+ wordDictionary.addWord("dad");
+ wordDictionary.addWord("mad");
+ wordDictionary.search("pad"); // return False
+ wordDictionary.search("bad"); // return True
+ wordDictionary.search(".ad"); // return True
+ wordDictionary.search("b.."); // return True
+  
+
+ Constraints:
+
+ 1 <= word.length <= 25
+ word in addWord consists of lowercase English letters.
+ word in search consist of '.' or lowercase English letters.
+ There will be at most 3 dots in word for search queries.
+ At most 104 calls will be made to addWord and search.
+ */
+
+class WordDictionary {
+    private var _dicts: [Int: Set<String>]
+    
+    init() {
+        _dicts = [:]
+    }
+    
+    func addWord(_ word: String) {
+        _dicts[word.count, default: []].insert(word)
+    }
+    
+    func search(_ query: String) -> Bool {
+        
+        func equalString(_ str1: String, _ str2: String) -> Bool {
+            func equalCharacter(_ char1: Character, _ char2: Character) -> Bool {
+                guard char1 != ".", char2 != "." else {
+                    return true
+                }
+                
+                return char1 == char2
+            }
+            guard str1.count == str2.count else { return false }
+            let array1 = Array(str1)
+            let array2 = Array(str2)
+            
+            for i in 0..<array1.count {
+                guard equalCharacter(array1[i], array2[i]) else {
+                    return false
+                }
+            }
+            
+            return true
+        }
+        
+        guard let set = _dicts[query.count] else { return false }
+        if query.contains(".") == false { return set.contains(query) }
+        
+        for word in set {
+            guard equalString(word, query) else {
+                continue
+            }
+            return true
+        }
+        
+        return false
+        
+        
+    }
+}
+
+
+var wordDictionary : WordDictionary = .init()
+wordDictionary.addWord("bad");
+wordDictionary.addWord("dad");
+wordDictionary.addWord("mad");
+wordDictionary.search("pad"); // return False
+wordDictionary.search("bad"); // return True
+wordDictionary.search(".ad"); // return True
+wordDictionary.search("b.."); // return True
