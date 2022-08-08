@@ -483,3 +483,41 @@ let sum = calculator.sum(with: shapes)
 var printer : AreaPrinter = .init(with: calculator)
 printer.json(shapes)
 printer.csv(shapes)
+
+func selectionSort(_ nums: inout [Int]) {
+    for i in 0 ..< nums.count {
+        var min : Int = i
+        for j in i+1 ..< nums.count {
+            if nums[min] > nums[j] {
+                min = j
+            }
+        }
+        let temp = nums[i]
+        nums[i] = nums[min]
+        nums[min] = temp
+    }
+}
+
+var nums : [Int] = [7,5,9,0,3,1,6,2,4,8]
+selectionSort(&nums)
+print(nums)
+
+@propertyWrapper
+struct Uppercase {
+    private var value: String = ""
+    var wrappedValue: String {
+        get { self.value }
+        set { self.value = newValue.uppercased() }
+    }
+            
+    init(wrappedValue initialValue: String) {
+        self.wrappedValue = initialValue
+    }
+}
+
+struct Town {
+    @Uppercase var name : String
+}
+
+var town : Town = .init(name: "name")
+print(town.name)

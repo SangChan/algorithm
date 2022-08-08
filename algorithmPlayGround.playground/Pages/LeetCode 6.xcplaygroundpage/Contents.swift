@@ -2114,3 +2114,93 @@ wordDictionary.search("pad"); // return False
 wordDictionary.search("bad"); // return True
 wordDictionary.search(".ad"); // return True
 wordDictionary.search("b.."); // return True
+
+/*
+ 300. Longest Increasing Subsequence
+ Medium
+
+ Given an integer array nums, return the length of the longest strictly increasing subsequence.
+
+ A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+
+  
+
+ Example 1:
+
+ Input: nums = [10,9,2,5,3,7,101,18]
+ Output: 4
+ Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+ Example 2:
+
+ Input: nums = [0,1,0,3,2,3]
+ Output: 4
+ Example 3:
+
+ Input: nums = [7,7,7,7,7,7,7]
+ Output: 1
+  
+
+ Constraints:
+
+ 1 <= nums.length <= 2500
+ -104 <= nums[i] <= 104
+  
+
+ Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity
+ */
+
+func lengthOfLIS(_ nums: [Int]) -> Int {
+    var result = [Int](repeating: 1, count: nums.count)
+            
+    for i in 1..<nums.count {
+        for j in 0..<i {
+            if nums[i] > nums[j] {
+                result[i] = max(result[i], result[j] + 1)
+            }
+        }
+    }
+    print(result)
+    return result.max()!
+}
+
+lengthOfLIS([10,9,2,5,3,7,101,18]) //4
+lengthOfLIS([0,1,0,3,2,3]) //4
+lengthOfLIS([7,7,7,7,7,7,7,7]) //1
+
+/*
+ 823. Binary Trees With Factors
+ Medium
+
+ 890
+
+ 108
+
+ Add to List
+
+ Share
+ Given an array of unique integers, arr, where each integer arr[i] is strictly greater than 1.
+
+ We make a binary tree using these integers, and each number may be used for any number of times. Each non-leaf node's value should be equal to the product of the values of its children.
+
+ Return the number of binary trees we can make. The answer may be too large so return the answer modulo 109 + 7.
+
+  
+
+ Example 1:
+
+ Input: arr = [2,4]
+ Output: 3
+ Explanation: We can make these trees: [2], [4], [4, 2, 2]
+ Example 2:
+
+ Input: arr = [2,4,5,10]
+ Output: 7
+ Explanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], [10, 5, 2].
+  
+
+ Constraints:
+
+ 1 <= arr.length <= 1000
+ 2 <= arr[i] <= 109
+ All the values of arr are unique.
+ */
