@@ -2204,3 +2204,35 @@ lengthOfLIS([7,7,7,7,7,7,7,7]) //1
  2 <= arr[i] <= 109
  All the values of arr are unique.
  */
+
+func numFactoredBinaryTrees(_ arr: [Int]) -> Int {
+    let mod : Int = 1_000_000_007
+    let n = arr.count
+    var newArr = arr.sorted()
+    var dp : [Int] = [Int].init(repeating: 1, count: n)
+    
+    var index : [Int: Int] = [:]
+    
+    for i in 0 ..< n {
+        index[newArr[i]] = i
+    }
+    
+    for i in 0 ..< n {
+        for j in 0 ..< i {
+            if newArr[i] % newArr[j] == 0 {
+                let right = newArr[i] / newArr[j]
+                if let rightIndex = index[right] {
+                    dp[i] = (dp[i]+dp[j] * dp[rightIndex]) % mod
+                }
+            }
+        }
+    }
+    
+    var ans : Int = 0
+    for x in dp {
+        ans += x
+    }
+    return Int(ans % mod)
+}
+
+numFactoredBinaryTrees([2,4])

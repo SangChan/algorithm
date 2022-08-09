@@ -339,6 +339,7 @@ strings[strings.index(strings.startIndex, offsetBy: 4)]
 String(strings[...strings.index(strings.startIndex, offsetBy: 4)])
 strings.range(of: "world")
 let binary = String(255, radix:2)
+var arr: [Int] = [Int].init(repeating: 1, count: 100)
 
 /*
  Single Responsibility
