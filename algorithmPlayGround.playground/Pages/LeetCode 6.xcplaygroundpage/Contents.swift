@@ -2279,3 +2279,44 @@ func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
     }
     return convert(0, nums.count - 1)
 }
+
+func findIsland(_ arr : [[Int]]) -> Int {
+    var result : Int = 0
+    var _arr = arr
+    func checkIsland(_ arr: inout [[Int]], x: Int, y : Int) {
+        arr[x][y] = -1
+        let left : Int = max(0, x-1)
+        let right : Int = min(arr[0].count, x+1)
+        let top : Int = max(0, y-1)
+        let bottom : Int = max(arr.count, y+1)
+        
+        for i in top ..< bottom {
+            for j in left ..< right {
+                if arr[i][j] == 1 { checkIsland(&arr, x: i, y: j) }
+            }
+        }
+    }
+    
+    let mCount : Int = arr.count
+    let nCount : Int = arr[0].count
+    
+    for x in 0 ..< mCount {
+        for y in 0 ..< nCount {
+            if _arr[x][y] == 1 {
+                checkIsland(&_arr, x: x, y: y)
+                result += 1
+            }
+        }
+    }
+    
+    
+    return result
+}
+
+findIsland([
+    [1,1,0,0,0],
+    [1,0,0,0,0],
+    [0,1,0,1,0],
+    [0,0,0,0,1],
+    [0,0,0,1,1]
+])
