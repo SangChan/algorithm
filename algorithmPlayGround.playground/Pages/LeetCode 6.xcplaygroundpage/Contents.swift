@@ -2410,3 +2410,120 @@ func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> 
     }
     return root
 }
+
+/*
+ 30. Substring with Concatenation of All Words
+ Hard
+
+ You are given a string s and an array of strings words of the same length. Return all starting indices of substring(s) in s that is a concatenation of each word in words exactly once, in any order, and without any intervening characters.
+
+ You can return the answer in any order.
+
+  
+
+ Example 1:
+
+ Input: s = "barfoothefoobarman", words = ["foo","bar"]
+ Output: [0,9]
+ Explanation: Substrings starting at index 0 and 9 are "barfoo" and "foobar" respectively.
+ The output order does not matter, returning [9,0] is fine too.
+ Example 2:
+
+ Input: s = "wordgoodgoodgoodbestword", words = ["word","good","best","word"]
+ Output: []
+ Example 3:
+
+ Input: s = "barfoofoobarthefoobarman", words = ["bar","foo","the"]
+ Output: [6,9,12]
+  
+
+ Constraints:
+
+ 1 <= s.length <= 104
+ 1 <= words.length <= 5000
+ 1 <= words[i].length <= 30
+ s and words[i] consist of lowercase English letters.
+ Accepted
+ 274,204
+ Submissions
+ 950,906
+ */
+
+func findSubstring(_ s: String, _ words: [String]) -> [Int] {
+    func slidingWindow(_ i : Int, _ s : String, _ answer : inout [Int]) {
+        
+    }
+    
+    let n : Int = s.count
+    let k : Int = words.count
+    let wordLength : Int = words[0].count
+    let substringSize : Int = wordLength * k
+    
+    var wordCount : [String : Int] = [:]
+    
+    for word in words {
+        if var count = wordCount[word] {
+            wordCount[word] = count + 1
+        } else {
+            wordCount[word] = 0
+        }
+    }
+    
+    var answer : [Int] = []
+    for i in 0 ..< wordLength {
+        slidingWindow(i, s, &answer)
+    }
+    return answer
+}
+
+findSubstring("barfoothefoobarman", ["foo","bar"]) // [0,9]
+
+
+private void slidingWindow(int left, String s, List<Integer> answer) {
+       HashMap<String, Integer> wordsFound = new HashMap<>();
+       int wordsUsed = 0;
+       boolean excessWord = false;
+       
+       // Do the same iteration pattern as the previous approach - iterate
+       // word_length at a time, and at each iteration we focus on one word
+       for (int right = left; right <= n - wordLength; right += wordLength) {
+           
+           String sub = s.substring(right, right + wordLength);
+           if (!wordCount.containsKey(sub)) {
+               // Mismatched word - reset the window
+               wordsFound.clear();
+               wordsUsed = 0;
+               excessWord = false;
+               left = right + wordLength;
+           } else {
+               // If we reached max window size or have an excess word
+               while (right - left == substringSize || excessWord) {
+                   String leftmostWord = s.substring(left, left + wordLength);
+                   left += wordLength;
+                   wordsFound.put(leftmostWord, wordsFound.get(leftmostWord) - 1);
+
+                   if (wordsFound.get(leftmostWord) >= wordCount.get(leftmostWord)) {
+                       // This word was an excess word
+                       excessWord = false;
+                   } else {
+                       // Otherwise we actually needed it
+                       wordsUsed--;
+                   }
+               }
+               
+               // Keep track of how many times this word occurs in the window
+               wordsFound.put(sub, wordsFound.getOrDefault(sub, 0) + 1);
+               if (wordsFound.get(sub) <= wordCount.get(sub)) {
+                   wordsUsed++;
+               } else {
+                   // Found too many instances already
+                   excessWord = true;
+               }
+               
+               if (wordsUsed == k && !excessWord) {
+                   // Found a valid substring
+                   answer.add(left);
+               }
+           }
+       }
+   }
