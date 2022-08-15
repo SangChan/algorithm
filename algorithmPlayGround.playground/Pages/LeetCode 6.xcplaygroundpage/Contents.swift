@@ -2558,3 +2558,63 @@ func findLadders(_ beginWord: String, _ endWord: String, _ wordList: [String]) -
     return res
 }
 findLadders("hit", "cog", ["hot","dot","dog","lot","log","cog"]) //[["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]
+
+/*
+ 3. Longest Substring Without Repeating Characters
+ Medium
+
+ Given a string s, find the length of the longest substring without repeating characters.
+
+  
+
+ Example 1:
+
+ Input: s = "abcabcbb"
+ Output: 3
+ Explanation: The answer is "abc", with the length of 3.
+ Example 2:
+
+ Input: s = "bbbbb"
+ Output: 1
+ Explanation: The answer is "b", with the length of 1.
+ Example 3:
+
+ Input: s = "pwwkew"
+ Output: 3
+ Explanation: The answer is "wke", with the length of 3.
+ Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+  
+
+ Constraints:
+
+ 0 <= s.length <= 5 * 104
+ s consists of English letters, digits, symbols and spaces.
+ Accepted
+ 3,689,749
+ Submissions
+ 10,980,435
+ */
+
+func lengthOfLongestSubstring(_ s: String) -> Int {
+    let chars : [Character] = s.map { $0 }
+    
+    var maximum : Int = 0
+    var answer : [Character] = []
+    for i in 0 ..< chars.count {
+        answer = []
+        for j in i ..< chars.count {
+            if answer.contains(chars[j]) == false {
+                answer.append(chars[j])
+                maximum = max(answer.count, maximum)
+            } else {
+                maximum = max(answer.count, maximum)
+                break
+            }
+        }
+    }
+    return maximum
+}
+
+lengthOfLongestSubstring("abcabcbb") // 3. abc
+lengthOfLongestSubstring("bbbbb") // 1. b
+lengthOfLongestSubstring("pwwkew") // 3. wke
