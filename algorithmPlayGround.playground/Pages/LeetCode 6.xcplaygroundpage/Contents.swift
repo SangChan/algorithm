@@ -2648,9 +2648,20 @@ lengthOfLongestSubstring("pwwkew") // 3. wke
  */
 
 func firstUniqChar(_ s: String) -> Int {
-    for (index, char) in s.enumerated() {
-        if s.filter({ $0 == char }).count == 1 { return index }
+//    for (index, char) in s.enumerated() {
+//        if s.filter({ $0 == char }).count == 1 { return index }
+//    }
+//    return -1
+    var charTable : [Character : Int] = [:]
+    
+    for char in s {
+        charTable[char, default: 0] += 1
     }
+    
+    for (index, char) in s.enumerated() {
+        if let count = charTable[char], count == 1 { return index }
+    }
+    
     return -1
 }
 
