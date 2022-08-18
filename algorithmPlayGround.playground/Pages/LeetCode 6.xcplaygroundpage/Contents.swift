@@ -2759,3 +2759,57 @@ func uniqueMorseRepresentations(_ words: [String]) -> Int {
     
     return answer.count
 }
+
+/*
+ 1338. Reduce Array Size to The Half
+ Medium
+
+ You are given an integer array arr. You can choose a set of integers and remove all the occurrences of these integers in the array.
+
+ Return the minimum size of the set so that at least half of the integers of the array are removed.
+
+  
+
+ Example 1:
+
+ Input: arr = [3,3,3,3,5,5,5,2,2,7]
+ Output: 2
+ Explanation: Choosing {3,7} will make the new array [5,5,5,2,2] which has size 5 (i.e equal to half of the size of the old array).
+ Possible sets of size 2 are {3,5},{3,2},{5,2}.
+ Choosing set {2,7} is not possible as it will make the new array [3,3,3,3,5,5,5] which has a size greater than half of the size of the old array.
+ Example 2:
+
+ Input: arr = [7,7,7,7,7,7]
+ Output: 1
+ Explanation: The only possible set you can choose is {7}. This will make the new array empty.
+  
+
+ Constraints:
+
+ 2 <= arr.length <= 105
+ arr.length is even.
+ 1 <= arr[i] <= 105
+ */
+
+func minSetSize(_ arr: [Int]) -> Int {
+    var dict = [Int: Int]()
+    for i in arr {
+        dict[i, default: 0] += 1
+    }
+
+    var sort = dict.sorted { $0.value > $1.value }
+    let half = arr.count / 2
+    var sum = 0
+
+    for i in 0..<sort.count {
+        sum += sort[i].value
+        if sum >= half {
+            return i + 1
+        }
+    }
+
+    return 0
+}
+
+minSetSize([3,3,3,3,5,5,5,2,2,7]) // 2
+minSetSize([7,7,7,7,7,7]) // 1
