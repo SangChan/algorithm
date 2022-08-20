@@ -2894,3 +2894,62 @@ func isPossible(_ nums: [Int]) -> Bool {
 isPossible([1,2,3,3,4,5])
 isPossible([1,2,3,3,4,4,5,5])
 isPossible([1,2,3,4,4,5])
+
+/*
+ 5. Longest Palindromic Substring
+ Medium
+
+ Given a string s, return the longest palindromic substring in s.
+
+  
+
+ Example 1:
+
+ Input: s = "babad"
+ Output: "bab"
+ Explanation: "aba" is also a valid answer.
+ Example 2:
+
+ Input: s = "cbbd"
+ Output: "bb"
+  
+
+ Constraints:
+
+ 1 <= s.length <= 1000
+ s consist of only digits and English letters.
+ */
+
+func longestPalindrome(_ s: String) -> String {
+    func expandAroundCenter(_ s: String, left: Int, right: Int) -> Int {
+        let chars : [Character] = s.map { $0 }
+        var l : Int = left
+        var r : Int = right
+        
+        while (l >= 0 && r < s.count &&  chars[l] == chars[r]) {
+            l -= 1
+            r += 1
+        }
+        
+        return r - l - 1
+    }
+    
+    guard s.count > 0 else { return "" }
+    
+    var start : Int = 0
+    var end : Int = 0
+    for i in 0 ..< s.count {
+        let len1 : Int = expandAroundCenter(s, left: i, right: i)
+        let len2 : Int = expandAroundCenter(s, left: i, right: i+1)
+        let len : Int = max(len1, len2)
+        if len > end - start {
+            start = i - (len - 1) / 2
+            end = i + (len / 2)
+        }
+    }
+    
+    return String(s[s.index(s.startIndex, offsetBy: start) ... s.index(s.startIndex, offsetBy: end)])
+}
+
+longestPalindrome("babad")
+longestPalindrome("cbbd")
