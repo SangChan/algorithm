@@ -2921,34 +2921,35 @@ isPossible([1,2,3,4,4,5])
  */
 
 func longestPalindrome(_ s: String) -> String {
-    func expandAroundCenter(_ s: String, left: Int, right: Int) -> Int {
-        let chars : [Character] = s.map { $0 }
-        var l : Int = left
-        var r : Int = right
-        
-        while (l >= 0 && r < s.count &&  chars[l] == chars[r]) {
-            l -= 1
-            r += 1
+    var res = ""
+    var resLength = 0
+    let sArr = Array(s)
+    for i in 0..<sArr.count {
+        // odd length
+        var leftIdx = i
+        var rightIdx = i
+        while leftIdx >= 0 && rightIdx < sArr.count && sArr[leftIdx] == sArr[rightIdx] {
+            if (rightIdx - leftIdx + 1) > resLength {
+                res = String(sArr[leftIdx..<rightIdx + 1])
+                resLength = rightIdx - leftIdx + 1
+            }
+            leftIdx -= 1
+            rightIdx += 1
         }
-        
-        return r - l - 1
-    }
-    
-    guard s.count > 0 else { return "" }
-    
-    var start : Int = 0
-    var end : Int = 0
-    for i in 0 ..< s.count {
-        let len1 : Int = expandAroundCenter(s, left: i, right: i)
-        let len2 : Int = expandAroundCenter(s, left: i, right: i+1)
-        let len : Int = max(len1, len2)
-        if len > end - start {
-            start = i - (len - 1) / 2
-            end = i + (len / 2)
+
+        // even length
+        leftIdx = i
+        rightIdx = i + 1
+        while leftIdx >= 0 && rightIdx < sArr.count && sArr[leftIdx] == sArr[rightIdx] {
+            if (rightIdx - leftIdx + 1) > resLength {
+                res = String(sArr[leftIdx..<rightIdx + 1])
+                resLength = rightIdx - leftIdx + 1
+            }
+            leftIdx -= 1
+            rightIdx += 1
         }
     }
-    
-    return String(s[s.index(s.startIndex, offsetBy: start) ... s.index(s.startIndex, offsetBy: end)])
+    return res
 }
 
 longestPalindrome("babad")
