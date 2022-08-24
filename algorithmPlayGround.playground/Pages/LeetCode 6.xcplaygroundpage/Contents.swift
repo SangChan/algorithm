@@ -3061,3 +3061,61 @@ func reverse(_ head: ListNode?) -> ListNode? {
     
     return pre
 }
+
+/*
+ 326. Power of Three
+ Easy
+
+ 1640
+
+ 161
+
+ Add to List
+
+ Share
+ Given an integer n, return true if it is a power of three. Otherwise, return false.
+
+ An integer n is a power of three, if there exists an integer x such that n == 3x.
+
+  
+
+ Example 1:
+
+ Input: n = 27
+ Output: true
+ Example 2:
+
+ Input: n = 0
+ Output: false
+ Example 3:
+
+ Input: n = 9
+ Output: true
+  
+
+ Constraints:
+
+ -231 <= n <= 231 - 1
+ */
+
+func isPowerOfThree(_ n: Int) -> Bool {
+    // solution 1
+    /*
+    guard n > 0 else { return false }
+    var num : Int = n
+    while (num % 3 == 0) {
+        num /= 3
+    }
+
+    return num == 1
+     */
+    
+    // soultion 3
+    //return Int((log10(Double(n)) / log10(Double(3)))) % 1 == 0
+    // solution 4
+    return n > 0 && 1162261467 % n == 0
+}
+
+isPowerOfThree(27) // true
+isPowerOfThree(0) // false
+isPowerOfThree(9) // true
