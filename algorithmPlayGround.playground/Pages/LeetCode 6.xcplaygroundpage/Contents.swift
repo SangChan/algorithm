@@ -3119,3 +3119,72 @@ func isPowerOfThree(_ n: Int) -> Bool {
 isPowerOfThree(27) // true
 isPowerOfThree(0) // false
 isPowerOfThree(9) // true
+
+/*
+ 383. Ransom Note
+ Easy
+
+ 2520
+
+ 352
+
+ Add to List
+
+ Share
+ Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+ Each letter in magazine can only be used once in ransomNote.
+
+  
+
+ Example 1:
+
+ Input: ransomNote = "a", magazine = "b"
+ Output: false
+ Example 2:
+
+ Input: ransomNote = "aa", magazine = "ab"
+ Output: false
+ Example 3:
+
+ Input: ransomNote = "aa", magazine = "aab"
+ Output: true
+  
+
+ Constraints:
+
+ 1 <= ransomNote.length, magazine.length <= 105
+ ransomNote and magazine consist of lowercase English letters.
+ Accepted
+ 509,692
+ Submissions
+ 894,386
+ */
+func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+    var ransomTable : [Character : Int] = [:]
+    for char in ransomNote {
+        ransomTable[char, default: 0] += 1
+    }
+    
+    var magazineTable : [Character : Int] = [:]
+    for char in magazine {
+        magazineTable[char, default: 0] += 1
+    }
+    
+    for key in magazineTable.keys {
+        if ransomTable[key] != nil {
+            ransomTable[key]! -= magazineTable[key]!
+        }
+    }
+    
+    for key in ransomTable.keys {
+        if ransomTable[key]! > 0 {
+            return false
+        }
+    }
+    return true
+}
+
+canConstruct("a", "b")
+canConstruct("aa", "ab")
+canConstruct("aa", "aab")
