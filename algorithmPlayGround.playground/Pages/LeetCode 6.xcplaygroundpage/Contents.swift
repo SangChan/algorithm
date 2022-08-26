@@ -3188,3 +3188,60 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
 canConstruct("a", "b")
 canConstruct("aa", "ab")
 canConstruct("aa", "aab")
+
+/*
+ 869. Reordered Power of 2
+ Medium
+
+ 1015
+
+ 260
+
+ Add to List
+
+ Share
+ You are given an integer n. We reorder the digits in any order (including the original order) such that the leading digit is not zero.
+
+ Return true if and only if we can do this so that the resulting number is a power of two.
+
+  
+
+ Example 1:
+
+ Input: n = 1
+ Output: true
+ Example 2:
+
+ Input: n = 10
+ Output: false
+  
+
+ Constraints:
+
+ 1 <= n <= 109
+ */
+
+func reorderedPowerOf2(_ n: Int) -> Bool {
+    let answer : [Int] = count(n)
+    
+    for i in 0 ..< 32 {
+        if  answer == count(1 << i) {
+            return true
+        }
+    }
+    
+    return false
+}
+
+func count(_ n: Int) -> [Int] {
+    var number : Int = n
+    var answer : [Int] = [Int].init(repeating: 0, count: 10)
+    while(number > 0) {
+        answer[number % 10] += 1
+        number /= 10
+    }
+    return answer
+}
+
+reorderedPowerOf2(1)
+reorderedPowerOf2(24)
