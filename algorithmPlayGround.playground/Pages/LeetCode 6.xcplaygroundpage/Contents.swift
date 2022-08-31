@@ -3451,3 +3451,151 @@ func rotate(_ matrix: inout [[Int]]) {
 var rotateMatrix : [[Int]] = [[1,2,3],[4,5,6],[7,8,9]]
 rotate(&rotateMatrix)
 print(rotateMatrix) // [[7,4,1],[8,5,2],[9,6,3]]
+
+/*
+ 417. Pacific Atlantic Water Flow
+ Medium
+
+ There is an m x n rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's right and bottom edges.
+
+ The island is partitioned into a grid of square cells. You are given an m x n integer matrix heights where heights[r][c] represents the height above sea level of the cell at coordinate (r, c).
+
+ The island receives a lot of rain, and the rain water can flow to neighboring cells directly north, south, east, and west if the neighboring cell's height is less than or equal to the current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.
+
+ Return a 2D list of grid coordinates result where result[i] = [ri, ci] denotes that rain water can flow from cell (ri, ci) to both the Pacific and Atlantic oceans.
+
+  
+
+ Example 1:
+
+
+ Input: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+ Output: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+ Explanation: The following cells can flow to the Pacific and Atlantic oceans, as shown below:
+ [0,4]: [0,4] -> Pacific Ocean
+        [0,4] -> Atlantic Ocean
+ [1,3]: [1,3] -> [0,3] -> Pacific Ocean
+        [1,3] -> [1,4] -> Atlantic Ocean
+ [1,4]: [1,4] -> [1,3] -> [0,3] -> Pacific Ocean
+        [1,4] -> Atlantic Ocean
+ [2,2]: [2,2] -> [1,2] -> [0,2] -> Pacific Ocean
+        [2,2] -> [2,3] -> [2,4] -> Atlantic Ocean
+ [3,0]: [3,0] -> Pacific Ocean
+        [3,0] -> [4,0] -> Atlantic Ocean
+ [3,1]: [3,1] -> [3,0] -> Pacific Ocean
+        [3,1] -> [4,1] -> Atlantic Ocean
+ [4,0]: [4,0] -> Pacific Ocean
+        [4,0] -> Atlantic Ocean
+ Note that there are other possible paths for these cells to flow to the Pacific and Atlantic oceans.
+ Example 2:
+
+ Input: heights = [[1]]
+ Output: [[0,0]]
+ Explanation: The water can flow from the only cell to the Pacific and Atlantic oceans.
+  
+
+ Constraints:
+
+ m == heights.length
+ n == heights[r].length
+ 1 <= m, n <= 200
+ 0 <= heights[r][c] <= 105
+ */
+
+struct IslandLocation: Hashable {
+    let row: Int
+    let col: Int
+    
+    static func ==(lhs: IslandLocation, rhs: IslandLocation) -> Bool {
+        return lhs.row == rhs.row && lhs.col == rhs.col
+    }
+}
+
+func pacificAtlantic(_ heights: [[Int]]) -> [[Int]] {
+    
+    guard heights.count > 0 else { return [[Int]]() }
+    
+    var paths = [[Int]]()
+    
+    for row in 0..<heights.count {
+        for col in 0..<heights[row].count {
+            let startLocation = IslandLocation(row: row, col: col)
+            if pathFound(in: heights, startLocation: startLocation) {
+                paths.append([row,col])
+            }
+        }
+    }
+    
+    return paths
+}
+
+func atlanticFoundIn(_ grid: [[Int]], at location: IslandLocation) -> Bool {
+    return location.row == grid.count - 1 || location.col == grid[location.row].count - 1 ? true : false
+}
+
+func pacificFoundIn(_ grid: [[Int]], at location: IslandLocation) -> Bool {
+    return location.row == 0 || location.col == 0 ? true : false
+}
+
+func pathFound(in grid: [[Int]], startLocation: IslandLocation) -> Bool {
+    
+    var pacificFound = false
+    var atlanticFound = false
+    
+    var island = [IslandLocation]()
+    island.append(startLocation)
+    
+    var explored = Set<IslandLocation>()
+    explored.insert(startLocation)
+    
+    while !island.isEmpty {
+        
+        let currentLocation = island.removeLast()
+        let currentValue = grid[currentLocation.row][currentLocation.col]
+        
+        if pacificFoundIn(grid, at: currentLocation) {
+            pacificFound = true
+        }
+        
+        if atlanticFoundIn(grid, at: currentLocation) {
+            atlanticFound = true
+        }
+        
+        if pacificFound && atlanticFound {
+            return true
+        }
+        
+        for child in successors(for: grid, location: currentLocation) where !explored.contains(child) {
+            explored.insert(child)
+            island.append(child)
+        }
+
+    }
+    
+    return false
+}
+
+func successors(for grid: [[Int]], location: IslandLocation) -> [IslandLocation] {
+    var successors = [IslandLocation]()
+    
+    let currentLocationValue = grid[location.row][location.col]
+    
+    // North
+    if location.row - 1 >= 0 && currentLocationValue >= grid[location.row - 1][location.col] {
+        successors.append(IslandLocation(row: location.row - 1, col: location.col))
+    }
+    // South
+    if location.row + 1 < grid.count && currentLocationValue >= grid[location.row + 1][location.col] {
+        successors.append(IslandLocation(row: location.row + 1, col: location.col))
+    }
+    // East
+    if location.col + 1 < grid[location.row].count && currentLocationValue >= grid[location.row][location.col + 1] {
+        successors.append(IslandLocation(row: location.row, col: location.col + 1))
+    }
+    // West
+    if location.col - 1 >= 0 && currentLocationValue >= grid[location.row][location.col - 1] {
+        successors.append(IslandLocation(row: location.row, col: location.col - 1))
+    }
+    
+    return successors
+}
