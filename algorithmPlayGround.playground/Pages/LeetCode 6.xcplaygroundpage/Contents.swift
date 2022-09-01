@@ -3645,6 +3645,38 @@ func successors(for grid: [[Int]], location: IslandLocation) -> [IslandLocation]
  296,728
  */
 
+
+// simple solution
+var result = 0
+
 func goodNodes(_ root: TreeNode?) -> Int {
-    return Int.min
+    check(node: root!, maxVal: Int.min)
+    return result
+}
+
+func check(node: TreeNode, maxVal: Int) {
+    if node.val >= maxVal {
+        result += 1
+    }
+    let newMaxVal = max(maxVal, node.val)
+    if let left = node.left {
+        check(node: left, maxVal: newMaxVal)
+    }
+    if let right = node.right {
+        check(node: right, maxVal: newMaxVal)
+    }
+}
+
+// dfs
+
+func goodNodesDfs(_ root: TreeNode?) -> Int {
+    guard let root = root else { return 0 }
+    return dfs(root, root.val)
+}
+
+private func dfs(_ root: TreeNode?, _ parentsMax: Int)->Int{
+    guard let root = root else{ return 0 }
+    
+    let currentMax = max(root.val, parentsMax)
+    return (root.val >= parentsMax ? 1 : 0) + dfs(root.left, currentMax) + dfs(root.right, currentMax)
 }
