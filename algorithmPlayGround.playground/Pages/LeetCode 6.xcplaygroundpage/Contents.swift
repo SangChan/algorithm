@@ -3709,33 +3709,30 @@ private func dfs(_ root: TreeNode?, _ parentsMax: Int)->Int{
  */
 
 func averageOfLevels(_ root: TreeNode?) -> [Double] {
-    return []
+    var count : [Int] = []
+    var res : [Double] = []
+    
+    average(root, 0, &res, &count)
+    for i in 0 ..< res.count {
+        res[i] = res[i] / Double(count[i])
+    }
+    
+    return res
 }
  
-/*
- DFS
- public List < Double > averageOfLevels(TreeNode root) {
-        List < Integer > count = new ArrayList < > ();
-        List < Double > res = new ArrayList < > ();
-        average(root, 0, res, count);
-        for (int i = 0; i < res.size(); i++)
-            res.set(i, res.get(i) / count.get(i));
-        return res;
+func average(_ t: TreeNode? , _ i : Int, _ sum : inout [Double], _ count : inout [Int]) {
+    guard let t = t else { return }
+
+    if i < sum.count {
+        sum[i] = sum[i] + Double(t.val)
+        count[i] = count[i] + 1
+    } else {
+        sum.append(Double(t.val))
+        count.append(1)
     }
-    public void average(TreeNode t, int i, List < Double > sum, List < Integer > count) {
-        if (t == null)
-            return;
-        if (i < sum.size()) {
-            sum.set(i, sum.get(i) + t.val);
-            count.set(i, count.get(i) + 1);
-        } else {
-            sum.add(1.0 * t.val);
-            count.add(1);
-        }
-        average(t.left, i + 1, sum, count);
-        average(t.right, i + 1, sum, count);
-    }
- */
+    average(t.left, i+1, &sum, &count)
+    average(t.right, i+1, &sum, &count)
+}
  /*
  BFS
  public List < Double > averageOfLevels(TreeNode root) {
