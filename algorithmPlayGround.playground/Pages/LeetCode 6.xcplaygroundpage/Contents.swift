@@ -3734,28 +3734,48 @@ func average(_ t: TreeNode? , _ i : Int, _ sum : inout [Double], _ count : inout
     average(t.right, i+1, &sum, &count)
 }
 
+class Queue<T> {
+    fileprivate var array : [T] = [T]()
+    
+    func size() -> Int {
+        return array.count
+    }
+    
+    func enqueue(x : T) {
+        array.append(x)
+    }
+    
+    func dequeue() -> T? {
+        guard array.isEmpty == false else { return nil }
+        return array.removeFirst()
+    }
+}
+
 func averageOfLevelsBFS(_ root: TreeNode?) -> [Double] {
+    guard let root = root else { return [] }
     var res : [Double] = []
+    var queue : Queue<TreeNode> = .init()
+    queue.enqueue(x: root)
+    
+    while queue.size() != 0 {
+        var sum = 0
+        var count = 0
+        var temp : Queue<TreeNode> = .init()
+        while queue.size() != 0 {
+            if let n : TreeNode = queue.dequeue() {
+                sum += n.val
+                count += 1
+                if let left = n.left {
+                    temp.enqueue(x: left)
+                }
+                if let right = n.right {
+                    temp.enqueue(x: right)
+                }
+            }
+        }
+        queue = temp
+        res.append(Double(sum) / Double(count))
+    }
     
     return res
-    
-    /*List < Double > res = new ArrayList < > ();
-    Queue < TreeNode > queue = new LinkedList < > ();
-    queue.add(root);
-    while (!queue.isEmpty()) {
-        long sum = 0, count = 0;
-        Queue < TreeNode > temp = new LinkedList < > ();
-        while (!queue.isEmpty()) {
-            TreeNode n = queue.remove();
-            sum += n.val;
-            count++;
-            if (n.left != null)
-                temp.add(n.left);
-            if (n.right != null)
-                temp.add(n.right);
-        }
-        queue = temp;
-        res.add(sum * 1.0 / count);
-    }
-    return res;*/
 }
