@@ -3760,7 +3760,7 @@ func averageOfLevelsBFS(_ root: TreeNode?) -> [Double] {
     while queue.size() != 0 {
         var sum = 0
         var count = 0
-        var temp : Queue<TreeNode> = .init()
+        let temp : Queue<TreeNode> = .init()
         while queue.size() != 0 {
             if let n : TreeNode = queue.dequeue() {
                 sum += n.val
