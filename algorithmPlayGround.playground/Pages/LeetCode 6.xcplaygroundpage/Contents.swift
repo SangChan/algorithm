@@ -3828,3 +3828,5 @@ func numberOfWeakCharacters(_ properties: [[Int]]) -> Int {
 }
 
 numberOfWeakCharacters([[5,5],[6,3],[3,6]]) // 0. No character has strictly greater attack and defense than the other.
+numberOfWeakCharacters([[2,2],[3,3]]) // 1. The first character is weak because the second character has a strictly greater attack and defense.
+numberOfWeakCharacters([[1,5],[10,4],[4,3]]) // 1. The third character is weak because the second character has a strictly greater attack and defense.
