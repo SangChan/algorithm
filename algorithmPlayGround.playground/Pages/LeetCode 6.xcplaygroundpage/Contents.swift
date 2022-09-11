@@ -3824,7 +3824,20 @@ func averageOfLevelsBFS(_ root: TreeNode?) -> [Double] {
  */
 
 func numberOfWeakCharacters(_ properties: [[Int]]) -> Int {
-    return Int.min
+    let properties = properties.sorted(by: {
+        $0[0] == $1[0] ? $0[1] > $1[1] : $0[0] < $1[0]
+    })
+    let n = properties.count
+    var tmpMax = Int.min
+    var result = 0
+    for i in 0..<n {
+        if properties[n - 1 - i][1] < tmpMax {
+            result += 1
+        } else {
+            tmpMax = properties[n - 1 - i][1]
+        }
+    }
+    return result
 }
 
 numberOfWeakCharacters([[5,5],[6,3],[3,6]]) // 0. No character has strictly greater attack and defense than the other.
