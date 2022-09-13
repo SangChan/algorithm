@@ -3894,3 +3894,34 @@ numberOfWeakCharacters([[1,5],[10,4],[4,3]]) // 1. The third character is weak b
  0 <= tokens.length <= 1000
  0 <= tokens[i], power < 104
  */
+
+func bagOfTokensScore(_ tokens: [Int], _ power: Int) -> Int {
+    return Int.min
+}
+
+/*
+ Greedy
+ 
+ class Solution {
+     public int bagOfTokensScore(int[] tokens, int P) {
+         Arrays.sort(tokens);
+         int lo = 0, hi = tokens.length - 1;
+         int points = 0, ans = 0;
+         while (lo <= hi && (P >= tokens[lo] || points > 0)) {
+             while (lo <= hi && P >= tokens[lo]) {
+                 P -= tokens[lo++];
+                 points++;
+             }
+
+             ans = Math.max(ans, points);
+             if (lo <= hi && points > 0) {
+                 P += tokens[hi--];
+                 points--;
+             }
+         }
+
+         return ans;
+     }
+ }
+ 
+ */
