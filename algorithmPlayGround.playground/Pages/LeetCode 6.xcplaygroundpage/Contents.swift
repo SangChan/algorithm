@@ -3896,32 +3896,32 @@ numberOfWeakCharacters([[1,5],[10,4],[4,3]]) // 1. The third character is weak b
  */
 
 func bagOfTokensScore(_ tokens: [Int], _ power: Int) -> Int {
-    return Int.min
+    let sortedTokens = tokens.sorted()
+    var _power = power
+    
+    var low : Int = 0
+    var high : Int = tokens.count - 1
+    var points : Int = 0
+    var answer : Int = 0
+    
+    while (low <= high && (_power >= sortedTokens[low] || points > 0) ) {
+        while (low <= high && _power >= sortedTokens[low]) {
+            low += 1
+            _power -= tokens[low]
+            points += 1
+        }
+        
+        answer = max(answer, points)
+        if low <= high && points > 0 {
+            high -= 1
+            _power += tokens[high]
+            points += 1
+        }
+    }
+    
+    return answer
 }
 
-/*
- Greedy
- 
- class Solution {
-     public int bagOfTokensScore(int[] tokens, int P) {
-         Arrays.sort(tokens);
-         int lo = 0, hi = tokens.length - 1;
-         int points = 0, ans = 0;
-         while (lo <= hi && (P >= tokens[lo] || points > 0)) {
-             while (lo <= hi && P >= tokens[lo]) {
-                 P -= tokens[lo++];
-                 points++;
-             }
-
-             ans = Math.max(ans, points);
-             if (lo <= hi && points > 0) {
-                 P += tokens[hi--];
-                 points--;
-             }
-         }
-
-         return ans;
-     }
- }
- 
- */
+bagOfTokensScore([100], 50) // 0
+bagOfTokensScore([100, 200], 150) // 1
+bagOfTokensScore([100, 200, 300, 400], 200) //2
