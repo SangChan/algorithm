@@ -23,5 +23,6 @@
         <page name='LeetCode 5'/>
         <page name='LeetCode 6'/>
         <page name='Remind'/>
+        <page name='Architectures'/>
     </pages>
 </playground>
