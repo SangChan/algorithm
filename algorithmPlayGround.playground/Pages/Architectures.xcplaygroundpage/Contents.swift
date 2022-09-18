@@ -35,6 +35,11 @@ class MVC_Controller {
     }
 }
 
+var mvc : MVC_Controller = .init(model: .init(no: 1, name: "test"), view: .init())
+mvc.update()
+mvc.model = .init(no: 2, name: "testtest")
+mvc.update()
+
 // VIPER
 
 class VIPER_View {
