@@ -43,19 +43,32 @@ mvc.update()
 // VIPER
 
 class VIPER_View {
+    var presenter : VIPER_Presenter
     
+    func initUISet() {
+        
+    }
+    func didAppearSet() {
+        
+    }
 }
 
 class VIPER_Interactor {
-    
+    var presenter : VIPER_Presenter
+    func fetch() {
+        
+    }
 }
 
 class VIPER_Presenter {
-    
+    var view : VIPER_View
+    var interactor : VIPER_Interactor
+    var wireFrame : VIPER_Router
 }
 
 class VIPER_Entity {
-    
+    var name : String
+    var no : Int
 }
 
 class VIPER_Router {
