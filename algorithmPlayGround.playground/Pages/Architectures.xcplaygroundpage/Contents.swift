@@ -51,6 +51,10 @@ class VIPER_View {
     func didAppearSet() {
         
     }
+    
+    init(presenter: VIPER_Presenter) {
+        self.presenter = presenter
+    }
 }
 
 class VIPER_Interactor {
@@ -58,17 +62,32 @@ class VIPER_Interactor {
     func fetch() {
         
     }
+    
+    init(presenter: VIPER_Presenter) {
+        self.presenter = presenter
+    }
 }
 
 class VIPER_Presenter {
     var view : VIPER_View
     var interactor : VIPER_Interactor
     var wireFrame : VIPER_Router
+    
+    init(view: VIPER_View, interactor: VIPER_Interactor, wireFrame: VIPER_Router ) {
+        self.view = view
+        self.interactor = interactor
+        self.wireFrame = wireFrame
+    }
 }
 
 class VIPER_Entity {
     var name : String
     var no : Int
+    
+    init(no : Int, name :  String) {
+        self.no = no
+        self.name = name
+    }
 }
 
 class VIPER_Router {
