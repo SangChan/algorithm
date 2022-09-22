@@ -43,40 +43,38 @@ mvc.update()
 // VIPER
 
 class VIPER_View {
-    var presenter : VIPER_Presenter
+    var presenter : VIPER_Presenter?
     
-    func initUISet() {
-        
-    }
-    func didAppearSet() {
+    func update(_ data: VIPER_Entity) {
         
     }
     
-    init(presenter: VIPER_Presenter) {
-        self.presenter = presenter
-    }
+    
 }
 
 class VIPER_Interactor {
-    var presenter : VIPER_Presenter
+    var presenter : VIPER_Presenter?
+    
     func fetch() {
         
     }
     
-    init(presenter: VIPER_Presenter) {
-        self.presenter = presenter
+    func didFetch(_ data: VIPER_Entity) {
+        
     }
 }
 
 class VIPER_Presenter {
-    var view : VIPER_View
-    var interactor : VIPER_Interactor
-    var wireFrame : VIPER_Router
+    weak var view : VIPER_View?
+    var interactor : VIPER_Interactor?
+    var router : VIPER_Router?
     
-    init(view: VIPER_View, interactor: VIPER_Interactor, wireFrame: VIPER_Router ) {
-        self.view = view
-        self.interactor = interactor
-        self.wireFrame = wireFrame
+    func viewDidLoad() {
+        
+    }
+    
+    func show(with : VIPER_Entity) {
+        
     }
 }
 
@@ -91,7 +89,19 @@ class VIPER_Entity {
 }
 
 class VIPER_Router {
+    static func create(view: VIPER_View) {
+        let presenter : VIPER_Presenter = VIPER_Presenter()
+        
+        view.presenter = presenter
+        view.presenter?.router = VIPER_Router()
+        view.presenter?.view = view
+        view.presenter?.interactor = VIPER_Interactor()
+        view.presenter?.interactor?.presenter = presenter
+    }
     
+    func pushTo(view: VIPER_View, with: VIPER_Entity) {
+        
+    }
 }
 
 // MVVM
