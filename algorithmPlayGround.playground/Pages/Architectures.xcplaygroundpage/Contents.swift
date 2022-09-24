@@ -78,6 +78,7 @@ class VIPER_Presenter {
     
     func viewDidLoad() {
         Swift.print("view did load")
+        show(with: .init(no: 2, name: "viper_test_presenter"))
     }
     
     func show(with data : VIPER_Entity) {
@@ -111,7 +112,9 @@ class VIPER_Router {
     }
 }
 
-VIPER_Router.create(view: .init())
+var viperView : VIPER_View = .init()
+VIPER_Router.create(view: viperView)
+viperView.presenter?.viewDidLoad()
 
 // MVVM
 
