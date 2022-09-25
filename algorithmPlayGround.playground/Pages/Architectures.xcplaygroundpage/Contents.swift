@@ -44,11 +44,8 @@ mvc.update()
 
 class VIPER_View {
     var presenter : VIPER_Presenter?
-    
-    init() {
-        presenter?.viewDidLoad()
-    }
-    
+   
+    // presenter -> view
     func update(_ data: VIPER_Entity) {
         Swift.print("no = \(data.no)")
         Swift.print("name = \(data.name)")
@@ -61,11 +58,13 @@ class VIPER_Interactor {
     var presenter : VIPER_Presenter?
     var entity : VIPER_Entity?
     
+    // presenter -> interactor
     func fetch() {
         entity = .init(no: 1, name: "viper test")
         didFetch(entity!)
     }
     
+    // interactor -> presenter
     func didFetch(_ data: VIPER_Entity) {
         presenter?.view?.update(data)
     }
@@ -76,11 +75,18 @@ class VIPER_Presenter {
     var interactor : VIPER_Interactor?
     var router : VIPER_Router?
     
+    // view -> presenter
     func viewDidLoad() {
         Swift.print("view did load")
-        show(with: .init(no: 2, name: "viper_test_presenter"))
+        fetch()
     }
     
+    // presenter -> interactor
+    func fetch() {
+        interactor?.fetch()
+    }
+    
+    // view -> presenter
     func show(with data : VIPER_Entity) {
         view?.update(data)
     }
@@ -97,6 +103,7 @@ class VIPER_Entity {
 }
 
 class VIPER_Router {
+    // presemter -> router
     static func create(view: VIPER_View) {
         let presenter : VIPER_Presenter = VIPER_Presenter()
         
