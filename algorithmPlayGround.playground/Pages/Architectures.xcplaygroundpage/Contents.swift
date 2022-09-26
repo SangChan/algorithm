@@ -57,16 +57,17 @@ class VIPER_View {
 class VIPER_Interactor {
     var presenter : VIPER_Presenter?
     var entity : VIPER_Entity?
-    
+    private var count : Int = 0
     // presenter -> interactor
     func fetch() {
-        entity = .init(no: 1, name: "viper test")
+        count += 1
+        entity = .init(no: count, name: "viper test \(count)")
         didFetch(entity!)
     }
     
     // interactor -> presenter
     func didFetch(_ data: VIPER_Entity) {
-        presenter?.view?.update(data)
+        presenter?.show(with: data)
     }
 }
 
@@ -78,7 +79,7 @@ class VIPER_Presenter {
     // view -> presenter
     func viewDidLoad() {
         Swift.print("view did load")
-        fetch()
+        self.fetch()
     }
     
     // presenter -> interactor
@@ -122,6 +123,7 @@ class VIPER_Router {
 var viperView : VIPER_View = .init()
 VIPER_Router.create(view: viperView)
 viperView.presenter?.viewDidLoad()
+viperView.presenter?.fetch()
 
 // MVVM
 
