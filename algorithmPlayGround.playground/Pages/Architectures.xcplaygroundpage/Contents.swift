@@ -125,9 +125,13 @@ VIPER_Router.create(view: viperView)
 viperView.presenter?.viewDidLoad()
 viperView.presenter?.fetch()
 
-// MVVM
+// MVVM - Clean
 
-class MVVM_Model {
+struct MVVM_Entity {
+    
+}
+
+struct MVVM_Model {
     
 }
 
