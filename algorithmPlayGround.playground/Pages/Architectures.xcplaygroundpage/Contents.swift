@@ -124,6 +124,8 @@ var viperView : VIPER_View = .init()
 VIPER_Router.create(view: viperView)
 viperView.presenter?.viewDidLoad()
 viperView.presenter?.fetch()
+viperView.presenter?.fetch()
+viperView.presenter?.fetch()
 
 // MVVM - Clean
 
