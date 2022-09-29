@@ -35,10 +35,12 @@ class MVC_Controller {
     }
 }
 
+print("MVC TEST - start")
 var mvc : MVC_Controller = .init(model: .init(no: 1, name: "test"), view: .init())
 mvc.update()
 mvc.model = .init(no: 2, name: "testtest")
 mvc.update()
+print("MVC TEST - end")
 
 // VIPER
 
@@ -120,13 +122,14 @@ class VIPER_Router {
     }
 }
 
+print("VIPER TEST - start")
 var viperView : VIPER_View = .init()
 VIPER_Router.create(view: viperView)
 viperView.presenter?.viewDidLoad()
 viperView.presenter?.fetch()
 viperView.presenter?.fetch()
 viperView.presenter?.fetch()
-
+print("VIPER TEST - end")
 // MVVM - Clean
 
 struct MVVM_Entity {
