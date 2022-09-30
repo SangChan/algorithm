@@ -132,11 +132,25 @@ viperView.presenter?.fetch()
 print("VIPER TEST - end")
 // MVVM - Clean
 
+// Entities
 struct MVVM_Entity {
+    let no : Int
+    let name : String
+}
+
+// Use cases
+class MVVM_UseCase {
+    func fetch() {
+        
+    }
+}
+
+// Presenter
+struct MVVM_ViewModel {
     
 }
 
-struct MVVM_Model {
+class MVVM_Coordinator {
     
 }
 
@@ -144,6 +158,15 @@ class MVVM_View {
     
 }
 
-class MVVM_ViewModel {
+// Data
+class MVVM_Network {
+    
+}
+
+class MVVM_Storage {
+    
+}
+
+class MVVM_Repository {
     
 }
