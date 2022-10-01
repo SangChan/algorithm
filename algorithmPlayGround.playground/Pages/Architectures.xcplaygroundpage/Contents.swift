@@ -132,6 +132,7 @@ viperView.presenter?.fetch()
 print("VIPER TEST - end")
 // MVVM - Clean
 
+/// Domain Layer
 // Entities
 struct MVVM_Entity {
     let no : Int
@@ -145,6 +146,11 @@ class MVVM_UseCase {
     }
 }
 
+protocol MVVM_Interface {
+    
+}
+
+/// Presentation Layer
 // Presenter
 struct MVVM_ViewModel {
     
@@ -158,6 +164,7 @@ class MVVM_View {
     
 }
 
+/// Data Layer
 // Data
 class MVVM_Network {
     
@@ -167,6 +174,6 @@ class MVVM_Storage {
     
 }
 
-class MVVM_Repository {
+class MVVM_Repository : MVVM_Interface {
     
 }
