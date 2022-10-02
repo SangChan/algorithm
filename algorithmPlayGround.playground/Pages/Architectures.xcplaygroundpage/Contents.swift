@@ -147,7 +147,8 @@ class MVVM_UseCase {
 }
 
 protocol MVVM_Interface {
-    
+    func set(_ data: MVVM_Entity)
+    func get() -> MVVM_Entity?
 }
 
 /// Presentation Layer
@@ -175,5 +176,13 @@ class MVVM_Storage {
 }
 
 class MVVM_Repository : MVVM_Interface {
+    private var data: MVVM_Entity?
     
+    func set(_ data: MVVM_Entity) {
+        self.data = data
+    }
+    
+    func get() -> MVVM_Entity? {
+        return self.data
+    }
 }
