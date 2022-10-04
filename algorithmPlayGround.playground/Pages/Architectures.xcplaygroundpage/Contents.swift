@@ -141,10 +141,8 @@ struct MVVM_Entity {
 
 // Use cases
 class MVVM_UseCase {
-    func fetch(from repository : MVVM_Interface) {
-        if let data = repository.get() {
-            
-        }
+    func fetch(from repository : MVVM_Interface) -> MVVM_Entity? {
+        return repository.get()
     }
 }
 
