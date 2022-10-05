@@ -186,3 +186,6 @@ class MVVM_Repository : MVVM_Interface {
         return self.data
     }
 }
+
+print("MVVM TEST - start")
+print("MVVM TEST - end")
