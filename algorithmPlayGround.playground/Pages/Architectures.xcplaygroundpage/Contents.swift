@@ -141,7 +141,9 @@ struct MVVM_Entity {
 
 // Use cases
 class MVVM_UseCase {
-    func fetch(from repository : MVVM_Interface) -> MVVM_Entity? {
+    private let repository : MVVM_Repository = .init()
+    
+    func fetch() -> MVVM_Entity? {
         return repository.get()
     }
 }
@@ -154,7 +156,22 @@ protocol MVVM_Interface {
 /// Presentation Layer
 // Presenter
 struct MVVM_ViewModel {
+    private let useCase : MVVM_UseCase = .init()
+    let text : String?
     
+    func viewDidLoad() {
+        
+    }
+    
+    func fetch() {
+        if let entity = useCase.fetch() {
+            update(entity)
+        }
+    }
+    
+    func update(_ entity : MVVM_Entity) {
+        
+    }
 }
 
 class MVVM_Coordinator {
@@ -162,7 +179,9 @@ class MVVM_Coordinator {
 }
 
 class MVVM_View {
-    
+    func bind() {
+        
+    }
 }
 
 /// Data Layer
