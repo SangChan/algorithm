@@ -179,12 +179,13 @@ class MVVM_Coordinator {
 }
 
 class MVVM_View {
+    private var vm : MVVM_ViewModel = .init(text: nil)
     func viewDidLoad() {
         self.bind()
     }
     
     func bind() {
-        
+        //observe vm
     }
 }
 
