@@ -179,6 +179,10 @@ class MVVM_Coordinator {
 }
 
 class MVVM_View {
+    func viewDidLoad() {
+        self.bind()
+    }
+    
     func bind() {
         
     }
