@@ -192,11 +192,15 @@ class MVVM_View {
 /// Data Layer
 // Data
 class MVVM_Network {
-    
+    func initialize() {
+        
+    }
 }
 
 class MVVM_Storage {
-    
+    func initialize() {
+        
+    }
 }
 
 class MVVM_Repository : MVVM_Interface {
