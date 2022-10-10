@@ -175,7 +175,9 @@ struct MVVM_ViewModel {
 }
 
 class MVVM_Coordinator {
-    
+    func push(to view : MVVM_View) {
+        view.viewDidLoad()
+    }
 }
 
 class MVVM_View {
@@ -216,4 +218,6 @@ class MVVM_Repository : MVVM_Interface {
 }
 
 print("MVVM TEST - start")
+let coordinator = MVVM_Coordinator.init()
+coordinator.push(to: .init())
 print("MVVM TEST - end")
