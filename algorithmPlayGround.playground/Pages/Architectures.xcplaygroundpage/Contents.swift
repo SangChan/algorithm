@@ -157,7 +157,7 @@ protocol MVVM_Interface {
 // Presenter
 struct MVVM_ViewModel {
     private let useCase : MVVM_UseCase = .init()
-    let text : String?
+    var text : String?
     
     func viewDidLoad() {
         
@@ -170,7 +170,7 @@ struct MVVM_ViewModel {
     }
     
     func update(_ entity : MVVM_Entity) {
-        
+        self.text = "no = \(entity.no) name = \(entity.name)"
     }
 }
 
@@ -188,6 +188,7 @@ class MVVM_View {
     
     func bind() {
         //observe vm
+        Swift.print(vm.text)
     }
 }
 
