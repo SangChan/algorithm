@@ -141,7 +141,7 @@ struct MVVM_Entity {
 
 // Use cases
 class MVVM_UseCase {
-    private let repository : MVVM_Repository = .init()
+    private let repository : MVVM_Interface = MVVM_Repository()
     
     func fetch() -> MVVM_Entity? {
         return repository.get()
@@ -155,12 +155,12 @@ protocol MVVM_Interface {
 
 /// Presentation Layer
 // Presenter
-struct MVVM_ViewModel {
+class MVVM_ViewModel : NSObject {
     private let useCase : MVVM_UseCase = .init()
-    var text : String?
+    @objc dynamic var text : String?
     
     func viewDidLoad() {
-        
+        fetch()
     }
     
     func fetch() {
@@ -170,7 +170,7 @@ struct MVVM_ViewModel {
     }
     
     func update(_ entity : MVVM_Entity) {
-        self.text = "no = \(entity.no) name = \(entity.name)"
+        text = "no = \(entity.no) name = \(entity.name)"
     }
 }
 
@@ -181,14 +181,17 @@ class MVVM_Coordinator {
 }
 
 class MVVM_View {
-    private var vm : MVVM_ViewModel = .init(text: nil)
+    private var vm : MVVM_ViewModel = .init()
     func viewDidLoad() {
         self.bind()
+        vm.viewDidLoad()
     }
     
     func bind() {
         //observe vm
-        Swift.print(vm.text)
+        vm.observe(\.text) { vm, change in
+            Swift.print(change.newValue)
+        }
     }
 }
 
@@ -207,6 +210,7 @@ class MVVM_Storage {
 }
 
 class MVVM_Repository : MVVM_Interface {
+    private var count : Int = 0
     private var data: MVVM_Entity?
     
     func set(_ data: MVVM_Entity) {
@@ -214,6 +218,8 @@ class MVVM_Repository : MVVM_Interface {
     }
     
     func get() -> MVVM_Entity? {
+        self.set(MVVM_Entity(no: count, name: "MVVM \(count)"))
+        count += 1
         return self.data
     }
 }
