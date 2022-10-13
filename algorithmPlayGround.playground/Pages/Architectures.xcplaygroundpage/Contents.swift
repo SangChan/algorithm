@@ -160,6 +160,7 @@ class MVVM_ViewModel : NSObject {
     @objc dynamic var text : String?
     
     func viewDidLoad() {
+        Swift.print("view did load")
         fetch()
     }
     
@@ -218,8 +219,9 @@ class MVVM_Repository : MVVM_Interface {
     }
     
     func get() -> MVVM_Entity? {
-        self.set(MVVM_Entity(no: count, name: "MVVM \(count)"))
         count += 1
+        let data = MVVM_Entity(no: count, name: "MVVM \(count)")
+        self.data = data
         return self.data
     }
 }
