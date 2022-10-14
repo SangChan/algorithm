@@ -182,17 +182,23 @@ class MVVM_Coordinator {
 }
 
 class MVVM_View {
+    private var ob : NSKeyValueObservation!
     private var vm : MVVM_ViewModel = .init()
     func viewDidLoad() {
         self.bind()
         vm.viewDidLoad()
     }
     
-    func bind() {
+    private func bind() {
         //observe vm
-        vm.observe(\.text) { vm, change in
-            Swift.print(change.newValue)
+        ob = vm.observe(\.text, options: .new) { vm, change in
+            guard let new = change.newValue else { return }
+            Swift.print("observed = \(new)")
         }
+    }
+    
+    func event() {
+        vm.fetch()
     }
 }
 
@@ -227,6 +233,9 @@ class MVVM_Repository : MVVM_Interface {
 }
 
 print("MVVM TEST - start")
-let coordinator = MVVM_Coordinator.init()
-coordinator.push(to: .init())
+let coordinator = MVVM_Coordinator()
+let view = MVVM_View()
+coordinator.push(to: view)
+view.event()
+view.event()
 print("MVVM TEST - end")
