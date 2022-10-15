@@ -175,6 +175,7 @@ class MVVM_ViewModel : NSObject {
     }
 }
 
+// Router
 class MVVM_Coordinator {
     func push(to view : MVVM_View) {
         view.viewDidLoad()
