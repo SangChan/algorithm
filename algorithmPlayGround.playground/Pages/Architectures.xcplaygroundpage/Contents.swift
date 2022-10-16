@@ -191,9 +191,11 @@ class MVVM_View {
     }
     
     private func bind() {
-        //observe vm
         ob = vm.observe(\.text, options: .new) { vm, change in
-            guard let new = change.newValue else { return }
+            guard
+                let newValue = change.newValue,
+                let new = newValue
+            else { return }
             Swift.print("observed = \(new)")
         }
     }
