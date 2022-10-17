@@ -211,6 +211,7 @@ class MVVM_Network {
     func initialize() {
         
     }
+    
 }
 
 class MVVM_Storage {
@@ -239,6 +240,8 @@ print("MVVM TEST - start")
 let coordinator = MVVM_Coordinator()
 let view = MVVM_View()
 coordinator.push(to: view)
+view.event()
+view.event()
 view.event()
 view.event()
 print("MVVM TEST - end")
