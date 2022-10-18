@@ -208,21 +208,20 @@ class MVVM_View {
 /// Data Layer
 // Data
 class MVVM_Network {
-    func initialize() {
-        
-    }
-    
 }
 
 class MVVM_Storage {
-    func initialize() {
-        
-    }
 }
 
 class MVVM_Repository : MVVM_Interface {
+    private var network : MVVM_Network = .init()
+    private var storage : MVVM_Storage?
     private var count : Int = 0
     private var data: MVVM_Entity?
+    
+    init(with storage : MVVM_Storage) {
+        self.storage = storage
+    }
     
     func set(_ data: MVVM_Entity) {
         self.data = data
