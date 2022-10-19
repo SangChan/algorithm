@@ -141,7 +141,7 @@ struct MVVM_Entity {
 
 // Use cases
 class MVVM_UseCase {
-    private let repository : MVVM_Interface = MVVM_Repository()
+    private let repository : MVVM_Interface = MVVM_Repository(with: .local)
     
     func fetch() -> MVVM_Entity? {
         return repository.get()
@@ -210,6 +210,17 @@ class MVVM_View {
 class MVVM_Network {
 }
 
+class MVVM_Storage_Factory {
+    enum StorageType {
+        case local
+    }
+    static func factory(with type: StorageType) -> MVVM_Storage {
+        switch type {
+        case .local : return MVVM_Storage()
+        }
+    }
+}
+
 class MVVM_Storage {
 }
 
@@ -219,8 +230,8 @@ class MVVM_Repository : MVVM_Interface {
     private var count : Int = 0
     private var data: MVVM_Entity?
     
-    init(with storage : MVVM_Storage) {
-        self.storage = storage
+    init(with storageType : MVVM_Storage_Factory.StorageType) {
+        self.storage = MVVM_Storage_Factory.factory(with: storageType)
     }
     
     func set(_ data: MVVM_Entity) {
